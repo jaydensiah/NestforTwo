@@ -47,10 +47,10 @@ const ProductGrid = ({ category = 'freshly-cooked', onAddToCart, className = '' 
         // Map product names to route slugs
         const getRouteSlug = (name) => {
           const slugMap = {
-            'Honey Sachet': 'honey',
-            'Zero Sugar Sachet': 'zero-sugar',
-            'Rock Sugar Sachet': 'rock-sugar',
-            'Dried Bird\'s Nest': 'dried'
+            'Freshly Cooked Birdnest with Honey': 'honey',
+            'Freshly Cooked Birdnest with Zero Sugar': 'zero-sugar',
+            'Freshly Cooked Birdnest with Rock Sugar': 'rock-sugar',
+            'Pure Dry Selection': 'dried'
           };
           return slugMap[name] || name.toLowerCase().replace(/\s+/g, '-').replace(/'/g, '');
         };

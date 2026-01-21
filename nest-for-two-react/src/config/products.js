@@ -2,13 +2,12 @@
 export const PRODUCTS = {
   ZERO_SUGAR: {
     id: 'gid://shopify/Product/7859390251089',
-    name: 'Zero Sugar Sachet',
+    name: 'Freshly Cooked Birdnest with Zero Sugar',
     category: 'Freshly Cooked Bird\'s Nest',
     label: 'FOR PREGNANT LADIES & DIABETICS',
     images: [
       '/images/ZeroSugar.png',
       '/images/ZeroSugar2.png',
-      '/images/ZeroSugar3.png',
       '/images/All_4.png',
       '/images/All_5.png',
       '/images/All_6.png'
@@ -53,13 +52,12 @@ export const PRODUCTS = {
 
   HONEY: {
     id: 'gid://shopify/Product/7859386613841',
-    name: 'Honey Sachet',
+    name: 'Freshly Cooked Birdnest with Honey',
     category: 'Freshly Cooked Bird\'s Nest',
     label: 'FOR CHILDREN',
     images: [
       '/images/Honey.png',
       '/images/Honey2.png',
-      '/images/Honey3.png',
       '/images/All_4.png',
       '/images/All_5.png',
       '/images/All_6.png'
@@ -104,13 +102,12 @@ export const PRODUCTS = {
 
   ROCK_SUGAR: {
     id: 'gid://shopify/Product/7859383992401',
-    name: 'Rock Sugar Sachet',
+    name: 'Freshly Cooked Birdnest with Rock Sugar',
     category: 'Freshly Cooked Bird\'s Nest',
     label: 'FOR ELDERLY',
     images: [
       '/images/RockSugar.png',
       '/images/RockSugar2.png',
-      '/images/RockSugar3.png',
       '/images/All_4.png',
       '/images/All_5.png',
       '/images/All_6.png'

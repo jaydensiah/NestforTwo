@@ -1,13 +1,9 @@
-import { Link } from 'react-router-dom';
 import HeroSection from '../components/home/HeroSection';
 import ProductGrid from '../components/home/ProductGrid';
 import ReviewCarousel from '../components/home/ReviewCarousel';
-import ProductCard from '../components/product/ProductCard';
 import BenefitsCarousel from '../components/home/BenefitsCarousel';
-import { getKueLapisProducts } from '../config/products';
 
 const Home = () => {
-  const kueLapisProducts = getKueLapisProducts();
 
   return (
     <div>
@@ -31,7 +27,7 @@ const Home = () => {
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <h2 className="font-playfair-bold text-3xl text-center mb-4 text-wellness-dark">
-            Signature Bottle Series
+            OUR BEST SELLERS
           </h2>
 
           {/* Decorative line */}
@@ -50,24 +46,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Latest Additions (Kue Lapis) */}
-      <section className="py-16 md:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-playfair-bold text-3xl text-center mb-12 text-wellness-dark">
-            Latest Additions
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {kueLapisProducts.map((product, index) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                index={index}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Reviews Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-wellness-cream">
         <div className="max-w-7xl mx-auto">
@@ -78,23 +56,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-wellness-rose">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-playfair-bold text-3xl text-white mb-6">
-            Ready to Experience the Difference?
-          </h2>
-          <p className="font-source-sans text-white text-lg mb-8 opacity-90">
-            Join thousands of satisfied customers enjoying Singapore's thickest, freshest bird's nest
-          </p>
-          <Link
-            to="/products/honey"
-            className="inline-block bg-white text-wellness-rose px-8 py-3 font-nunito-regular font-semibold hover:bg-wellness-cream transition-colors"
-          >
-            Shop Now
-          </Link>
-        </div>
-      </section>
     </div>
   );
 };

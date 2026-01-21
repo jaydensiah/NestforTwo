@@ -86,27 +86,18 @@ const ProductCarousel = ({
   return (
     <div className={`w-full ${className}`}>
       {/* Main Carousel Container */}
-      <div className="relative w-full aspect-square bg-wellness-cream overflow-hidden group">
+      <div className="relative w-full aspect-square overflow-hidden group" {...touch.handlers}>
         {/* Images */}
-        <div
-          {...touch.handlers}
-          className="relative w-full h-full"
-        >
-          {images.map((image, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-500 ${
-                index === carousel.currentIndex ? 'opacity-100' : 'opacity-0'
-              }`}
-            >
-              <img
-                src={getImageUrl(image)}
-                alt={getImageAlt(image, index)}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ))}
-        </div>
+        {images.map((image, index) => (
+          <img
+            key={index}
+            src={getImageUrl(image)}
+            alt={getImageAlt(image, index)}
+            className={`w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-500 ${
+              index === carousel.currentIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        ))}
 
         {/* Navigation Arrows - Show only if more than 1 image */}
         {images.length > 1 && (
@@ -160,15 +151,15 @@ const ProductCarousel = ({
 
       {/* Desktop: Thumbnail Grid */}
       {images.length > 1 && (
-        <div className="hidden md:grid grid-cols-4 gap-2 mt-4">
+        <div className="hidden md:grid grid-cols-5 gap-2 mt-4">
           {images.map((image, index) => (
             <button
               key={index}
               onClick={() => handleThumbnailClick(index)}
-              className={`aspect-square overflow-hidden rounded-md border-2 transition-all duration-200 ${
+              className={`aspect-square overflow-hidden transition-all duration-200 ${
                 index === carousel.currentIndex
-                  ? 'border-wellness-rose'
-                  : 'border-gray-200 hover:border-wellness-rose/50'
+                  ? 'opacity-100'
+                  : 'opacity-60 hover:opacity-80'
               }`}
               aria-label={`View image ${index + 1}`}
             >

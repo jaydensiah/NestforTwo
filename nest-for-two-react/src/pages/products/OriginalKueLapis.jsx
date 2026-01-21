@@ -47,16 +47,16 @@ const OriginalKueLapis = () => {
   };
 
   return (
-    <div className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-wellness-cream min-h-screen">
+    <div className="pt-8 pb-20 px-4 sm:px-6 lg:px-8 bg-white min-h-screen">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
           <div>
             <ProductCarousel images={product.images} autoPlay={true} />
           </div>
 
-          <div className="space-y-6 bg-white p-8 rounded-lg shadow-md">
+          <div className="space-y-6 bg-white pt-0 px-6 pb-6">
             <div>
-              <h1 className="font-playfair-bold text-3xl md:text-4xl mb-2 text-wellness-dark">
+              <h1 className="font-playfair-bold mb-2 text-wellness-dark" style={{ fontSize: '30px' }}>
                 {product.name}
               </h1>
               <p className="font-source-sans text-wellness-text text-sm uppercase tracking-wide">
