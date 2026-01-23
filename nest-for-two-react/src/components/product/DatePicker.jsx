@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { formatDateShort, isDateAllowed, getMinDate } from '../../utils/dateHelpers';
+import { isDateAllowed, getMinDate } from '../../utils/dateHelpers';
 
 /**
  * DatePicker Component
@@ -13,51 +13,55 @@ import { formatDateShort, isDateAllowed, getMinDate } from '../../utils/dateHelp
  * @param {boolean} props.required - Whether the field is required (default: true)
  */
 const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
-  const [displayValue, setDisplayValue] = useState('');
   const [error, setError] = useState('');
+  const inputRef = useRef(null);
+
+  const handleClick = () => {
+    if (inputRef.current?.showPicker) {
+      inputRef.current.showPicker();
+    }
+  };
 
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;
     const validation = isDateAllowed(selectedDate, purchaseType);
 
     if (!validation.allowed) {
+      // Show popup alert for subscription non-Sunday selection
+      if (purchaseType === 'subscription' && validation.error.includes('Sundays')) {
+        alert('Subscription deliveries are only available on Sundays. Please select a Sunday.');
+      }
       setError(validation.error);
       onChange('');
-      setDisplayValue('');
     } else {
       setError('');
       onChange(selectedDate);
-      setDisplayValue(formatDateShort(selectedDate));
     }
   };
 
   const handleClear = () => {
     onChange('');
-    setDisplayValue('');
     setError('');
   };
 
   return (
     <div className="space-y-2">
-      <label className="block font-nunito-regular text-wellness-dark">
-        Delivery Date {required && <span className="text-red-500">*</span>}
+      <label className="block font-source-sans uppercase" style={{ fontSize: '14px', color: '#81775A' }}>
+        DELIVERY DATE
       </label>
 
       <div className="relative">
         <input
+          ref={inputRef}
           type="date"
           min={getMinDate(purchaseType)}
           value={value}
           onChange={handleDateChange}
-          className={`w-full border ${error ? 'border-red-500' : 'border-[#d1d5db]'} rounded px-4 py-2 font-source-sans focus:outline-none focus:ring-2 ${error ? 'focus:ring-red-500' : 'focus:ring-wellness-rose'}`}
+          onClick={handleClick}
+          className={`w-full border ${error ? 'border-red-500' : 'border-[#d1d5db]'} px-4 py-2 font-source-sans focus:outline-none focus:ring-2 ${error ? 'focus:ring-red-500' : 'focus:ring-wellness-rose'} cursor-pointer`}
+          style={{ color: '#636260' }}
           required={required}
         />
-
-        {displayValue && (
-          <div className="absolute top-full mt-1 text-sm font-source-sans text-wellness-text">
-            Selected: {displayValue}
-          </div>
-        )}
 
         {value && (
           <button
@@ -72,14 +76,14 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
       </div>
 
       {error && (
-        <p className="text-sm text-red-500 font-source-sans">{error}</p>
+        <p className="font-source-sans" style={{ fontSize: '12px', color: '#636260' }}>{error}</p>
       )}
 
       {!error && (
-        <p className="text-sm text-wellness-text font-source-sans">
+        <p className="font-source-sans" style={{ fontSize: '12px', color: '#636260' }}>
           {purchaseType === 'subscription'
-            ? 'Subscription deliveries are only available on Sundays'
-            : 'Delivery requires at least 24 hours notice'}
+            ? 'Delivery for Subscription orders are fixed on Sundays. *Today\'s date cannot be selected for delivery.'
+            : 'We deliver Monday to Sunday *Today\'s date cannot be selected for delivery.'}
         </p>
       )}
     </div>

@@ -11,11 +11,11 @@ import PropTypes from 'prop-types';
  */
 const PurchaseTypeToggle = ({ selected, onChange }) => {
   return (
-    <div className="border border-[#d1d5db] rounded-lg p-1 inline-flex">
+    <div className="border border-[#d1d5db] p-1 w-full flex">
       <button
         type="button"
         onClick={() => onChange('one-time')}
-        className={`px-6 py-2 rounded font-nunito-regular text-sm transition-colors ${
+        className={`flex-1 py-2 font-source-sans text-sm transition-colors ${
           selected === 'one-time'
             ? 'bg-wellness-rose text-white'
             : 'bg-white text-wellness-dark'
@@ -27,14 +27,14 @@ const PurchaseTypeToggle = ({ selected, onChange }) => {
       <button
         type="button"
         onClick={() => onChange('subscription')}
-        className={`px-6 py-2 rounded font-nunito-regular text-sm transition-colors ${
+        className={`flex-1 py-2 font-source-sans text-sm transition-colors ${
           selected === 'subscription'
             ? 'bg-wellness-rose text-white'
             : 'bg-white text-wellness-dark'
         }`}
         aria-pressed={selected === 'subscription'}
       >
-        Subscription
+        Monthly Subscription and Save 17%
       </button>
     </div>
   );

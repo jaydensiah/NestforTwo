@@ -16,8 +16,8 @@ const InstructionsField = ({ value, onChange, maxWords = 100 }) => {
 
   return (
     <div className="space-y-2">
-      <label className="block font-nunito-regular text-wellness-dark">
-        Delivery Instructions (Optional)
+      <label className="block font-source-sans uppercase" style={{ fontSize: '14px', color: '#81775A' }}>
+        DELIVERY INSTRUCTIONS <span className="normal-case font-normal">(Optional)</span>
       </label>
 
       <textarea
@@ -25,11 +25,11 @@ const InstructionsField = ({ value, onChange, maxWords = 100 }) => {
         onChange={(e) => onChange(e.target.value)}
         placeholder="e.g., Leave at door, Call upon arrival"
         rows={4}
-        className="w-full border border-[#d1d5db] rounded px-4 py-2 font-source-sans resize-none focus:outline-none focus:ring-2 focus:ring-wellness-rose"
+        className="w-full border border-[#d1d5db] px-4 py-2 font-source-sans resize-none focus:outline-none focus:ring-2 focus:ring-wellness-rose"
       />
 
-      <div className={`text-sm font-source-sans ${wordCountResult.isValid ? 'text-wellness-text' : 'text-red-500'}`}>
-        {wordCountResult.count} / {maxWords} words
+      <div className="font-source-sans" style={{ fontSize: '12px', color: wordCountResult.isValid ? '#636260' : '#ef4444' }}>
+        {wordCountResult.count}/{maxWords}
       </div>
     </div>
   );

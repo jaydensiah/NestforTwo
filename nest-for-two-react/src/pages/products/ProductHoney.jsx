@@ -16,16 +16,28 @@ const ProductHoney = () => {
 
   const [purchaseType, setPurchaseType] = useState('one-time');
   const [size, setSize] = useState('50ml');
-  const [quantity, setQuantity] = useState(1);
-  const [deliveryDate, setDeliveryDate] = useState('');
+  const [oneTimeQuantity, setOneTimeQuantity] = useState(1);
+  const [subscriptionQuantity, setSubscriptionQuantity] = useState(1);
+  const [oneTimeDeliveryDate, setOneTimeDeliveryDate] = useState('');
+  const [subscriptionDeliveryDate, setSubscriptionDeliveryDate] = useState('');
   const [timeSlot, setTimeSlot] = useState('3-5PM');
   const [instructions, setInstructions] = useState('');
   const [isAdding, setIsAdding] = useState(false);
+
+  // Get current quantity and delivery date based on purchase type
+  const quantity = purchaseType === 'one-time' ? oneTimeQuantity : subscriptionQuantity;
+  const setQuantity = purchaseType === 'one-time' ? setOneTimeQuantity : setSubscriptionQuantity;
+  const deliveryDate = purchaseType === 'one-time' ? oneTimeDeliveryDate : subscriptionDeliveryDate;
+  const setDeliveryDate = purchaseType === 'one-time' ? setOneTimeDeliveryDate : setSubscriptionDeliveryDate;
 
   // Get variant options based on purchase type
   const variantOptions = Object.values(product.variants).filter(
     v => v.type === purchaseType
   );
+
+  const handlePurchaseTypeChange = (newType) => {
+    setPurchaseType(newType);
+  };
 
   // Get current variant - convert purchaseType to camelCase for key
   const variantKey = purchaseType === 'one-time'
@@ -80,11 +92,8 @@ const ProductHoney = () => {
               <h1 className="font-playfair-bold mb-2 text-wellness-dark" style={{ fontSize: '30px' }}>
                 {product.name}
               </h1>
-              <p className="font-source-sans text-wellness-text text-sm uppercase tracking-wide">
-                {product.category}
-              </p>
               {product.label && (
-                <p className="mt-2 inline-block bg-wellness-rose text-white px-3 py-1 text-xs font-nunito-regular rounded-full">
+                <p className="mt-2 inline-block bg-wellness-rose text-white px-3 py-1 font-source-sans rounded-full" style={{ fontSize: '12px' }}>
                   {product.label}
                 </p>
               )}
@@ -92,19 +101,19 @@ const ProductHoney = () => {
 
             {/* Purchase Type */}
             <div>
-              <label className="block font-nunito-regular text-wellness-dark text-sm mb-2">
+              <label className="block font-source-sans mb-2 uppercase" style={{ fontSize: '14px', color: '#81775A' }}>
                 Purchase Type
               </label>
               <PurchaseTypeToggle
                 selected={purchaseType}
-                onChange={setPurchaseType}
+                onChange={handlePurchaseTypeChange}
               />
             </div>
 
             {/* Size Selection */}
             <div>
-              <label className="block font-nunito-regular text-wellness-dark text-sm mb-3">
-                Select Size
+              <label className="block font-source-sans mb-3 uppercase" style={{ fontSize: '14px', color: '#81775A' }}>
+                Size
               </label>
               <SizeSelector
                 options={variantOptions}
@@ -115,12 +124,56 @@ const ProductHoney = () => {
             </div>
 
             {/* Quantity */}
-            <div>
-              <label className="block font-nunito-regular text-wellness-dark text-sm mb-2">
-                Quantity
-              </label>
-              <QuantitySelector quantity={quantity} onChange={setQuantity} />
-            </div>
+            {purchaseType === 'subscription' ? (
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-source-sans mb-2 uppercase" style={{ fontSize: '14px', color: '#81775A' }}>
+                    Delivery Frequency
+                  </label>
+                  <input
+                    type="text"
+                    value="3 times a month"
+                    readOnly
+                    className="w-full border border-[#d1d5db] px-4 py-2 font-source-sans bg-gray-50 cursor-not-allowed"
+                    style={{ color: '#636260', height: '40px' }}
+                  />
+                </div>
+                <div>
+                  <label className="block font-source-sans mb-2 uppercase" style={{ fontSize: '14px', color: '#81775A' }}>
+                    Quantity
+                  </label>
+                  <div className="w-full border border-[#d1d5db] flex items-center justify-between" style={{ height: '40px' }}>
+                    <button
+                      type="button"
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      disabled={quantity <= 1}
+                      className="flex-1 h-full flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      style={{ color: '#636260' }}
+                    >
+                      −
+                    </button>
+                    <span className="flex-1 font-source-sans text-lg text-center border-l border-r border-[#d1d5db] h-full flex items-center justify-center" style={{ color: '#636260' }}>
+                      {quantity}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setQuantity(quantity + 1)}
+                      className="flex-1 h-full flex items-center justify-center hover:bg-gray-100 transition-colors"
+                      style={{ color: '#636260' }}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <label className="block font-source-sans mb-2 uppercase" style={{ fontSize: '14px', color: '#81775A' }}>
+                  Quantity
+                </label>
+                <QuantitySelector quantity={quantity} onChange={setQuantity} />
+              </div>
+            )}
 
             {/* Delivery Date */}
             <DatePicker
@@ -137,28 +190,23 @@ const ProductHoney = () => {
 
             {/* Price Summary */}
             <div className="border-t border-gray-200 pt-4">
-              <div className="flex justify-between items-center mb-2">
-                <span className="font-source-sans text-wellness-text">
+              <div className="flex justify-between items-center">
+                <span className="font-source-sans" style={{ color: '#636260' }}>
                   Subtotal:
                 </span>
-                <span className="font-playfair-bold text-2xl text-wellness-rose">
+                <span className="font-source-sans text-2xl" style={{ color: '#B76E79' }}>
                   ${(currentVariant.price * quantity).toFixed(2)}
                 </span>
               </div>
-              {currentVariant.quantity && (
-                <p className="text-sm font-source-sans text-wellness-text">
-                  {currentVariant.quantity} bottles × ${currentVariant.pricePerBottle}/bottle
-                </p>
-              )}
             </div>
 
             {/* Add to Cart Button */}
             <button
               onClick={handleAddToCart}
               disabled={isAdding}
-              className="w-full bg-wellness-rose text-white py-4 font-nunito-regular font-semibold text-lg hover:bg-rose-gold-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed rounded"
+              className="w-full bg-wellness-rose text-white py-4 font-source-sans text-lg hover:bg-rose-gold-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed rounded"
             >
-              {isAdding ? 'Adding...' : 'Add to Cart'}
+              {isAdding ? 'Adding...' : (purchaseType === 'subscription' ? 'Add Subscription to Cart' : 'Add to Cart')}
             </button>
 
             {/* Collapsible Sections */}

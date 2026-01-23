@@ -12,12 +12,19 @@ import PropTypes from 'prop-types';
  * @param {string} props.purchaseType - Purchase type to filter options
  */
 const SizeSelector = ({ options, selected, onChange, purchaseType }) => {
+  const getSizeLabel = (size, type) => {
+    if (type === 'subscription') {
+      return `${size} - Monthly Subscription (30 bottles)`;
+    }
+    return `${size} - Box of 6 bottles`;
+  };
+
   return (
     <div className="space-y-2">
       {options.map(option => (
         <label
           key={option.size}
-          className="flex items-center justify-between border border-[#d1d5db] rounded p-4 cursor-pointer hover:border-wellness-rose transition-colors"
+          className="flex items-center justify-between border border-[#d1d5db] p-4 cursor-pointer hover:border-wellness-rose transition-colors"
         >
           <div className="flex items-center gap-3">
             <input
@@ -28,21 +35,14 @@ const SizeSelector = ({ options, selected, onChange, purchaseType }) => {
               onChange={() => onChange(option.size)}
               className="w-4 h-4 text-wellness-rose"
             />
-            <div>
-              <div className="font-nunito-regular text-wellness-dark">
-                {option.size}
-              </div>
-              {purchaseType === 'subscription' && option.savings && (
-                <div className="font-source-sans text-sm text-wellness-rose">
-                  Save {option.savings}
-                </div>
-              )}
+            <div className="font-source-sans text-wellness-dark">
+              {getSizeLabel(option.size, purchaseType)}
             </div>
           </div>
-          <div className="font-playfair-bold text-lg text-wellness-dark">
+          <div className="font-source-sans text-lg" style={{ color: '#B76E79' }}>
             ${option.price}
             {option.pricePerBottle && (
-              <span className="font-source-sans text-sm text-wellness-text ml-2">
+              <span className="font-source-sans text-sm ml-2" style={{ color: '#636260' }}>
                 (${option.pricePerBottle}/bottle)
               </span>
             )}

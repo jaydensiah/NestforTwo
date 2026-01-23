@@ -12,23 +12,25 @@ import PropTypes from 'prop-types';
  */
 const QuantitySelector = ({ quantity, onChange, min = 1 }) => {
   return (
-    <div className="flex items-center gap-4">
+    <div className="inline-flex items-center border border-[#d1d5db]">
       <button
         type="button"
         onClick={() => onChange(Math.max(min, quantity - 1))}
         disabled={quantity <= min}
-        className="w-10 h-10 border border-[#d1d5db] flex items-center justify-center hover:border-wellness-rose disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        style={{ color: '#636260' }}
         aria-label="Decrease quantity"
       >
         −
       </button>
-      <span className="font-nunito-regular text-lg w-12 text-center">
+      <span className="font-source-sans text-lg w-12 text-center border-l border-r border-[#d1d5db]" style={{ color: '#636260', lineHeight: '40px' }}>
         {quantity}
       </span>
       <button
         type="button"
         onClick={() => onChange(quantity + 1)}
-        className="w-10 h-10 border border-[#d1d5db] flex items-center justify-center hover:border-wellness-rose transition-colors"
+        className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 transition-colors"
+        style={{ color: '#636260' }}
         aria-label="Increase quantity"
       >
         +

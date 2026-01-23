@@ -14,8 +14,8 @@ const TimeSlotSelector = ({ selected, onChange }) => {
 
   return (
     <div className="space-y-2">
-      <label className="block font-nunito-regular text-wellness-dark">
-        Delivery Time Slot <span className="text-red-500">*</span>
+      <label className="block font-source-sans uppercase" style={{ fontSize: '14px', color: '#81775A' }}>
+        DELIVERY TIME SLOT
       </label>
 
       <div className="flex gap-4">
@@ -32,7 +32,7 @@ const TimeSlotSelector = ({ selected, onChange }) => {
               onChange={() => onChange(slot)}
               className="w-4 h-4 text-wellness-rose"
             />
-            <span className="font-source-sans">{slot}</span>
+            <span className="font-source-sans" style={{ fontSize: '14px', color: '#636260' }}>{slot}</span>
           </label>
         ))}
       </div>

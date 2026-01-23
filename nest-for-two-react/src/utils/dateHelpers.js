@@ -354,23 +354,42 @@ export const endOfDay = (date) => {
 };
 
 /**
+ * Check if current time is past the cutoff hour (8pm)
+ * @returns {boolean} True if past 8pm
+ */
+export const isPastCutoffTime = () => {
+  const now = new Date();
+  return now.getHours() >= 20; // 8pm = 20:00
+};
+
+/**
  * Get tomorrow's date in ISO format (YYYY-MM-DD)
+ * If past 8pm, returns day after tomorrow
  * @returns {string} Tomorrow's date in ISO format
  */
 export const getTomorrowDate = () => {
   const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  // If past 8pm, minimum is day after tomorrow
+  const daysToAdd = isPastCutoffTime() ? 2 : 1;
+  tomorrow.setDate(tomorrow.getDate() + daysToAdd);
   return formatDateISO(tomorrow);
 };
 
 /**
  * Get next Sunday's date in ISO format (YYYY-MM-DD)
+ * If past 8pm and tomorrow is Sunday, returns the Sunday after
  * @returns {string} Next Sunday's date in ISO format
  */
 export const getNextSunday = () => {
   const today = new Date();
   const dayOfWeek = today.getDay();
-  const daysUntilSunday = dayOfWeek === 0 ? 7 : 7 - dayOfWeek;
+  let daysUntilSunday = dayOfWeek === 0 ? 7 : 7 - dayOfWeek;
+
+  // If past 8pm and tomorrow is Sunday (today is Saturday), skip to next Sunday
+  if (isPastCutoffTime() && daysUntilSunday === 1) {
+    daysUntilSunday = 8;
+  }
+
   const nextSunday = new Date(today);
   nextSunday.setDate(today.getDate() + daysUntilSunday);
   return formatDateISO(nextSunday);
@@ -392,14 +411,34 @@ export const isDateAllowed = (dateString, purchaseType) => {
 
   const selectedDate = new Date(dateString);
   const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
   today.setHours(0, 0, 0, 0);
+  tomorrow.setHours(0, 0, 0, 0);
   selectedDate.setHours(0, 0, 0, 0);
 
-  // Cannot select today (24hr notice rule)
-  if (selectedDate <= today) {
+  // Cannot select today
+  if (selectedDate.getTime() === today.getTime()) {
     return {
       allowed: false,
-      error: 'Please select a date at least 24 hours in advance'
+      error: 'Today\'s date cannot be selected for delivery'
+    };
+  }
+
+  // Cannot select tomorrow if it's past 8pm
+  if (isPastCutoffTime() && selectedDate.getTime() === tomorrow.getTime()) {
+    return {
+      allowed: false,
+      error: 'Orders placed after 8pm cannot be delivered the next day. Please select a later date.'
+    };
+  }
+
+  // Cannot select past dates
+  if (selectedDate < today) {
+    return {
+      allowed: false,
+      error: 'Please select a future date'
     };
   }
 
