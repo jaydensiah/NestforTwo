@@ -53,6 +53,8 @@ body {
 /* Smooth scroll */
 html {
   scroll-behavior: smooth;
+  scrollbar-color: #636260 #f1f1f1; /* Firefox scrollbar */
+  scrollbar-width: thin;
 }
 
 /* Remove default button styles */
@@ -70,12 +72,12 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #B76E79;
+  background: #636260;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #9A5B68;
+  background: #4a4948;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -92,4 +94,9 @@ button {
 /* Perspective for 3D carousel */
 .perspective-1000 {
   perspective: 1000px;
+}
+
+/* Rose-colored radio buttons */
+.radio-rose input[type="radio"] {
+  accent-color: #B76E79;
 }

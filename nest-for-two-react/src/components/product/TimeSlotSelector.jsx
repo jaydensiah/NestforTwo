@@ -10,11 +10,11 @@ import PropTypes from 'prop-types';
  * @param {Function} props.onChange - Callback function when time slot changes
  */
 const TimeSlotSelector = ({ selected, onChange }) => {
-  const timeSlots = ['3-5PM', '7-9PM'];
+  const timeSlots = ['1-5PM', '6-10PM'];
 
   return (
     <div className="space-y-2">
-      <label className="block font-source-sans uppercase" style={{ fontSize: '14px', color: '#81775A' }}>
+      <label className="block font-source-sans uppercase text-[12px] sm:text-[14px]" style={{ color: '#81775A' }}>
         DELIVERY TIME SLOT
       </label>
 
@@ -32,7 +32,7 @@ const TimeSlotSelector = ({ selected, onChange }) => {
               onChange={() => onChange(slot)}
               className="w-4 h-4 text-wellness-rose"
             />
-            <span className="font-source-sans" style={{ fontSize: '14px', color: '#636260' }}>{slot}</span>
+            <span className="font-source-sans text-[12px] sm:text-[14px]" style={{ color: '#636260' }}>{slot}</span>
           </label>
         ))}
       </div>

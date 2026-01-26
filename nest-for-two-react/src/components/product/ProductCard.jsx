@@ -49,6 +49,8 @@ const ProductCard = ({ product, onAddToCart, className = '' }) => {
   return (
     <Link
       to={productUrl}
+      target="_blank"
+      rel="noopener noreferrer"
       className={`group block bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 ${className}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

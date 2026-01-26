@@ -24,7 +24,7 @@ const SizeSelector = ({ options, selected, onChange, purchaseType }) => {
       {options.map(option => (
         <label
           key={option.size}
-          className="flex items-center justify-between border border-[#d1d5db] p-4 cursor-pointer hover:border-wellness-rose transition-colors"
+          className="flex items-center justify-between border border-[#d1d5db] p-3 sm:p-4 cursor-pointer hover:border-wellness-rose transition-colors"
         >
           <div className="flex items-center gap-3">
             <input
@@ -35,14 +35,19 @@ const SizeSelector = ({ options, selected, onChange, purchaseType }) => {
               onChange={() => onChange(option.size)}
               className="w-4 h-4 text-wellness-rose"
             />
-            <div className="font-source-sans text-wellness-dark">
+            <div className="font-source-sans text-wellness-dark text-[14px] sm:text-base">
               {getSizeLabel(option.size, purchaseType)}
             </div>
           </div>
-          <div className="font-source-sans text-lg" style={{ color: '#B76E79' }}>
-            ${option.price}
+          <div className="font-source-sans text-base sm:text-lg flex items-center gap-2">
+            {option.originalPrice && (
+              <span className="text-[13px] sm:text-[14px] line-through" style={{ color: '#9ca3af' }}>
+                ${option.originalPrice.toFixed(2)}
+              </span>
+            )}
+            <span style={{ color: '#B76E79' }}>${option.price}</span>
             {option.pricePerBottle && (
-              <span className="font-source-sans text-sm ml-2" style={{ color: '#636260' }}>
+              <span className="font-source-sans text-[12px] sm:text-sm" style={{ color: '#636260' }}>
                 (${option.pricePerBottle}/bottle)
               </span>
             )}
@@ -58,6 +63,7 @@ SizeSelector.propTypes = {
     PropTypes.shape({
       size: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
+      originalPrice: PropTypes.number,
       pricePerBottle: PropTypes.number,
       savings: PropTypes.string
     })

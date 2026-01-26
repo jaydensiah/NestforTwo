@@ -1,12 +1,64 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { IoCartOutline, IoMenuOutline, IoChevronDown } from 'react-icons/io5';
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { IoCartOutline, IoMenuOutline } from 'react-icons/io5';
 import AnnouncementBar from './AnnouncementBar';
 import MobileMenu from './MobileMenu';
 
+// NavLink component with active state and hover underline effect
+const NavLink = ({ to, children, isActive }) => {
+  return (
+    <Link
+      to={to}
+      className={`relative font-source-sans font-bold text-sm tracking-wide py-2 group ${
+        isActive ? 'text-wellness-rose' : 'text-wellness-dark'
+      }`}
+    >
+      {children}
+      {/* Animated underline - only shows on hover, loads from left to right, halfway width */}
+      <span
+        className="absolute bottom-0 left-0 h-0.5 bg-wellness-rose transition-all duration-300 ease-out w-0 group-hover:w-1/2"
+      />
+    </Link>
+  );
+};
+
+// Shop dropdown image card component
+const ShopDropdownCard = ({ to, image, label }) => {
+  return (
+    <Link
+      to={to}
+      className="relative block overflow-hidden group"
+    >
+      {/* Image - Recommended size: 300x400px */}
+      <img
+        src={image}
+        alt={label}
+        className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+      />
+      {/* Dark gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+      {/* Text at bottom left */}
+      <div className="absolute bottom-4 left-4 right-4">
+        <span className="text-white font-source-sans font-bold text-sm tracking-wide">
+          {label}
+        </span>
+      </div>
+    </Link>
+  );
+};
+
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
+  const [isShopDropdownOpen, setIsShopDropdownOpen] = useState(false);
+  const location = useLocation();
+
+  // Check if current path matches
+  const isActive = (path) => {
+    if (path === '/') {
+      return location.pathname === '/';
+    }
+    return location.pathname.startsWith(path);
+  };
 
   return (
     <>
@@ -36,66 +88,83 @@ const Navbar = () => {
 
             {/* Desktop Navigation Links */}
             <div className="hidden lg:flex items-center space-x-8">
-              {/* Products with Dropdown */}
+              {/* HOME */}
+              <NavLink to="/" isActive={isActive('/')}>
+                HOME
+              </NavLink>
+
+              {/* SHOP with Dropdown */}
               <div
                 className="relative"
-                onMouseEnter={() => setIsProductsDropdownOpen(true)}
-                onMouseLeave={() => setIsProductsDropdownOpen(false)}
+                onMouseEnter={() => setIsShopDropdownOpen(true)}
+                onMouseLeave={() => setIsShopDropdownOpen(false)}
               >
-                <button className="flex items-center space-x-1 text-wellness-dark font-nunito-regular text-sm tracking-wide hover:text-wellness-rose transition-colors duration-200 py-2">
-                  <span>PRODUCTS</span>
-                  <IoChevronDown className="text-base" />
-                </button>
+                <Link
+                  to="/shop"
+                  className={`relative font-source-sans font-bold text-sm tracking-wide py-2 group ${
+                    isActive('/shop') ? 'text-wellness-rose' : 'text-wellness-dark'
+                  }`}
+                >
+                  SHOP
+                  {/* Animated underline - only shows on hover */}
+                  <span
+                    className="absolute bottom-0 left-0 h-0.5 bg-wellness-rose transition-all duration-300 ease-out w-0 group-hover:w-1/2"
+                  />
+                </Link>
 
-                {/* Dropdown Menu */}
-                {isProductsDropdownOpen && (
-                  <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-custom-border shadow-lg rounded-md overflow-hidden">
-                    <Link
-                      to="/products/freshly-cooked"
-                      className="block px-4 py-3 text-wellness-text font-nunito-light text-sm hover:bg-custom-dropdownHover hover:text-wellness-rose transition-colors duration-200"
-                    >
-                      Freshly Cooked
-                    </Link>
-                    <Link
-                      to="/products/dried"
-                      className="block px-4 py-3 text-wellness-text font-nunito-light text-sm hover:bg-custom-dropdownHover hover:text-wellness-rose transition-colors duration-200"
-                    >
-                      Dried
-                    </Link>
-                    <Link
-                      to="/products/kue-lapis"
-                      className="block px-4 py-3 text-wellness-text font-nunito-light text-sm hover:bg-custom-dropdownHover hover:text-wellness-rose transition-colors duration-200"
-                    >
-                      Kue Lapis
-                    </Link>
+                {/* Shop Dropdown Menu - Full width with 4 image columns */}
+                <div
+                  className={`fixed left-0 right-0 mt-2 bg-white border-t border-b border-gray-200 shadow-xl transition-all duration-300 ${
+                    isShopDropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
+                  }`}
+                  style={{ top: '120px' }}
+                >
+                  <div className="max-w-6xl mx-auto px-8 py-6">
+                    <div className="grid grid-cols-4 gap-4">
+                      <ShopDropdownCard
+                        to="/shop?category=signature-bottle"
+                        image="/images/placeholder-bottle.jpg"
+                        label="Signature Bottle Series"
+                      />
+                      <ShopDropdownCard
+                        to="/shop?category=signature-gift"
+                        image="/images/placeholder-gift.jpg"
+                        label="Signature Gift Set Series"
+                      />
+                      <ShopDropdownCard
+                        to="/shop?category=premium-dried"
+                        image="/images/placeholder-dried.jpg"
+                        label="Premium Dried Series"
+                      />
+                      <ShopDropdownCard
+                        to="/shop?category=kue-lapis"
+                        image="/images/placeholder-lapis.jpg"
+                        label="Traditional Kue Lapis Series"
+                      />
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
 
-              <Link
-                to="/about"
-                className="text-wellness-dark font-nunito-regular text-sm tracking-wide hover:text-wellness-rose transition-colors duration-200"
-              >
+              {/* ABOUT */}
+              <NavLink to="/about" isActive={isActive('/about')}>
                 ABOUT
-              </Link>
-              <Link
-                to="/collaborations"
-                className="text-wellness-dark font-nunito-regular text-sm tracking-wide hover:text-wellness-rose transition-colors duration-200"
-              >
+              </NavLink>
+
+              {/* COLLABORATIONS */}
+              <NavLink to="/collaborations" isActive={isActive('/collaborations')}>
                 COLLABORATIONS
-              </Link>
-              <Link
-                to="/faqs"
-                className="text-wellness-dark font-nunito-regular text-sm tracking-wide hover:text-wellness-rose transition-colors duration-200"
-              >
+              </NavLink>
+
+              {/* FAQS */}
+              <NavLink to="/faqs" isActive={isActive('/faqs')}>
                 FAQS
-              </Link>
-              <Link
-                to="/contact"
-                className="text-wellness-dark font-nunito-regular text-sm tracking-wide hover:text-wellness-rose transition-colors duration-200"
-              >
+              </NavLink>
+
+              {/* CONTACT */}
+              <NavLink to="/contact" isActive={isActive('/contact')}>
                 CONTACT
-              </Link>
+              </NavLink>
             </div>
 
             {/* Cart Icon */}
@@ -105,10 +174,6 @@ const Navbar = () => {
               aria-label="Shopping cart"
             >
               <IoCartOutline className="text-2xl" />
-              {/* Cart count badge - can be implemented later */}
-              {/* <span className="absolute -top-1 -right-1 bg-wellness-rose text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                0
-              </span> */}
             </Link>
           </div>
         </nav>

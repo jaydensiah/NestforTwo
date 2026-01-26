@@ -16,7 +16,7 @@ const Home = () => {
           <h1 className="font-playfair-bold text-[30px] mb-6 text-wellness-dark">
             Singapore's Thickest, Freshest Bird's Nest
           </h1>
-          <p className="font-source-sans text-wellness-text text-base max-w-3xl mx-auto mb-12">
+          <p className="font-source-sans text-wellness-text text-base max-w-4xl mx-auto mb-12">
             At Nest for Two, every bottle is brimming with generous strands of premium bird's nest, never watered down. We prepare each order only on the day of delivery, ensuring unmatched freshness and quality. No pre-made stock, no shortcuts, just the purest bird's nest at its peak, one of the most sought-after delicacies for its remarkable health benefits.
           </p>
           <BenefitsCarousel />
@@ -47,10 +47,10 @@ const Home = () => {
       </section>
 
       {/* Reviews Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-wellness-cream">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <h2 className="font-playfair-bold text-3xl text-center mb-12 text-wellness-dark">
-            What Our Customers Say
+            Hear from our happy customers
           </h2>
           <ReviewCarousel />
         </div>

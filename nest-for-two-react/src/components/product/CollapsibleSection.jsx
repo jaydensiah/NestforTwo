@@ -10,24 +10,25 @@ import PropTypes from 'prop-types';
  * @param {React.ReactNode} props.children - Section content
  * @param {boolean} props.defaultOpen - Whether section is open by default (default: false)
  */
-const CollapsibleSection = ({ title, children, defaultOpen = false }) => {
+const CollapsibleSection = ({ title, children, defaultOpen = false, hideTopBorder = false }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="border-t border-[#d1d5db]">
+    <div className={hideTopBorder ? '' : 'border-t border-[#d1d5db]'}>
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between py-4 font-nunito-regular text-left"
+        className="w-full flex items-center justify-between py-4 font-source-sans text-left uppercase"
+        style={{ fontSize: '14px' }}
       >
-        <span className="text-lg">{title}</span>
-        <span className={`transform transition-transform ${isOpen ? 'rotate-180' : ''}`}>
-          ▼
+        <span>{title}</span>
+        <span>
+          {isOpen ? '−' : '+'}
         </span>
       </button>
 
       {isOpen && (
-        <div className="pb-4 font-source-sans text-wellness-text">
+        <div className="pb-4 font-source-sans" style={{ fontSize: '15px', color: '#636260' }}>
           {children}
         </div>
       )}
@@ -38,7 +39,8 @@ const CollapsibleSection = ({ title, children, defaultOpen = false }) => {
 CollapsibleSection.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  defaultOpen: PropTypes.bool
+  defaultOpen: PropTypes.bool,
+  hideTopBorder: PropTypes.bool
 };
 
 export default CollapsibleSection;

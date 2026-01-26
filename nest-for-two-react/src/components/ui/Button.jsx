@@ -11,7 +11,7 @@ const Button = ({
   className = '',
   ...props
 }) => {
-  const baseClasses = 'inline-flex items-center justify-center font-nunito-regular transition-all duration-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-wellness-rose disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseClasses = 'inline-flex items-center justify-center font-nunito-bold transition-all duration-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-wellness-rose disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variants = {
     primary: 'bg-wellness-rose text-white hover:bg-rose-gold-700 active:bg-rose-gold-800',

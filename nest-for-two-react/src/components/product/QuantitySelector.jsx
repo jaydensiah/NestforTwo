@@ -23,7 +23,7 @@ const QuantitySelector = ({ quantity, onChange, min = 1 }) => {
       >
         −
       </button>
-      <span className="font-source-sans text-lg w-12 text-center border-l border-r border-[#d1d5db]" style={{ color: '#636260', lineHeight: '40px' }}>
+      <span className="font-source-sans text-base sm:text-lg w-12 text-center border-l border-r border-[#d1d5db]" style={{ color: '#636260', lineHeight: '40px' }}>
         {quantity}
       </span>
       <button

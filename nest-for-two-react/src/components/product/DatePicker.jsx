@@ -46,7 +46,7 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
 
   return (
     <div className="space-y-2">
-      <label className="block font-source-sans uppercase" style={{ fontSize: '14px', color: '#81775A' }}>
+      <label className="block font-source-sans uppercase text-[12px] sm:text-[14px]" style={{ color: '#81775A' }}>
         DELIVERY DATE
       </label>
 

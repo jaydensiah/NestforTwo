@@ -8,6 +8,7 @@ import WhatsAppButton from './components/shared/WhatsAppButton';
 
 // Pages
 import Home from './pages/Home';
+import Shop from './pages/Shop';
 import Cart from './pages/Cart';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -37,14 +38,17 @@ function App() {
               {/* Home */}
               <Route path="/" element={<Home />} />
 
+              {/* Shop */}
+              <Route path="/shop" element={<Shop />} />
+
               {/* Cart */}
               <Route path="/cart" element={<Cart />} />
 
               {/* Information Pages */}
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/partnerships" element={<Partnerships />} />
+              <Route path="/faqs" element={<FAQ />} />
+              <Route path="/collaborations" element={<Partnerships />} />
 
               {/* Product Pages - Freshly Cooked */}
               <Route path="/products/honey" element={<ProductHoney />} />

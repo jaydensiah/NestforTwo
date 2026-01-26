@@ -1,4 +1,4 @@
-// Product Configuration with Shopify IDs
+// Product Configuration with Shopify IDs for Freshly Cooked Bottles
 export const PRODUCTS = {
   ZERO_SUGAR: {
     id: 'gid://shopify/Product/7859390251089',
@@ -13,36 +13,166 @@ export const PRODUCTS = {
       '/images/All_6.png'
     ],
     variants: {
-      oneTime50ml: {
+      // One-Time 50ml variants (4 sweetness levels)
+      oneTime50ml25: {
         id: 'gid://shopify/ProductVariant/42912035045457',
         size: '50ml',
+        sweetness: '25',
         quantity: 6,
         price: 72,
         pricePerBottle: 12,
         type: 'one-time'
       },
-      oneTime100ml: {
+      oneTime50ml50: {
+        id: 'gid://shopify/ProductVariant/59013957550161',
+        size: '50ml',
+        sweetness: '50',
+        quantity: 6,
+        price: 72,
+        pricePerBottle: 12,
+        type: 'one-time'
+      },
+      oneTime50ml100: {
+        id: 'gid://shopify/ProductVariant/59013958729809',
+        size: '50ml',
+        sweetness: '100',
+        quantity: 6,
+        price: 72,
+        pricePerBottle: 12,
+        type: 'one-time'
+      },
+      oneTime50mlSide: {
+        id: 'gid://shopify/ProductVariant/59013959483473',
+        size: '50ml',
+        sweetness: 'side',
+        quantity: 6,
+        price: 72,
+        pricePerBottle: 12,
+        type: 'one-time'
+      },
+      // One-Time 100ml variants (4 sweetness levels)
+      oneTime100ml25: {
         id: 'gid://shopify/ProductVariant/42912035078225',
         size: '100ml',
+        sweetness: '25',
         quantity: 6,
         price: 144,
         pricePerBottle: 24,
         type: 'one-time'
       },
-      subscription50ml: {
+      oneTime100ml50: {
+        id: 'gid://shopify/ProductVariant/59013970919505',
+        size: '100ml',
+        sweetness: '50',
+        quantity: 6,
+        price: 144,
+        pricePerBottle: 24,
+        type: 'one-time'
+      },
+      oneTime100ml100: {
+        id: 'gid://shopify/ProductVariant/59013971869777',
+        size: '100ml',
+        sweetness: '100',
+        quantity: 6,
+        price: 144,
+        pricePerBottle: 24,
+        type: 'one-time'
+      },
+      oneTime100mlSide: {
+        id: 'gid://shopify/ProductVariant/59013972787281',
+        size: '100ml',
+        sweetness: 'side',
+        quantity: 6,
+        price: 144,
+        pricePerBottle: 24,
+        type: 'one-time'
+      },
+      // Subscription 50ml variants (4 sweetness levels)
+      subscription50ml25: {
         id: 'gid://shopify/ProductVariant/42912035110993',
         size: '50ml',
+        sweetness: '25',
         quantity: 30,
         price: 300,
+        originalPrice: 360,
         pricePerBottle: 10,
         type: 'subscription',
         savings: '17%'
       },
-      subscription100ml: {
+      subscription50ml50: {
+        id: 'gid://shopify/ProductVariant/59014014533713',
+        size: '50ml',
+        sweetness: '50',
+        quantity: 30,
+        price: 300,
+        originalPrice: 360,
+        pricePerBottle: 10,
+        type: 'subscription',
+        savings: '17%'
+      },
+      subscription50ml100: {
+        id: 'gid://shopify/ProductVariant/59014015942737',
+        size: '50ml',
+        sweetness: '100',
+        quantity: 30,
+        price: 300,
+        originalPrice: 360,
+        pricePerBottle: 10,
+        type: 'subscription',
+        savings: '17%'
+      },
+      subscription50mlSide: {
+        id: 'gid://shopify/ProductVariant/59014017056849',
+        size: '50ml',
+        sweetness: 'side',
+        quantity: 30,
+        price: 300,
+        originalPrice: 360,
+        pricePerBottle: 10,
+        type: 'subscription',
+        savings: '17%'
+      },
+      // Subscription 100ml variants (4 sweetness levels)
+      subscription100ml25: {
         id: 'gid://shopify/ProductVariant/42912035143761',
         size: '100ml',
+        sweetness: '25',
         quantity: 30,
         price: 600,
+        originalPrice: 720,
+        pricePerBottle: 20,
+        type: 'subscription',
+        savings: '17%'
+      },
+      subscription100ml50: {
+        id: 'gid://shopify/ProductVariant/59014027903057',
+        size: '100ml',
+        sweetness: '50',
+        quantity: 30,
+        price: 600,
+        originalPrice: 720,
+        pricePerBottle: 20,
+        type: 'subscription',
+        savings: '17%'
+      },
+      subscription100ml100: {
+        id: 'gid://shopify/ProductVariant/59014028460113',
+        size: '100ml',
+        sweetness: '100',
+        quantity: 30,
+        price: 600,
+        originalPrice: 720,
+        pricePerBottle: 20,
+        type: 'subscription',
+        savings: '17%'
+      },
+      subscription100mlSide: {
+        id: 'gid://shopify/ProductVariant/59014029115473',
+        size: '100ml',
+        sweetness: 'side',
+        quantity: 30,
+        price: 600,
+        originalPrice: 720,
         pricePerBottle: 20,
         type: 'subscription',
         savings: '17%'
@@ -63,36 +193,166 @@ export const PRODUCTS = {
       '/images/All_6.png'
     ],
     variants: {
-      oneTime50ml: {
+      // One-Time 50ml variants (4 sweetness levels)
+      oneTime50ml25: {
         id: 'gid://shopify/ProductVariant/42912008405073',
         size: '50ml',
+        sweetness: '25',
         quantity: 6,
         price: 72,
         pricePerBottle: 12,
         type: 'one-time'
       },
-      oneTime100ml: {
+      oneTime50ml50: {
+        id: 'gid://shopify/ProductVariant/59014105170001',
+        size: '50ml',
+        sweetness: '50',
+        quantity: 6,
+        price: 72,
+        pricePerBottle: 12,
+        type: 'one-time'
+      },
+      oneTime50ml100: {
+        id: 'gid://shopify/ProductVariant/59014105694289',
+        size: '50ml',
+        sweetness: '100',
+        quantity: 6,
+        price: 72,
+        pricePerBottle: 12,
+        type: 'one-time'
+      },
+      oneTime50mlSide: {
+        id: 'gid://shopify/ProductVariant/59014106153041',
+        size: '50ml',
+        sweetness: 'side',
+        quantity: 6,
+        price: 72,
+        pricePerBottle: 12,
+        type: 'one-time'
+      },
+      // One-Time 100ml variants (4 sweetness levels)
+      oneTime100ml25: {
         id: 'gid://shopify/ProductVariant/42912008437841',
         size: '100ml',
+        sweetness: '25',
         quantity: 6,
         price: 144,
         pricePerBottle: 24,
         type: 'one-time'
       },
-      subscription50ml: {
+      oneTime100ml50: {
+        id: 'gid://shopify/ProductVariant/59014107037777',
+        size: '100ml',
+        sweetness: '50',
+        quantity: 6,
+        price: 144,
+        pricePerBottle: 24,
+        type: 'one-time'
+      },
+      oneTime100ml100: {
+        id: 'gid://shopify/ProductVariant/59014107398225',
+        size: '100ml',
+        sweetness: '100',
+        quantity: 6,
+        price: 144,
+        pricePerBottle: 24,
+        type: 'one-time'
+      },
+      oneTime100mlSide: {
+        id: 'gid://shopify/ProductVariant/59014107824209',
+        size: '100ml',
+        sweetness: 'side',
+        quantity: 6,
+        price: 144,
+        pricePerBottle: 24,
+        type: 'one-time'
+      },
+      // Subscription 50ml variants (4 sweetness levels)
+      subscription50ml25: {
         id: 'gid://shopify/ProductVariant/42912008470609',
         size: '50ml',
+        sweetness: '25',
         quantity: 30,
         price: 300,
+        originalPrice: 360,
         pricePerBottle: 10,
         type: 'subscription',
         savings: '17%'
       },
-      subscription100ml: {
+      subscription50ml50: {
+        id: 'gid://shopify/ProductVariant/59014109200465',
+        size: '50ml',
+        sweetness: '50',
+        quantity: 30,
+        price: 300,
+        originalPrice: 360,
+        pricePerBottle: 10,
+        type: 'subscription',
+        savings: '17%'
+      },
+      subscription50ml100: {
+        id: 'gid://shopify/ProductVariant/59014109462609',
+        size: '50ml',
+        sweetness: '100',
+        quantity: 30,
+        price: 300,
+        originalPrice: 360,
+        pricePerBottle: 10,
+        type: 'subscription',
+        savings: '17%'
+      },
+      subscription50mlSide: {
+        id: 'gid://shopify/ProductVariant/59014109888593',
+        size: '50ml',
+        sweetness: 'side',
+        quantity: 30,
+        price: 300,
+        originalPrice: 360,
+        pricePerBottle: 10,
+        type: 'subscription',
+        savings: '17%'
+      },
+      // Subscription 100ml variants (4 sweetness levels)
+      subscription100ml25: {
         id: 'gid://shopify/ProductVariant/42912008503377',
         size: '100ml',
+        sweetness: '25',
         quantity: 30,
         price: 600,
+        originalPrice: 720,
+        pricePerBottle: 20,
+        type: 'subscription',
+        savings: '17%'
+      },
+      subscription100ml50: {
+        id: 'gid://shopify/ProductVariant/59014115033169',
+        size: '100ml',
+        sweetness: '50',
+        quantity: 30,
+        price: 600,
+        originalPrice: 720,
+        pricePerBottle: 20,
+        type: 'subscription',
+        savings: '17%'
+      },
+      subscription100ml100: {
+        id: 'gid://shopify/ProductVariant/59014111526993',
+        size: '100ml',
+        sweetness: '100',
+        quantity: 30,
+        price: 600,
+        originalPrice: 720,
+        pricePerBottle: 20,
+        type: 'subscription',
+        savings: '17%'
+      },
+      subscription100mlSide: {
+        id: 'gid://shopify/ProductVariant/59014112444497',
+        size: '100ml',
+        sweetness: 'side',
+        quantity: 30,
+        price: 600,
+        originalPrice: 720,
         pricePerBottle: 20,
         type: 'subscription',
         savings: '17%'
@@ -113,36 +373,166 @@ export const PRODUCTS = {
       '/images/All_6.png'
     ],
     variants: {
-      oneTime50ml: {
+      // One-Time 50ml variants (4 sweetness levels)
+      oneTime50ml25: {
         id: 'gid://shopify/ProductVariant/42911989563473',
         size: '50ml',
+        sweetness: '25',
         quantity: 6,
         price: 72,
         pricePerBottle: 12,
         type: 'one-time'
       },
-      oneTime100ml: {
+      oneTime50ml50: {
+        id: 'gid://shopify/ProductVariant/59014123651153',
+        size: '50ml',
+        sweetness: '50',
+        quantity: 6,
+        price: 72,
+        pricePerBottle: 12,
+        type: 'one-time'
+      },
+      oneTime50ml100: {
+        id: 'gid://shopify/ProductVariant/59014124109905',
+        size: '50ml',
+        sweetness: '100',
+        quantity: 6,
+        price: 72,
+        pricePerBottle: 12,
+        type: 'one-time'
+      },
+      oneTime50mlSide: {
+        id: 'gid://shopify/ProductVariant/59014124437585',
+        size: '50ml',
+        sweetness: 'side',
+        quantity: 6,
+        price: 72,
+        pricePerBottle: 12,
+        type: 'one-time'
+      },
+      // One-Time 100ml variants (4 sweetness levels)
+      oneTime100ml25: {
         id: 'gid://shopify/ProductVariant/42911989596241',
         size: '100ml',
+        sweetness: '25',
         quantity: 6,
         price: 144,
         pricePerBottle: 24,
         type: 'one-time'
       },
-      subscription50ml: {
+      oneTime100ml50: {
+        id: 'gid://shopify/ProductVariant/59014125158481',
+        size: '100ml',
+        sweetness: '50',
+        quantity: 6,
+        price: 144,
+        pricePerBottle: 24,
+        type: 'one-time'
+      },
+      oneTime100ml100: {
+        id: 'gid://shopify/ProductVariant/59014133940305',
+        size: '100ml',
+        sweetness: '100',
+        quantity: 6,
+        price: 144,
+        pricePerBottle: 24,
+        type: 'one-time'
+      },
+      oneTime100mlSide: {
+        id: 'gid://shopify/ProductVariant/59014134267985',
+        size: '100ml',
+        sweetness: 'side',
+        quantity: 6,
+        price: 144,
+        pricePerBottle: 24,
+        type: 'one-time'
+      },
+      // Subscription 50ml variants (4 sweetness levels)
+      subscription50ml25: {
         id: 'gid://shopify/ProductVariant/42911991464017',
         size: '50ml',
+        sweetness: '25',
         quantity: 30,
         price: 300,
+        originalPrice: 360,
         pricePerBottle: 10,
         type: 'subscription',
         savings: '17%'
       },
-      subscription100ml: {
+      subscription50ml50: {
+        id: 'gid://shopify/ProductVariant/59014135251025',
+        size: '50ml',
+        sweetness: '50',
+        quantity: 30,
+        price: 300,
+        originalPrice: 360,
+        pricePerBottle: 10,
+        type: 'subscription',
+        savings: '17%'
+      },
+      subscription50ml100: {
+        id: 'gid://shopify/ProductVariant/59014135578705',
+        size: '50ml',
+        sweetness: '100',
+        quantity: 30,
+        price: 300,
+        originalPrice: 360,
+        pricePerBottle: 10,
+        type: 'subscription',
+        savings: '17%'
+      },
+      subscription50mlSide: {
+        id: 'gid://shopify/ProductVariant/59014135971921',
+        size: '50ml',
+        sweetness: 'side',
+        quantity: 30,
+        price: 300,
+        originalPrice: 360,
+        pricePerBottle: 10,
+        type: 'subscription',
+        savings: '17%'
+      },
+      // Subscription 100ml variants (4 sweetness levels)
+      subscription100ml25: {
         id: 'gid://shopify/ProductVariant/42911991496785',
         size: '100ml',
+        sweetness: '25',
         quantity: 30,
         price: 600,
+        originalPrice: 720,
+        pricePerBottle: 20,
+        type: 'subscription',
+        savings: '17%'
+      },
+      subscription100ml50: {
+        id: 'gid://shopify/ProductVariant/59014140297297',
+        size: '100ml',
+        sweetness: '50',
+        quantity: 30,
+        price: 600,
+        originalPrice: 720,
+        pricePerBottle: 20,
+        type: 'subscription',
+        savings: '17%'
+      },
+      subscription100ml100: {
+        id: 'gid://shopify/ProductVariant/59014627164241',
+        size: '100ml',
+        sweetness: '100',
+        quantity: 30,
+        price: 600,
+        originalPrice: 720,
+        pricePerBottle: 20,
+        type: 'subscription',
+        savings: '17%'
+      },
+      subscription100mlSide: {
+        id: 'gid://shopify/ProductVariant/59014140657745',
+        size: '100ml',
+        sweetness: 'side',
+        quantity: 30,
+        price: 600,
+        originalPrice: 720,
         pricePerBottle: 20,
         type: 'subscription',
         savings: '17%'

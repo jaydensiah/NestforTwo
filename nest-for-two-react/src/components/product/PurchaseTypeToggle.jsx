@@ -15,7 +15,7 @@ const PurchaseTypeToggle = ({ selected, onChange }) => {
       <button
         type="button"
         onClick={() => onChange('one-time')}
-        className={`flex-1 py-2 font-source-sans text-sm transition-colors ${
+        className={`flex-1 py-2 font-source-sans text-[12px] sm:text-sm transition-colors ${
           selected === 'one-time'
             ? 'bg-wellness-rose text-white'
             : 'bg-white text-wellness-dark'
@@ -27,7 +27,7 @@ const PurchaseTypeToggle = ({ selected, onChange }) => {
       <button
         type="button"
         onClick={() => onChange('subscription')}
-        className={`flex-1 py-2 font-source-sans text-sm transition-colors ${
+        className={`flex-1 py-2 font-source-sans text-[12px] sm:text-sm transition-colors ${
           selected === 'subscription'
             ? 'bg-wellness-rose text-white'
             : 'bg-white text-wellness-dark'

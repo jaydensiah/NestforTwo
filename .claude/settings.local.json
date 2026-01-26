@@ -14,7 +14,8 @@
       "Bash(lsof:*)",
       "Bash(netstat:*)",
       "Bash(kill:*)",
-      "Bash(xargs:*)"
+      "Bash(xargs:*)",
+      "Bash(ls:*)"
     ]
   }
 }
