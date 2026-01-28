@@ -62,6 +62,8 @@ const ProductGrid = ({ category = 'freshly-cooked', onAddToCart, className = '' 
           name: product.name,
           image: product.images?.[0] || '/images/placeholder.png',
           price: displayPrice,
+          label: product.label,
+          labelShort: product.labelShort,
           category: product.label || product.category,
           slug: slug,
           originalProduct: product
@@ -103,13 +105,13 @@ const ProductGrid = ({ category = 'freshly-cooked', onAddToCart, className = '' 
   }
 
   return (
-    <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 ${className}`}>
+    <div className={`flex gap-3 sm:gap-4 md:gap-6 overflow-x-auto md:overflow-visible pb-2 md:pb-0 no-scrollbar md:grid md:grid-cols-3 ${className}`}>
       {products.map((product) => (
         <ProductCard
           key={product.id}
           product={product}
           onAddToCart={handleAddToCart}
-          className="animate-fadeIn"
+          className="animate-fadeIn flex-shrink-0 w-[42%] min-w-[140px] md:w-full md:min-w-0"
         />
       ))}
     </div>

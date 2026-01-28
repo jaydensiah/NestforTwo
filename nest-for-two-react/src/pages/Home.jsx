@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import HeroSection from '../components/home/HeroSection';
 import ProductGrid from '../components/home/ProductGrid';
 import ReviewCarousel from '../components/home/ReviewCarousel';
@@ -43,6 +44,20 @@ const Home = () => {
           </div>
 
           <ProductGrid category="freshly-cooked" />
+
+          {/* View All Products Link */}
+          <div className="flex justify-center mt-10">
+            <Link
+              to="/shop"
+              className="font-playfair-bold text-[22px] flex items-center transition-colors duration-200 text-[#636260] hover:text-wellness-rose"
+            >
+              *View All Products
+              <span className="inline-flex items-center ml-1">
+                <span className="w-8 h-[1.5px] bg-current"></span>
+                <span className="-ml-0.5 -mt-[3px]">›</span>
+              </span>
+            </Link>
+          </div>
         </div>
       </section>
 

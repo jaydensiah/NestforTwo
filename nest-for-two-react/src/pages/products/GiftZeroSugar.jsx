@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import ProductCarousel from '../../components/product/ProductCarousel';
+import SweetnessLevelSelector from '../../components/product/SweetnessLevelSelector';
 import QuantitySelector from '../../components/product/QuantitySelector';
 import DatePicker from '../../components/product/DatePicker';
 import TimeSlotSelector from '../../components/product/TimeSlotSelector';
@@ -7,20 +8,34 @@ import CollapsibleSection from '../../components/product/CollapsibleSection';
 import { PRODUCTS } from '../../config/products';
 import { CartContext } from '../../context/CartContext';
 
-const PruneKueLapis = () => {
-  const product = PRODUCTS.PRUNE_KUE_LAPIS;
+const GiftZeroSugar = () => {
+  const product = PRODUCTS.GIFT_ZERO_SUGAR;
   const { addItem } = useContext(CartContext);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const [sweetness, setSweetness] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [deliveryDate, setDeliveryDate] = useState('');
   const [timeSlot, setTimeSlot] = useState('1-5PM');
   const [isAdding, setIsAdding] = useState(false);
+  const [showSweetnessInfo, setShowSweetnessInfo] = useState(false);
+
+  // Get current variant based on sweetness
+  const getVariantKey = () => {
+    if (sweetness === 'side') return 'sweetnessSide';
+    return `sweetness${sweetness}`;
+  };
+  const currentVariant = sweetness ? product.variants[getVariantKey()] : null;
 
   const handleAddToCart = async () => {
+    if (!sweetness) {
+      alert('Please select a Sweetness Level');
+      return;
+    }
+
     if (!deliveryDate) {
       alert('Please select a delivery date');
       return;
@@ -29,13 +44,15 @@ const PruneKueLapis = () => {
     setIsAdding(true);
 
     try {
+      const sweetnessLabel = sweetness === 'side' ? 'Sugar on the Side' : `${sweetness}%`;
       const customAttributes = [
         { key: 'Delivery Date', value: deliveryDate },
         { key: 'Time Slot', value: timeSlot },
+        { key: 'Sweetness Level', value: sweetnessLabel },
         { key: 'Size', value: product.fixedSize }
       ];
 
-      await addItem(product.variant, quantity, customAttributes);
+      await addItem(currentVariant.id, quantity, customAttributes);
       alert('Added to cart successfully!');
     } catch (error) {
       console.error('Add to cart error:', error);
@@ -58,9 +75,11 @@ const PruneKueLapis = () => {
               <h1 className="font-playfair-bold mb-2 text-wellness-dark text-[20px] sm:text-[30px]">
                 {product.name}
               </h1>
-              <p className="mt-2 inline-block bg-wellness-rose text-white px-3 py-1 font-source-sans rounded-full" style={{ fontSize: '12px' }}>
-                PRUNE FLAVOUR
-              </p>
+              {product.label && (
+                <p className="mt-2 inline-block bg-wellness-rose text-white px-3 py-1 font-source-sans rounded-full" style={{ fontSize: '12px' }}>
+                  {product.label}
+                </p>
+              )}
             </div>
 
             {/* Size - Fixed, Pre-selected */}
@@ -84,6 +103,69 @@ const PruneKueLapis = () => {
                 </div>
               </div>
             </div>
+
+            {/* Sweetness Level */}
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <label className="font-source-sans uppercase text-[12px] sm:text-[14px]" style={{ color: '#81775A' }}>
+                  Sweetness Level
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setShowSweetnessInfo(true)}
+                  className="w-4 h-4 rounded-full bg-[#B76E79] text-white flex items-center justify-center hover:bg-[#a25d68] transition-colors text-[10px] font-bold"
+                  aria-label="Learn more about sweetness levels"
+                >
+                  ?
+                </button>
+              </div>
+              <SweetnessLevelSelector
+                selected={sweetness}
+                onChange={setSweetness}
+              />
+            </div>
+
+            {/* Sweetness Info Modal */}
+            {showSweetnessInfo && (
+              <div
+                className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4"
+                onClick={() => setShowSweetnessInfo(false)}
+              >
+                <div
+                  className="bg-white rounded-lg max-w-md w-full p-6 shadow-xl"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="font-playfair-bold text-lg" style={{ color: '#81775A' }}>
+                      About Sweetness Levels
+                    </h3>
+                    <button
+                      type="button"
+                      onClick={() => setShowSweetnessInfo(false)}
+                      className="text-gray-400 hover:text-gray-600 transition-colors text-2xl leading-none"
+                      aria-label="Close"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                  <div className="font-source-sans text-[14px] leading-relaxed" style={{ color: '#636260' }}>
+                    <p className="mb-4">
+                      Based on your selected sweetness level, we will adjust and mix the flavour directly into the bottles during preparation.
+                    </p>
+                    <p>
+                      If you select <span className="font-semibold" style={{ color: '#B76E79' }}>Sugar on the Side</span>, we will provide the Zero Sugar sachets separately so you can adjust the sweetness to your liking. 4 Zero Sugar sachets will be given.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowSweetnessInfo(false)}
+                    className="mt-6 w-full bg-wellness-rose text-white py-2.5 font-source-sans rounded hover:bg-[#a25d68] transition-colors"
+                  >
+                    Got it
+                  </button>
+                </div>
+              </div>
+            )}
 
             {/* Quantity */}
             <div>
@@ -112,7 +194,7 @@ const PruneKueLapis = () => {
                   Subtotal:
                 </span>
                 <span className="font-source-sans text-2xl" style={{ color: '#B76E79' }}>
-                  ${(product.price * quantity).toFixed(2)}
+                  {currentVariant ? `$${(product.price * quantity).toFixed(2)}` : '—'}
                 </span>
               </div>
             </div>
@@ -145,18 +227,18 @@ const PruneKueLapis = () => {
                 />
               </CollapsibleSection>
 
-              <CollapsibleSection title="HOW TO CONSUME YOUR KUE LAPIS">
+              <CollapsibleSection title="HOW TO CONSUME YOUR BIRD'S NEST">
                 <img
                   src="/images/placeholder.png"
-                  alt="How to consume your kue lapis"
+                  alt="How to consume your bird's nest"
                   className="w-full h-auto rounded-lg"
                 />
               </CollapsibleSection>
 
-              <CollapsibleSection title="HOW TO STORE YOUR KUE LAPIS">
+              <CollapsibleSection title="HOW TO STORE YOUR BIRD'S NEST">
                 <img
                   src="/images/placeholder.png"
-                  alt="How to store your kue lapis"
+                  alt="How to store your bird's nest"
                   className="w-full h-auto rounded-lg"
                 />
               </CollapsibleSection>
@@ -168,4 +250,4 @@ const PruneKueLapis = () => {
   );
 };
 
-export default PruneKueLapis;
+export default GiftZeroSugar;

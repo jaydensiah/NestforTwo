@@ -15,14 +15,28 @@ import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import Partnerships from './pages/Partnerships';
 
-// Product Pages
+// Product Pages - Signature Bottle Series
 import ProductHoney from './pages/products/ProductHoney';
 import ProductZeroSugar from './pages/products/ProductZeroSugar';
 import ProductRockSugar from './pages/products/ProductRockSugar';
-import ProductDried from './pages/products/ProductDried';
+
+// Product Pages - Signature Gift Set Series
+import GiftHoney from './pages/products/GiftHoney';
+import GiftZeroSugar from './pages/products/GiftZeroSugar';
+import GiftRockSugar from './pages/products/GiftRockSugar';
+
+// Product Pages - Premium Dried Series
+import Dried50g from './pages/products/Dried50g';
+import Dried100g from './pages/products/Dried100g';
+import Dried250g from './pages/products/Dried250g';
+
+// Product Pages - Traditional Kue Lapis Series
 import KueLapisNest from './pages/products/KueLapisNest';
 import OriginalKueLapis from './pages/products/OriginalKueLapis';
 import PruneKueLapis from './pages/products/PruneKueLapis';
+
+// Legacy - keeping for backwards compatibility
+import ProductDried from './pages/products/ProductDried';
 
 function App() {
   return (
@@ -50,15 +64,24 @@ function App() {
               <Route path="/faqs" element={<FAQ />} />
               <Route path="/collaborations" element={<Partnerships />} />
 
-              {/* Product Pages - Freshly Cooked */}
+              {/* Product Pages - Signature Bottle Series */}
               <Route path="/products/honey" element={<ProductHoney />} />
               <Route path="/products/zero-sugar" element={<ProductZeroSugar />} />
               <Route path="/products/rock-sugar" element={<ProductRockSugar />} />
 
-              {/* Product Pages - Dried */}
+              {/* Product Pages - Signature Gift Set Series */}
+              <Route path="/products/gift-honey" element={<GiftHoney />} />
+              <Route path="/products/gift-zero-sugar" element={<GiftZeroSugar />} />
+              <Route path="/products/gift-rock-sugar" element={<GiftRockSugar />} />
+
+              {/* Product Pages - Premium Dried Series */}
+              <Route path="/products/dried-50g" element={<Dried50g />} />
+              <Route path="/products/dried-100g" element={<Dried100g />} />
+              <Route path="/products/dried-250g" element={<Dried250g />} />
+              {/* Legacy dried route for backwards compatibility */}
               <Route path="/products/dried" element={<ProductDried />} />
 
-              {/* Product Pages - Kue Lapis */}
+              {/* Product Pages - Traditional Kue Lapis Series */}
               <Route path="/products/kue-lapis-nest" element={<KueLapisNest />} />
               <Route path="/products/original-kue-lapis" element={<OriginalKueLapis />} />
               <Route path="/products/prune-kue-lapis" element={<PruneKueLapis />} />

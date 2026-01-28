@@ -1,10 +1,15 @@
-// Product Configuration with Shopify IDs for Freshly Cooked Bottles
+// Product Configuration with Shopify IDs for Nest for Two
 export const PRODUCTS = {
+  // ============================================
+  // SIGNATURE BOTTLE SERIES (3 products)
+  // ============================================
   ZERO_SUGAR: {
     id: 'gid://shopify/Product/7859390251089',
     name: 'Freshly Cooked Birdnest with Zero Sugar',
     category: 'Freshly Cooked Bird\'s Nest',
+    series: 'signature-bottle',
     label: 'FOR PREGNANT LADIES & DIABETICS',
+    labelShort: 'FOR PREGNANT LADIES',
     images: [
       '/images/ZeroSugar.png',
       '/images/ZeroSugar2.png',
@@ -184,6 +189,7 @@ export const PRODUCTS = {
     id: 'gid://shopify/Product/7859386613841',
     name: 'Freshly Cooked Birdnest with Honey',
     category: 'Freshly Cooked Bird\'s Nest',
+    series: 'signature-bottle',
     label: 'FOR CHILDREN',
     images: [
       '/images/Honey.png',
@@ -364,6 +370,7 @@ export const PRODUCTS = {
     id: 'gid://shopify/Product/7859383992401',
     name: 'Freshly Cooked Birdnest with Rock Sugar',
     category: 'Freshly Cooked Bird\'s Nest',
+    series: 'signature-bottle',
     label: 'FOR ELDERLY',
     images: [
       '/images/RockSugar.png',
@@ -540,86 +547,213 @@ export const PRODUCTS = {
     }
   },
 
-  DRIED: {
+  // ============================================
+  // SIGNATURE GIFT SET SERIES (3 products)
+  // ============================================
+  GIFT_HONEY: {
+    id: 'gid://shopify/Product/PLACEHOLDER_GIFT_HONEY',
+    name: 'Freshly Cooked Bird\'s Nest Gift Box with Honey',
+    category: 'Gift Set',
+    series: 'signature-gift',
+    label: 'FOR CHILDREN',
+    price: 88,
+    fixedSize: '250ml - Gift box with 1 x insulated tumbler',
+    images: [
+      '/images/placeholder_gift_honey_1.png',
+      '/images/placeholder_gift_honey_2.png',
+      '/images/placeholder_gift_honey_3.png'
+    ],
+    variants: {
+      // 4 sweetness levels (one-time only, no subscription)
+      sweetness25: {
+        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_HONEY_25',
+        sweetness: '25',
+        price: 88
+      },
+      sweetness50: {
+        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_HONEY_50',
+        sweetness: '50',
+        price: 88
+      },
+      sweetness100: {
+        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_HONEY_100',
+        sweetness: '100',
+        price: 88
+      },
+      sweetnessSide: {
+        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_HONEY_SIDE',
+        sweetness: 'side',
+        price: 88
+      }
+    }
+  },
+
+  GIFT_ZERO_SUGAR: {
+    id: 'gid://shopify/Product/PLACEHOLDER_GIFT_ZERO_SUGAR',
+    name: 'Freshly Cooked Bird\'s Nest Gift Box with Zero Sugar',
+    category: 'Gift Set',
+    series: 'signature-gift',
+    label: 'FOR PREGNANT LADIES & DIABETICS',
+    labelShort: 'FOR PREGNANT LADIES',
+    price: 88,
+    fixedSize: '250ml - Gift box with 1 x insulated tumbler',
+    images: [
+      '/images/placeholder_gift_zerosugar_1.png',
+      '/images/placeholder_gift_zerosugar_2.png',
+      '/images/placeholder_gift_zerosugar_3.png'
+    ],
+    variants: {
+      sweetness25: {
+        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_ZERO_25',
+        sweetness: '25',
+        price: 88
+      },
+      sweetness50: {
+        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_ZERO_50',
+        sweetness: '50',
+        price: 88
+      },
+      sweetness100: {
+        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_ZERO_100',
+        sweetness: '100',
+        price: 88
+      },
+      sweetnessSide: {
+        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_ZERO_SIDE',
+        sweetness: 'side',
+        price: 88
+      }
+    }
+  },
+
+  GIFT_ROCK_SUGAR: {
+    id: 'gid://shopify/Product/PLACEHOLDER_GIFT_ROCK_SUGAR',
+    name: 'Freshly Cooked Bird\'s Nest Gift Box with Rock Sugar',
+    category: 'Gift Set',
+    series: 'signature-gift',
+    label: 'FOR ELDERLY',
+    price: 88,
+    fixedSize: '250ml - Gift box with 1 x insulated tumbler',
+    images: [
+      '/images/placeholder_gift_rocksugar_1.png',
+      '/images/placeholder_gift_rocksugar_2.png',
+      '/images/placeholder_gift_rocksugar_3.png'
+    ],
+    variants: {
+      sweetness25: {
+        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_ROCK_25',
+        sweetness: '25',
+        price: 88
+      },
+      sweetness50: {
+        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_ROCK_50',
+        sweetness: '50',
+        price: 88
+      },
+      sweetness100: {
+        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_ROCK_100',
+        sweetness: '100',
+        price: 88
+      },
+      sweetnessSide: {
+        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_ROCK_SIDE',
+        sweetness: 'side',
+        price: 88
+      }
+    }
+  },
+
+  // ============================================
+  // PREMIUM DRIED SERIES (3 products)
+  // ============================================
+  DRIED_50G: {
     id: 'gid://shopify/Product/7859391234129',
-    name: 'Pure Dry Selection',
+    name: 'Nest for Two Premium Dried Bird\'s Nest | 50g',
     category: 'Dried Bird\'s Nest',
+    series: 'premium-dried',
     label: null,
+    price: 200,
+    servings: 16,
+    fixedSize: '50g - 16 servings',
     images: [
-      '/images/Dry1.png',
-      '/images/Dry2.png',
-      '/images/Dry3.png'
+      '/images/dry1.png',
+      '/images/dry2.png',
+      '/images/dry3.png'
     ],
-    variants: {
-      '50g': {
-        id: 'gid://shopify/ProductVariant/42912039108689',
-        size: '50g',
-        price: 150,
-        pricePerGram: 3.00
-      },
-      '100g': {
-        id: 'gid://shopify/ProductVariant/42912039141457',
-        size: '100g',
-        price: 360,
-        pricePerGram: 3.60
-      },
-      '250g': {
-        id: 'gid://shopify/ProductVariant/42912038715473',
-        size: '250g',
-        price: 800,
-        pricePerGram: 3.20
-      },
-      '1000g': {
-        id: 'gid://shopify/ProductVariant/42912038748241',
-        size: '1000g',
-        price: 3000,
-        pricePerGram: 3.00
-      }
+    variant: {
+      id: 'gid://shopify/ProductVariant/42912039108689',
+      size: '50g',
+      price: 200,
+      servings: 16
     }
   },
 
-  KUE_LAPIS_NEST: {
-    id: 'gid://shopify/Product/15591388151889',
-    name: 'Kue Lapis with Bird\'s Nest',
-    category: 'Kue Lapis',
-    price: 95,
-    fixedSize: '6 x 50ml bottles + 1 box Kue Lapis (10x20cm)',
+  DRIED_100G: {
+    id: 'gid://shopify/Product/7859391234129',
+    name: 'Nest for Two Premium Dried Bird\'s Nest | 100g',
+    category: 'Dried Bird\'s Nest',
+    series: 'premium-dried',
+    label: null,
+    price: 360,
+    originalPrice: 400,
+    savings: '10%',
+    servings: 33,
+    fixedSize: '100g - 33 servings',
     images: [
-      '/images/NestwKueh.png',
-      '/images/Original1.png',
-      '/images/Original2.png',
-      '/images/OriginalMeasure.png',
-      '/images/Prune1.png'
+      '/images/dry1.png',
+      '/images/dry2.png',
+      '/images/dry3.png'
     ],
-    flavours: {
-      original: {
-        images: ['/images/Original1.png', '/images/Original2.png', '/images/Original3.png', '/images/OriginalMeasure.png']
-      },
-      prune: {
-        images: ['/images/Prune1.png', '/images/Prune2.png', '/images/Prune3.png', '/images/PruneMeasure.png']
-      }
-    },
-    variants: {
-      originalHoney: 'gid://shopify/ProductVariant/58344489287761',
-      originalRockSugar: 'gid://shopify/ProductVariant/58344489320529',
-      originalZeroSugar: 'gid://shopify/ProductVariant/58344489353297',
-      pruneHoney: 'gid://shopify/ProductVariant/58344489386065',
-      pruneRockSugar: 'gid://shopify/ProductVariant/58344489418833',
-      pruneZeroSugar: 'gid://shopify/ProductVariant/58344489451601'
+    variant: {
+      id: 'gid://shopify/ProductVariant/42912039141457',
+      size: '100g',
+      price: 360,
+      originalPrice: 400,
+      servings: 33
     }
   },
 
+  DRIED_250G: {
+    id: 'gid://shopify/Product/7859391234129',
+    name: 'Nest for Two Premium Dried Bird\'s Nest | 250g',
+    category: 'Dried Bird\'s Nest',
+    series: 'premium-dried',
+    label: null,
+    price: 800,
+    originalPrice: 1000,
+    savings: '20%',
+    servings: 83,
+    fixedSize: '250g - 83 servings',
+    images: [
+      '/images/dry1.png',
+      '/images/dry2.png',
+      '/images/dry3.png'
+    ],
+    variant: {
+      id: 'gid://shopify/ProductVariant/42912038715473',
+      size: '250g',
+      price: 800,
+      originalPrice: 1000,
+      servings: 83
+    }
+  },
+
+  // ============================================
+  // TRADITIONAL KUE LAPIS SERIES (2 products)
+  // ============================================
   ORIGINAL_KUE_LAPIS: {
     id: 'gid://shopify/Product/15591856177233',
     name: 'Original Kue Lapis',
     category: 'Kue Lapis',
+    series: 'kue-lapis',
+    label: null,
+    price: 40,
+    fixedSize: '1 Box of Kue Lapis (10x20cm)',
     variant: 'gid://shopify/ProductVariant/58347016781905',
-    price: 30,
     images: [
-      '/images/Original1.png',
-      '/images/Original2.png',
-      '/images/Original3.png',
-      '/images/OriginalMeasure.png'
+      '/images/placeholder_original_kue_1.png',
+      '/images/placeholder_original_kue_2.png',
+      '/images/placeholder_original_kue_3.png'
     ]
   },
 
@@ -627,15 +761,19 @@ export const PRODUCTS = {
     id: 'gid://shopify/Product/15591856308305',
     name: 'Prune Kue Lapis',
     category: 'Kue Lapis',
+    series: 'kue-lapis',
+    label: null,
+    price: 40,
+    fixedSize: '1 Box of Kue Lapis (10x20cm)',
     variant: 'gid://shopify/ProductVariant/58347020353617',
-    price: 30,
     images: [
-      '/images/Prune1.png',
-      '/images/Prune2.png',
-      '/images/Prune3.png',
-      '/images/PruneMeasure.png'
+      '/images/placeholder_prune_kue_1.png',
+      '/images/placeholder_prune_kue_2.png',
+      '/images/placeholder_prune_kue_3.png'
     ]
-  }
+  },
+
+  
 };
 
 // Helper function to get product by key
@@ -643,22 +781,74 @@ export const getProduct = (key) => {
   return PRODUCTS[key] || null;
 };
 
-// Get all freshly cooked products
+// Get Signature Bottle Series products
+export const getSignatureBottleProducts = () => {
+  return [PRODUCTS.HONEY, PRODUCTS.ZERO_SUGAR, PRODUCTS.ROCK_SUGAR];
+};
+
+// Get Signature Gift Set Series products
+export const getSignatureGiftProducts = () => {
+  return [PRODUCTS.GIFT_HONEY, PRODUCTS.GIFT_ZERO_SUGAR, PRODUCTS.GIFT_ROCK_SUGAR];
+};
+
+// Get Premium Dried Series products
+export const getPremiumDriedProducts = () => {
+  return [PRODUCTS.DRIED_50G, PRODUCTS.DRIED_100G, PRODUCTS.DRIED_250G];
+};
+
+// Get Traditional Kue Lapis Series products
+export const getKueLapisProducts = () => {
+  return [PRODUCTS.ORIGINAL_KUE_LAPIS, PRODUCTS.PRUNE_KUE_LAPIS];
+};
+
+// Get all freshly cooked products (backwards compatibility)
 export const getFreshlyCookedProducts = () => {
   return [PRODUCTS.HONEY, PRODUCTS.ZERO_SUGAR, PRODUCTS.ROCK_SUGAR];
 };
 
-// Get all dried products
+// Get all dried products (backwards compatibility)
 export const getDriedProducts = () => {
-  return [PRODUCTS.DRIED];
+  return [PRODUCTS.DRIED_50G, PRODUCTS.DRIED_100G, PRODUCTS.DRIED_250G];
 };
 
-// Get all Kue Lapis products
-export const getKueLapisProducts = () => {
-  return [PRODUCTS.KUE_LAPIS_NEST, PRODUCTS.ORIGINAL_KUE_LAPIS, PRODUCTS.PRUNE_KUE_LAPIS];
+// Get all products for shop page
+export const getAllShopProducts = () => {
+  return [
+    // Signature Bottle Series
+    PRODUCTS.HONEY,
+    PRODUCTS.ZERO_SUGAR,
+    PRODUCTS.ROCK_SUGAR,
+    // Signature Gift Set Series
+    PRODUCTS.GIFT_HONEY,
+    PRODUCTS.GIFT_ZERO_SUGAR,
+    PRODUCTS.GIFT_ROCK_SUGAR,
+    // Premium Dried Series
+    PRODUCTS.DRIED_50G,
+    PRODUCTS.DRIED_100G,
+    PRODUCTS.DRIED_250G,
+    // Traditional Kue Lapis Series
+    PRODUCTS.ORIGINAL_KUE_LAPIS,
+    PRODUCTS.PRUNE_KUE_LAPIS
+  ];
 };
 
-// Get all products for homepage
+// Get products by series
+export const getProductsBySeries = (series) => {
+  switch (series) {
+    case 'signature-bottle':
+      return getSignatureBottleProducts();
+    case 'signature-gift':
+      return getSignatureGiftProducts();
+    case 'premium-dried':
+      return getPremiumDriedProducts();
+    case 'kue-lapis':
+      return getKueLapisProducts();
+    default:
+      return getAllShopProducts();
+  }
+};
+
+// Get all products including legacy (backwards compatibility)
 export const getAllProducts = () => {
   return Object.values(PRODUCTS);
 };

@@ -7,8 +7,8 @@ import CollapsibleSection from '../../components/product/CollapsibleSection';
 import { PRODUCTS } from '../../config/products';
 import { CartContext } from '../../context/CartContext';
 
-const PruneKueLapis = () => {
-  const product = PRODUCTS.PRUNE_KUE_LAPIS;
+const Dried100g = () => {
+  const product = PRODUCTS.DRIED_100G;
   const { addItem } = useContext(CartContext);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const PruneKueLapis = () => {
         { key: 'Size', value: product.fixedSize }
       ];
 
-      await addItem(product.variant, quantity, customAttributes);
+      await addItem(product.variant.id, quantity, customAttributes);
       alert('Added to cart successfully!');
     } catch (error) {
       console.error('Add to cart error:', error);
@@ -59,16 +59,16 @@ const PruneKueLapis = () => {
                 {product.name}
               </h1>
               <p className="mt-2 inline-block bg-wellness-rose text-white px-3 py-1 font-source-sans rounded-full" style={{ fontSize: '12px' }}>
-                PRUNE FLAVOUR
+                SAVE {product.savings}
               </p>
             </div>
 
-            {/* Size - Fixed, Pre-selected */}
+            {/* Size - Fixed, Pre-selected with Savings Badge */}
             <div>
               <label className="block font-source-sans mb-2 uppercase text-[12px] sm:text-[14px]" style={{ color: '#81775A' }}>
                 Size
               </label>
-              <div className="border border-gray-200 p-4 rounded">
+              <div className="border border-gray-200 p-4 rounded relative">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="w-4 h-4 rounded-full border-2 border-wellness-rose flex items-center justify-center">
@@ -78,9 +78,14 @@ const PruneKueLapis = () => {
                       {product.fixedSize}
                     </span>
                   </div>
-                  <span className="font-source-sans text-[18px]" style={{ color: '#B76E79' }}>
-                    ${product.price}
-                  </span>
+                  <div className="text-right">
+                    <span className="text-gray-400 font-source-sans text-[14px] line-through mr-2">
+                      ${product.originalPrice}
+                    </span>
+                    <span className="font-source-sans text-[18px]" style={{ color: '#B76E79' }}>
+                      ${product.price}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -111,9 +116,16 @@ const PruneKueLapis = () => {
                 <span className="font-source-sans" style={{ color: '#636260' }}>
                   Subtotal:
                 </span>
-                <span className="font-source-sans text-2xl" style={{ color: '#B76E79' }}>
-                  ${(product.price * quantity).toFixed(2)}
-                </span>
+                <div className="text-right">
+                  {quantity > 1 && (
+                    <span className="text-gray-400 font-source-sans text-base line-through mr-2">
+                      ${(product.originalPrice * quantity).toFixed(2)}
+                    </span>
+                  )}
+                  <span className="font-source-sans text-2xl" style={{ color: '#B76E79' }}>
+                    ${(product.price * quantity).toFixed(2)}
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -145,18 +157,18 @@ const PruneKueLapis = () => {
                 />
               </CollapsibleSection>
 
-              <CollapsibleSection title="HOW TO CONSUME YOUR KUE LAPIS">
+              <CollapsibleSection title="HOW TO CONSUME YOUR BIRD'S NEST">
                 <img
                   src="/images/placeholder.png"
-                  alt="How to consume your kue lapis"
+                  alt="How to consume your bird's nest"
                   className="w-full h-auto rounded-lg"
                 />
               </CollapsibleSection>
 
-              <CollapsibleSection title="HOW TO STORE YOUR KUE LAPIS">
+              <CollapsibleSection title="HOW TO STORE YOUR BIRD'S NEST">
                 <img
                   src="/images/placeholder.png"
-                  alt="How to store your kue lapis"
+                  alt="How to store your bird's nest"
                   className="w-full h-auto rounded-lg"
                 />
               </CollapsibleSection>
@@ -168,4 +180,4 @@ const PruneKueLapis = () => {
   );
 };
 
-export default PruneKueLapis;
+export default Dried100g;

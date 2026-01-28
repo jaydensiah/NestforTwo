@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaChevronLeft, FaChevronRight, FaStar } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight, FaStar, FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 import useCarousel from '../../hooks/useCarousel';
 import useTouch from '../../hooks/useTouch';
 import Modal from '../ui/Modal';
@@ -146,12 +146,11 @@ const ReviewCarousel = ({ reviews: customReviews, autoPlay = false, autoPlayInte
     <div className="w-full">
       {/* Carousel Container */}
       <div
-        className="relative w-full max-w-5xl mx-auto px-4"
-        style={{ minHeight: '400px' }}
+        className="relative w-full max-w-5xl mx-auto px-4 min-h-[280px] md:min-h-[400px]"
         {...handlers}
       >
         {/* Cards */}
-        <div className="relative w-full h-full" style={{ minHeight: '400px' }}>
+        <div className="relative w-full h-full min-h-[280px] md:min-h-[400px]">
           {reviews.map((review, index) => {
             const position = getCardPosition(index);
 
@@ -174,11 +173,6 @@ const ReviewCarousel = ({ reviews: customReviews, autoPlay = false, autoPlayInte
                   <div className="text-center border-t border-gray-200 pt-4">
                     <p className="font-nunito-regular font-semibold text-wellness-dark mb-1">
                       {review.name}
-                      {review.verified && (
-                        <span className="ml-2 text-xs text-green-600 font-normal">
-                          ✓ Verified Purchase
-                        </span>
-                      )}
                     </p>
                     <p className="text-xs text-gray-500">
                       {formatDate(review.date)}
@@ -190,28 +184,63 @@ const ReviewCarousel = ({ reviews: customReviews, autoPlay = false, autoPlayInte
           })}
         </div>
 
-        {/* Navigation Arrows */}
+        {/* Navigation Arrows - Desktop/Tablet only (hidden on mobile) */}
         <button
           onClick={prev}
           disabled={!canGoPrev}
-          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-4 bg-white text-wellness-rose p-3 md:p-4 rounded-full shadow-lg hover:bg-wellness-blush disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 z-40"
+          className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white text-wellness-rose p-4 rounded-full shadow-lg hover:bg-wellness-blush disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 z-40"
           aria-label="Previous review"
         >
-          <FaChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
+          <FaChevronLeft className="w-6 h-6" />
         </button>
 
         <button
           onClick={next}
           disabled={!canGoNext}
-          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-4 bg-white text-wellness-rose p-3 md:p-4 rounded-full shadow-lg hover:bg-wellness-blush disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 z-40"
+          className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white text-wellness-rose p-4 rounded-full shadow-lg hover:bg-wellness-blush disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 z-40"
           aria-label="Next review"
         >
-          <FaChevronRight className="w-5 h-5 md:w-6 md:h-6" />
+          <FaChevronRight className="w-6 h-6" />
         </button>
       </div>
 
+      {/* Mobile: Swipe instruction and bottom navigation */}
+      <div className="md:hidden">
+        {/* Swipe instruction label - close to card */}
+        <div className="flex items-center justify-center gap-2 mt-2 mb-6">
+          <FaLongArrowAltLeft className="w-4 h-4 text-wellness-text" />
+          <span className="font-nunito-regular text-wellness-text" style={{ fontSize: '12px' }}>
+            Swipe for more
+          </span>
+          <FaLongArrowAltRight className="w-4 h-4 text-wellness-text" />
+        </div>
+
+        {/* Bottom navigation arrows - more space from swipe text */}
+        <div className="flex justify-center">
+          <div className="inline-flex items-center bg-white rounded-full shadow-lg overflow-hidden">
+            <button
+              onClick={prev}
+              disabled={!canGoPrev}
+              className="px-6 py-3 text-wellness-dark hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+              aria-label="Previous review"
+            >
+              <FaChevronLeft className="w-4 h-4" />
+            </button>
+            <div className="w-px h-6 bg-gray-200" />
+            <button
+              onClick={next}
+              disabled={!canGoNext}
+              className="px-6 py-3 text-wellness-dark hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+              aria-label="Next review"
+            >
+              <FaChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* Indicators */}
-      <div className="flex justify-center gap-2 mt-8 mb-6">
+      <div className="flex justify-center gap-2 mt-6 md:mt-8 mb-0 md:mb-6">
         {reviews.map((_, index) => (
           <button
             key={index}
@@ -235,7 +264,7 @@ const ReviewCarousel = ({ reviews: customReviews, autoPlay = false, autoPlayInte
       </div>
 
       {/* Leave a Review Button */}
-      <div className="text-center mt-8">
+      <div className="text-center mt-6 md:mt-8">
         <button
           onClick={() => setIsReviewModalOpen(true)}
           className="bg-wellness-rose text-white px-8 py-3 rounded-full font-nunito-regular text-sm uppercase tracking-wider hover:bg-wellness-rose/90 transition-colors duration-200 shadow-md hover:shadow-lg"

@@ -3,9 +3,17 @@ import { Link } from 'react-router-dom';
 import { IoClose, IoChevronDown, IoChevronUp } from 'react-icons/io5';
 
 const MobileMenu = ({ isOpen, onClose }) => {
-  const [isProductsExpanded, setIsProductsExpanded] = useState(false);
+  const [isShopExpanded, setIsShopExpanded] = useState(false);
 
   if (!isOpen) return null;
+
+  const shopCategories = [
+    { to: '/shop', label: 'All Products' },
+    { to: '/shop?category=signature-bottle', label: 'Signature Bottle Series' },
+    { to: '/shop?category=signature-gift', label: 'Signature Gift Set Series' },
+    { to: '/shop?category=premium-dried', label: 'Premium Dried Series' },
+    { to: '/shop?category=kue-lapis', label: 'Traditional Kue Lapis Series' }
+  ];
 
   return (
     <>
@@ -16,7 +24,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
       />
 
       {/* Slide-in Menu */}
-      <div className="fixed top-0 left-0 h-full w-80 bg-white z-50 shadow-xl transform transition-transform duration-300 ease-in-out">
+      <div className="fixed top-0 left-0 h-full w-80 bg-white z-50 shadow-xl transform transition-transform duration-300 ease-in-out overflow-y-auto">
         {/* Close Button */}
         <div className="flex justify-end p-4 border-b border-custom-border">
           <button
@@ -30,14 +38,23 @@ const MobileMenu = ({ isOpen, onClose }) => {
 
         {/* Navigation Links */}
         <nav className="flex flex-col p-6">
-          {/* Products with Submenu */}
+          {/* Home */}
+          <Link
+            to="/"
+            onClick={onClose}
+            className="py-3 text-wellness-dark font-nunito-regular text-base hover:text-wellness-rose transition-colors duration-200"
+          >
+            HOME
+          </Link>
+
+          {/* Shop with Submenu */}
           <div className="mb-2">
             <button
-              onClick={() => setIsProductsExpanded(!isProductsExpanded)}
+              onClick={() => setIsShopExpanded(!isShopExpanded)}
               className="w-full flex items-center justify-between py-3 text-wellness-dark font-nunito-regular text-base hover:text-wellness-rose transition-colors duration-200"
             >
-              <span>PRODUCTS</span>
-              {isProductsExpanded ? (
+              <span>SHOP</span>
+              {isShopExpanded ? (
                 <IoChevronUp className="text-lg" />
               ) : (
                 <IoChevronDown className="text-lg" />
@@ -45,34 +62,23 @@ const MobileMenu = ({ isOpen, onClose }) => {
             </button>
 
             {/* Expandable Submenu */}
-            {isProductsExpanded && (
+            {isShopExpanded && (
               <div className="pl-4 mt-2 space-y-2 border-l-2 border-wellness-blush">
-                <Link
-                  to="/products/freshly-cooked"
-                  onClick={onClose}
-                  className="block py-2 text-wellness-text font-nunito-light text-sm hover:text-wellness-rose transition-colors duration-200"
-                >
-                  Freshly Cooked
-                </Link>
-                <Link
-                  to="/products/dried"
-                  onClick={onClose}
-                  className="block py-2 text-wellness-text font-nunito-light text-sm hover:text-wellness-rose transition-colors duration-200"
-                >
-                  Dried
-                </Link>
-                <Link
-                  to="/products/kue-lapis"
-                  onClick={onClose}
-                  className="block py-2 text-wellness-text font-nunito-light text-sm hover:text-wellness-rose transition-colors duration-200"
-                >
-                  Kue Lapis
-                </Link>
+                {shopCategories.map((category) => (
+                  <Link
+                    key={category.to}
+                    to={category.to}
+                    onClick={onClose}
+                    className="block py-2 text-wellness-text font-nunito-light text-sm hover:text-wellness-rose transition-colors duration-200"
+                  >
+                    {category.label}
+                  </Link>
+                ))}
               </div>
             )}
           </div>
 
-          {/* Other Navigation Links */}
+          {/* About */}
           <Link
             to="/about"
             onClick={onClose}
@@ -80,6 +86,8 @@ const MobileMenu = ({ isOpen, onClose }) => {
           >
             ABOUT
           </Link>
+
+          {/* Collaborations */}
           <Link
             to="/collaborations"
             onClick={onClose}
@@ -87,6 +95,8 @@ const MobileMenu = ({ isOpen, onClose }) => {
           >
             COLLABORATIONS
           </Link>
+
+          {/* FAQs */}
           <Link
             to="/faqs"
             onClick={onClose}
@@ -94,6 +104,8 @@ const MobileMenu = ({ isOpen, onClose }) => {
           >
             FAQS
           </Link>
+
+          {/* Contact */}
           <Link
             to="/contact"
             onClick={onClose}

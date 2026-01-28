@@ -38,7 +38,7 @@ const ShopDropdownCard = ({ to, image, label }) => {
       {/* Dark gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
       {/* Text at bottom left */}
-      <div className="absolute bottom-4 left-4 right-4">
+      <div className="absolute bottom-2 left-4 right-4">
         <span className="text-white font-source-sans font-bold text-sm tracking-wide">
           {label}
         </span>
@@ -62,7 +62,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-30 bg-white">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white">
         {/* Announcement Bar */}
         <AnnouncementBar />
 
@@ -114,7 +114,7 @@ const Navbar = () => {
 
                 {/* Shop Dropdown Menu - Full width with 4 image columns */}
                 <div
-                  className={`fixed left-0 right-0 mt-2 bg-white border-t border-b border-gray-200 shadow-xl transition-all duration-300 ${
+                  className={`fixed left-0 right-0 bg-white border-b border-gray-200 shadow-xl transition-all duration-300 ${
                     isShopDropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                   }`}
                   style={{ top: '120px' }}
@@ -123,22 +123,22 @@ const Navbar = () => {
                     <div className="grid grid-cols-4 gap-4">
                       <ShopDropdownCard
                         to="/shop?category=signature-bottle"
-                        image="/images/placeholder-bottle.jpg"
+                        image="/images/NavBar_Bottles.png"
                         label="Signature Bottle Series"
                       />
                       <ShopDropdownCard
                         to="/shop?category=signature-gift"
-                        image="/images/placeholder-gift.jpg"
+                        image="/images/NavBar_Gift.png"
                         label="Signature Gift Set Series"
                       />
                       <ShopDropdownCard
                         to="/shop?category=premium-dried"
-                        image="/images/placeholder-dried.jpg"
+                        image="/images/NavBar_Dried.png"
                         label="Premium Dried Series"
                       />
                       <ShopDropdownCard
                         to="/shop?category=kue-lapis"
-                        image="/images/placeholder-lapis.jpg"
+                        image="/images/NavBar_Kue.png"
                         label="Traditional Kue Lapis Series"
                       />
                     </div>

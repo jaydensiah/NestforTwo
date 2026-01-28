@@ -30,21 +30,8 @@ const ProductCard = ({ product, onAddToCart, className = '' }) => {
     }
   };
 
-  // Determine label color based on category
-  const getLabelStyle = (category) => {
-    const baseStyle = 'absolute top-4 right-4 px-3 py-1.5 text-xs font-nunito-regular uppercase tracking-wider z-10 backdrop-blur-sm';
-
-    switch (category) {
-      case 'FOR CHILDREN':
-        return `${baseStyle} bg-blue-500/90 text-white`;
-      case 'FOR PREGNANT LADIES & DIABETICS':
-        return `${baseStyle} bg-wellness-rose/90 text-white`;
-      case 'FOR ELDERLY':
-        return `${baseStyle} bg-amber-600/90 text-white`;
-      default:
-        return `${baseStyle} bg-wellness-dark/90 text-white`;
-    }
-  };
+  // Label style - consistent for all categories (reduced size on mobile)
+  const labelStyle = 'absolute top-1 right-1 sm:top-2 sm:right-2 bg-wellness-rose text-white text-[7px] sm:text-[10px] md:text-[12px] px-1 sm:px-2 md:px-3 py-0.5 sm:py-1 rounded-full font-medium font-source-sans z-10 group-hover:opacity-0 transition-opacity duration-300';
 
   return (
     <Link
@@ -65,9 +52,10 @@ const ProductCard = ({ product, onAddToCart, className = '' }) => {
         />
 
         {/* Floating Label */}
-        {product.category && (
-          <span className={getLabelStyle(product.category)}>
-            {product.category}
+        {(product.label || product.category) && (
+          <span className={labelStyle}>
+            <span className="md:hidden">{product.labelShort || product.label || product.category}</span>
+            <span className="hidden md:inline">{product.label || product.category}</span>
           </span>
         )}
 
@@ -82,7 +70,7 @@ const ProductCard = ({ product, onAddToCart, className = '' }) => {
             className="w-full bg-wellness-rose hover:bg-wellness-rose/90 text-white font-nunito-regular uppercase tracking-wider py-3 px-4 text-sm transition-colors duration-200"
             aria-label={`Add ${product.name} to cart`}
           >
-            Add to Cart
+            View Product
           </button>
         </div>
       </div>

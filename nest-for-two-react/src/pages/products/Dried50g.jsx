@@ -7,8 +7,8 @@ import CollapsibleSection from '../../components/product/CollapsibleSection';
 import { PRODUCTS } from '../../config/products';
 import { CartContext } from '../../context/CartContext';
 
-const PruneKueLapis = () => {
-  const product = PRODUCTS.PRUNE_KUE_LAPIS;
+const Dried50g = () => {
+  const product = PRODUCTS.DRIED_50G;
   const { addItem } = useContext(CartContext);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const PruneKueLapis = () => {
         { key: 'Size', value: product.fixedSize }
       ];
 
-      await addItem(product.variant, quantity, customAttributes);
+      await addItem(product.variant.id, quantity, customAttributes);
       alert('Added to cart successfully!');
     } catch (error) {
       console.error('Add to cart error:', error);
@@ -58,8 +58,8 @@ const PruneKueLapis = () => {
               <h1 className="font-playfair-bold mb-2 text-wellness-dark text-[20px] sm:text-[30px]">
                 {product.name}
               </h1>
-              <p className="mt-2 inline-block bg-wellness-rose text-white px-3 py-1 font-source-sans rounded-full" style={{ fontSize: '12px' }}>
-                PRUNE FLAVOUR
+              <p className="font-source-sans text-wellness-text text-sm uppercase tracking-wide">
+                {product.category}
               </p>
             </div>
 
@@ -145,18 +145,18 @@ const PruneKueLapis = () => {
                 />
               </CollapsibleSection>
 
-              <CollapsibleSection title="HOW TO CONSUME YOUR KUE LAPIS">
+              <CollapsibleSection title="HOW TO CONSUME YOUR BIRD'S NEST">
                 <img
                   src="/images/placeholder.png"
-                  alt="How to consume your kue lapis"
+                  alt="How to consume your bird's nest"
                   className="w-full h-auto rounded-lg"
                 />
               </CollapsibleSection>
 
-              <CollapsibleSection title="HOW TO STORE YOUR KUE LAPIS">
+              <CollapsibleSection title="HOW TO STORE YOUR BIRD'S NEST">
                 <img
                   src="/images/placeholder.png"
-                  alt="How to store your kue lapis"
+                  alt="How to store your bird's nest"
                   className="w-full h-auto rounded-lg"
                 />
               </CollapsibleSection>
@@ -168,4 +168,4 @@ const PruneKueLapis = () => {
   );
 };
 
-export default PruneKueLapis;
+export default Dried50g;
