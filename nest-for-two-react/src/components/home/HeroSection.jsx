@@ -27,7 +27,7 @@ const HeroSection = () => {
               </p>
 
               {/* Shop Now Button */}
-              <Link to="/products">
+              <Link to="/shop">
                 <button
                   className="font-source-sans font-bold text-white px-5 py-2 sm:px-8 sm:py-3 text-xs sm:text-base md:text-lg rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                   style={{ backgroundColor: '#B76E79' }}

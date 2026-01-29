@@ -58,9 +58,6 @@ const Dried50g = () => {
               <h1 className="font-playfair-bold mb-2 text-wellness-dark text-[20px] sm:text-[30px]">
                 {product.name}
               </h1>
-              <p className="font-source-sans text-wellness-text text-sm uppercase tracking-wide">
-                {product.category}
-              </p>
             </div>
 
             {/* Size - Fixed, Pre-selected */}
@@ -129,33 +126,25 @@ const Dried50g = () => {
             {/* Collapsible Sections */}
             <div className="mt-6">
               <CollapsibleSection title="Description" defaultOpen={true} hideTopBorder={true}>
-                <p className="mb-3">
-                  We highly recommend our Rock Sugar birdnest to elderly customers as it offers a classic, familiar sweetness that is flavourful yet not overly sweet.
-                </p>
-                <p className="mb-3">
-                  Each bottle of 50ml contains 3 grams of premium bird's nest (dry weight), with no chemical fragrances, preservatives, additives, artificial colouring and alcohol.
-                </p>
-              </CollapsibleSection>
-
-              <CollapsibleSection title="WHAT'S INCLUDED">
                 <img
-                  src="/images/placeholder.png"
-                  alt="What's included in your order"
+                  src="/images/Dried_Description.png"
+                  alt="More info about dried bird's nest"
                   className="w-full h-auto rounded-lg"
                 />
               </CollapsibleSection>
 
-              <CollapsibleSection title="HOW TO CONSUME YOUR BIRD'S NEST">
+
+              <CollapsibleSection title="HOW TO OPEN THE CONTAINER">
                 <img
-                  src="/images/placeholder.png"
-                  alt="How to consume your bird's nest"
+                  src="/images/Dried_HTO.png"
+                  alt="How to open the container"
                   className="w-full h-auto rounded-lg"
                 />
               </CollapsibleSection>
 
               <CollapsibleSection title="HOW TO STORE YOUR BIRD'S NEST">
                 <img
-                  src="/images/placeholder.png"
+                  src="/images/Dried_HTS.png"
                   alt="How to store your bird's nest"
                   className="w-full h-auto rounded-lg"
                 />

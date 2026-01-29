@@ -13,7 +13,6 @@ import Cart from './pages/Cart';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
-import Partnerships from './pages/Partnerships';
 
 // Product Pages - Signature Bottle Series
 import ProductHoney from './pages/products/ProductHoney';
@@ -62,7 +61,6 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/faqs" element={<FAQ />} />
-              <Route path="/collaborations" element={<Partnerships />} />
 
               {/* Product Pages - Signature Bottle Series */}
               <Route path="/products/honey" element={<ProductHoney />} />

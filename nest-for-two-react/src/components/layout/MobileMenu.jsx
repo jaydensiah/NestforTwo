@@ -87,15 +87,6 @@ const MobileMenu = ({ isOpen, onClose }) => {
             ABOUT
           </Link>
 
-          {/* Collaborations */}
-          <Link
-            to="/collaborations"
-            onClick={onClose}
-            className="py-3 text-wellness-dark font-nunito-regular text-base hover:text-wellness-rose transition-colors duration-200"
-          >
-            COLLABORATIONS
-          </Link>
-
           {/* FAQs */}
           <Link
             to="/faqs"

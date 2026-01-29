@@ -130,35 +130,33 @@ const PruneKueLapis = () => {
             <div className="mt-6">
               <CollapsibleSection title="Description" defaultOpen={true} hideTopBorder={true}>
                 <p className="mb-3">
-                  We highly recommend our Rock Sugar birdnest to elderly customers as it offers a classic, familiar sweetness that is flavourful yet not overly sweet.
+                  A rich, buttery indulgence baked layer by layer for a soft, fragrant finish, complemented with tender prunes for a hint of natural sweetness.
                 </p>
                 <p className="mb-3">
-                  Each bottle of 50ml contains 3 grams of premium bird's nest (dry weight), with no chemical fragrances, preservatives, additives, artificial colouring and alcohol.
+                  Made with premium butter, flour, eggs, sugar, and a delicate blend of spice rempah.
                 </p>
               </CollapsibleSection>
 
               <CollapsibleSection title="WHAT'S INCLUDED">
                 <img
-                  src="/images/placeholder.png"
+                  src="/images/Kue_Included.png"
                   alt="What's included in your order"
                   className="w-full h-auto rounded-lg"
                 />
               </CollapsibleSection>
 
-              <CollapsibleSection title="HOW TO CONSUME YOUR KUE LAPIS">
-                <img
-                  src="/images/placeholder.png"
-                  alt="How to consume your kue lapis"
-                  className="w-full h-auto rounded-lg"
-                />
-              </CollapsibleSection>
-
-              <CollapsibleSection title="HOW TO STORE YOUR KUE LAPIS">
-                <img
-                  src="/images/placeholder.png"
-                  alt="How to store your kue lapis"
-                  className="w-full h-auto rounded-lg"
-                />
+              <CollapsibleSection title="STORAGE & CONSUMPTION">
+                <p className="mb-3">
+                  Keep the cake <strong>cling-wrapped at all times</strong> to maintain freshness and prevent it from drying out.
+                </p>
+                <ul className="mb-3 list-disc list-inside space-y-1">
+                  <li>Room Temperature (below 25°C): Keeps well for up to <strong>3 days</strong></li>
+                  <li>Refrigerated (below 4°C): Keeps well for up to <strong>2 weeks</strong></li>
+                  <li>Frozen (below -15°C): Keeps well for up to <strong>2 months</strong></li>
+                </ul>
+                <p className="mb-3 italic">
+                  For best taste and texture, allow chilled or frozen cakes to return to room temperature before serving.
+                </p>
               </CollapsibleSection>
             </div>
           </div>

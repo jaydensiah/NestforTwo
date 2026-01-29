@@ -551,7 +551,7 @@ export const PRODUCTS = {
   // SIGNATURE GIFT SET SERIES (3 products)
   // ============================================
   GIFT_HONEY: {
-    id: 'gid://shopify/Product/PLACEHOLDER_GIFT_HONEY',
+    id: 'gid://shopify/Product/15681709146193',
     name: 'Freshly Cooked Bird\'s Nest Gift Box with Honey',
     category: 'Gift Set',
     series: 'signature-gift',
@@ -559,29 +559,29 @@ export const PRODUCTS = {
     price: 88,
     fixedSize: '250ml - Gift box with 1 x insulated tumbler',
     images: [
-      '/images/placeholder_gift_honey_1.png',
+      '/images/Gift_Honey.png',
       '/images/placeholder_gift_honey_2.png',
       '/images/placeholder_gift_honey_3.png'
     ],
     variants: {
       // 4 sweetness levels (one-time only, no subscription)
       sweetness25: {
-        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_HONEY_25',
+        id: 'gid://shopify/ProductVariant/59031296180305',
         sweetness: '25',
         price: 88
       },
       sweetness50: {
-        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_HONEY_50',
+        id: 'gid://shopify/ProductVariant/59031296213073',
         sweetness: '50',
         price: 88
       },
       sweetness100: {
-        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_HONEY_100',
+        id: 'gid://shopify/ProductVariant/59031296245841',
         sweetness: '100',
         price: 88
       },
       sweetnessSide: {
-        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_HONEY_SIDE',
+        id: 'gid://shopify/ProductVariant/59031296278609',
         sweetness: 'side',
         price: 88
       }
@@ -589,7 +589,7 @@ export const PRODUCTS = {
   },
 
   GIFT_ZERO_SUGAR: {
-    id: 'gid://shopify/Product/PLACEHOLDER_GIFT_ZERO_SUGAR',
+    id: 'gid://shopify/Product/15681710620753',
     name: 'Freshly Cooked Bird\'s Nest Gift Box with Zero Sugar',
     category: 'Gift Set',
     series: 'signature-gift',
@@ -598,28 +598,28 @@ export const PRODUCTS = {
     price: 88,
     fixedSize: '250ml - Gift box with 1 x insulated tumbler',
     images: [
-      '/images/placeholder_gift_zerosugar_1.png',
+      '/images/Gift_ZeroSugar.png',
       '/images/placeholder_gift_zerosugar_2.png',
       '/images/placeholder_gift_zerosugar_3.png'
     ],
     variants: {
       sweetness25: {
-        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_ZERO_25',
+        id: 'gid://shopify/ProductVariant/59031317807185',
         sweetness: '25',
         price: 88
       },
       sweetness50: {
-        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_ZERO_50',
+        id: 'gid://shopify/ProductVariant/59031317839953',
         sweetness: '50',
         price: 88
       },
       sweetness100: {
-        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_ZERO_100',
+        id: 'gid://shopify/ProductVariant/59031317872721',
         sweetness: '100',
         price: 88
       },
       sweetnessSide: {
-        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_ZERO_SIDE',
+        id: 'gid://shopify/ProductVariant/59031317905489',
         sweetness: 'side',
         price: 88
       }
@@ -627,7 +627,7 @@ export const PRODUCTS = {
   },
 
   GIFT_ROCK_SUGAR: {
-    id: 'gid://shopify/Product/PLACEHOLDER_GIFT_ROCK_SUGAR',
+    id: 'gid://shopify/Product/15681709834321',
     name: 'Freshly Cooked Bird\'s Nest Gift Box with Rock Sugar',
     category: 'Gift Set',
     series: 'signature-gift',
@@ -635,28 +635,28 @@ export const PRODUCTS = {
     price: 88,
     fixedSize: '250ml - Gift box with 1 x insulated tumbler',
     images: [
-      '/images/placeholder_gift_rocksugar_1.png',
+      '/images/Gift_RockSugar.png',
       '/images/placeholder_gift_rocksugar_2.png',
       '/images/placeholder_gift_rocksugar_3.png'
     ],
     variants: {
       sweetness25: {
-        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_ROCK_25',
+        id: 'gid://shopify/ProductVariant/59031304568913',
         sweetness: '25',
         price: 88
       },
       sweetness50: {
-        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_ROCK_50',
+        id: 'gid://shopify/ProductVariant/59031304601681',
         sweetness: '50',
         price: 88
       },
       sweetness100: {
-        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_ROCK_100',
+        id: 'gid://shopify/ProductVariant/59031304634449',
         sweetness: '100',
         price: 88
       },
       sweetnessSide: {
-        id: 'gid://shopify/ProductVariant/PLACEHOLDER_GIFT_ROCK_SIDE',
+        id: 'gid://shopify/ProductVariant/59031304667217',
         sweetness: 'side',
         price: 88
       }
@@ -676,9 +676,7 @@ export const PRODUCTS = {
     servings: 16,
     fixedSize: '50g - 16 servings',
     images: [
-      '/images/dry1.png',
-      '/images/dry2.png',
-      '/images/dry3.png'
+      '/images/Dried_50g.png'
     ],
     variant: {
       id: 'gid://shopify/ProductVariant/42912039108689',
@@ -700,9 +698,7 @@ export const PRODUCTS = {
     servings: 33,
     fixedSize: '100g - 33 servings',
     images: [
-      '/images/dry1.png',
-      '/images/dry2.png',
-      '/images/dry3.png'
+      '/images/Dried_100g.png'
     ],
     variant: {
       id: 'gid://shopify/ProductVariant/42912039141457',
@@ -725,9 +721,7 @@ export const PRODUCTS = {
     servings: 83,
     fixedSize: '250g - 83 servings',
     images: [
-      '/images/dry1.png',
-      '/images/dry2.png',
-      '/images/dry3.png'
+      '/images/Dried_250g.png'
     ],
     variant: {
       id: 'gid://shopify/ProductVariant/42912038715473',
@@ -748,12 +742,12 @@ export const PRODUCTS = {
     series: 'kue-lapis',
     label: null,
     price: 40,
-    fixedSize: '1 Box of Kue Lapis (10x20cm)',
+    fixedSize: '1 Box of Kue Lapis (20 x 10cm)',
     variant: 'gid://shopify/ProductVariant/58347016781905',
     images: [
-      '/images/placeholder_original_kue_1.png',
-      '/images/placeholder_original_kue_2.png',
-      '/images/placeholder_original_kue_3.png'
+      '/images/Original_1.png',
+      '/images/Original_2.png',
+      '/images/Original_3.png'
     ]
   },
 
@@ -763,13 +757,13 @@ export const PRODUCTS = {
     category: 'Kue Lapis',
     series: 'kue-lapis',
     label: null,
-    price: 40,
-    fixedSize: '1 Box of Kue Lapis (10x20cm)',
+    price: 50,
+    fixedSize: '1 Box of Kue Lapis (20 x 10cm)',
     variant: 'gid://shopify/ProductVariant/58347020353617',
     images: [
-      '/images/placeholder_prune_kue_1.png',
-      '/images/placeholder_prune_kue_2.png',
-      '/images/placeholder_prune_kue_3.png'
+      '/images/Prune_1.png',
+      '/images/Prune_2.png',
+      '/images/Prune_3.png'
     ]
   },
 

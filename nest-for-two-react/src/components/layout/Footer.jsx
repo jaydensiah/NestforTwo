@@ -39,12 +39,6 @@ const Footer = () => {
                 FAQ
               </Link>
               <Link
-                to="/collaborations"
-                className="text-wellness-text font-nunito-light text-sm hover:text-wellness-rose transition-colors duration-200"
-              >
-                COLLABORATIONS
-              </Link>
-              <Link
                 to="/contact"
                 className="text-wellness-text font-nunito-light text-sm hover:text-wellness-rose transition-colors duration-200"
               >

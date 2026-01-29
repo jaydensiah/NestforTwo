@@ -151,11 +151,6 @@ const Navbar = () => {
                 ABOUT
               </NavLink>
 
-              {/* COLLABORATIONS */}
-              <NavLink to="/collaborations" isActive={isActive('/collaborations')}>
-                COLLABORATIONS
-              </NavLink>
-
               {/* FAQS */}
               <NavLink to="/faqs" isActive={isActive('/faqs')}>
                 FAQS
