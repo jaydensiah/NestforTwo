@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { isDateAllowed, getMinDate } from '../../utils/dateHelpers';
 
@@ -24,7 +24,6 @@ const formatDisplayDate = (dateString) => {
  * @param {boolean} props.required - Whether the field is required (default: true)
  */
 const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
-  const [error, setError] = useState('');
   const inputRef = useRef(null);
 
   const handleClick = () => {
@@ -39,14 +38,10 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
     const validation = isDateAllowed(selectedDate, purchaseType);
 
     if (!validation.allowed) {
-      // Show popup alert for subscription non-Sunday selection
-      if (purchaseType === 'subscription' && validation.error.includes('Sundays')) {
-        alert('Subscription deliveries are only available on Sundays. Please select a Sunday.');
-      }
-      setError(validation.error);
+      // Show popup alert for all validation errors
+      alert(validation.error);
       onChange('');
     } else {
-      setError('');
       onChange(selectedDate);
     }
   };
@@ -54,7 +49,6 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
   const handleClear = (e) => {
     e.stopPropagation();
     onChange('');
-    setError('');
   };
 
   return (
@@ -63,8 +57,16 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
         DELIVERY DATE
       </label>
 
-      <div className="relative">
-        {/* Hidden native date input */}
+      <div className="relative" onClick={handleClick} style={{ cursor: 'pointer' }}>
+        {/* Visible styled display */}
+        <div
+          className="w-full border border-[#d1d5db] px-4 py-2 font-source-sans bg-white"
+          style={{ color: value ? '#636260' : '#9ca3af', minHeight: '44px', display: 'flex', alignItems: 'center' }}
+        >
+          {value ? formatDisplayDate(value) : 'DD/MM/YYYY'}
+        </div>
+
+        {/* Hidden native date input - positioned after div so inset-0 works */}
         <input
           ref={inputRef}
           type="date"
@@ -72,18 +74,9 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
           value={value}
           onChange={handleDateChange}
           required={required}
-          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-          style={{ zIndex: 1 }}
+          className="absolute inset-0 w-full h-full cursor-pointer"
+          style={{ opacity: 0 }}
         />
-
-        {/* Visible styled display */}
-        <div
-          onClick={handleClick}
-          className={`w-full border ${error ? 'border-red-500' : 'border-[#d1d5db]'} px-4 py-2 font-source-sans cursor-pointer bg-white`}
-          style={{ color: value ? '#636260' : '#9ca3af', minHeight: '44px', display: 'flex', alignItems: 'center' }}
-        >
-          {value ? formatDisplayDate(value) : 'DD/MM/YYYY'}
-        </div>
 
         {value && (
           <button
@@ -98,17 +91,11 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
         )}
       </div>
 
-      {error && (
-        <p className="font-source-sans" style={{ fontSize: '12px', color: '#636260' }}>{error}</p>
-      )}
-
-      {!error && (
-        <p className="font-source-sans" style={{ fontSize: '12px', color: '#636260' }}>
-          {purchaseType === 'subscription'
-            ? 'Delivery for Subscription orders are fixed on Sundays. *Today\'s date cannot be selected for delivery.'
-            : 'We deliver Monday to Sunday *Today\'s date cannot be selected for delivery.'}
-        </p>
-      )}
+      <p className="font-source-sans" style={{ fontSize: '12px', color: '#636260' }}>
+        {purchaseType === 'subscription'
+          ? 'Delivery for Subscription orders are fixed on Sundays. *Today\'s date cannot be selected for delivery.'
+          : 'We deliver Monday to Sunday *Today\'s date cannot be selected for delivery.'}
+      </p>
     </div>
   );
 };
