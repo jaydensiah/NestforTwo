@@ -41,11 +41,11 @@ export const formatDateForShopify = (date) => {
     throw new Error('Invalid date provided');
   }
 
-  const day = dateObj.getDate();
-  const month = dateObj.toLocaleString('en-US', { month: 'short' });
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
   const year = dateObj.getFullYear();
 
-  return `${day} ${month} ${year}`;
+  return `${day}-${month}-${year}`;
 };
 
 /**
@@ -428,7 +428,10 @@ export const isDateAllowed = (dateString, purchaseType) => {
     };
   }
 
-  const selectedDate = new Date(dateString);
+  // Parse date string as local date (YYYY-MM-DD) to avoid timezone issues
+  const [year, month, day] = dateString.split('-').map(Number);
+  const selectedDate = new Date(year, month - 1, day); // month is 0-indexed
+
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);

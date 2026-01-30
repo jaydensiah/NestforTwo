@@ -7,7 +7,6 @@ import TimeSlotSelector from '../../components/product/TimeSlotSelector';
 import CollapsibleSection from '../../components/product/CollapsibleSection';
 import { PRODUCTS } from '../../config/products';
 import { CartContext } from '../../context/CartContext';
-import { formatDateForShopify } from '../../utils/dateHelpers';
 
 const GiftZeroSugar = () => {
   const product = PRODUCTS.GIFT_ZERO_SUGAR;
@@ -47,7 +46,7 @@ const GiftZeroSugar = () => {
 
     try {
       const customAttributes = [
-        { key: 'Delivery Date', value: formatDateForShopify(deliveryDate) },
+        { key: 'Delivery Date', value: deliveryDate },
         { key: 'Time Slot', value: timeSlot }
       ];
 
