@@ -44,8 +44,11 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
     const validation = isDateAllowed(selectedDate, purchaseType);
 
     if (!validation.allowed) {
-      // Show popup alert for all validation errors
-      alert(validation.error);
+      // Silently reject today's date and past dates (no alert)
+      // Only show alert for other validation errors (subscriptions, cutoff time, etc.)
+      if (!validation.error.includes('Today') && !validation.error.includes('future date')) {
+        alert(validation.error);
+      }
       onChange('');
     } else {
       onChange(selectedDate);
