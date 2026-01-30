@@ -3,6 +3,17 @@ import PropTypes from 'prop-types';
 import { isDateAllowed, getMinDate } from '../../utils/dateHelpers';
 
 /**
+ * Format date from YYYY-MM-DD to DD/MM/YYYY for display
+ * @param {string} dateString - Date in YYYY-MM-DD format
+ * @returns {string} Date in DD/MM/YYYY format
+ */
+const formatDisplayDate = (dateString) => {
+  if (!dateString) return '';
+  const [year, month, day] = dateString.split('-');
+  return `${day}/${month}/${year}`;
+};
+
+/**
  * DatePicker Component
  * Date picker with 24hr advance notice and Sunday-only for subscriptions
  *
@@ -17,8 +28,9 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
   const inputRef = useRef(null);
 
   const handleClick = () => {
-    if (inputRef.current?.showPicker) {
-      inputRef.current.showPicker();
+    if (inputRef.current) {
+      inputRef.current.showPicker?.();
+      inputRef.current.focus();
     }
   };
 
@@ -39,7 +51,8 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
     }
   };
 
-  const handleClear = () => {
+  const handleClear = (e) => {
+    e.stopPropagation();
     onChange('');
     setError('');
   };
@@ -51,31 +64,33 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
       </label>
 
       <div className="relative">
+        {/* Hidden native date input */}
         <input
           ref={inputRef}
           type="date"
           min={getMinDate(purchaseType)}
           value={value}
           onChange={handleDateChange}
-          onClick={handleClick}
-          className={`w-full border ${error ? 'border-red-500' : 'border-[#d1d5db]'} px-4 py-2 font-source-sans focus:outline-none focus:ring-2 ${error ? 'focus:ring-red-500' : 'focus:ring-wellness-rose'} cursor-pointer`}
-          style={{
-            color: '#636260',
-            WebkitAppearance: 'none',
-            MozAppearance: 'none',
-            appearance: 'none',
-            minHeight: '44px',
-            display: 'block',
-            boxSizing: 'border-box'
-          }}
           required={required}
+          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+          style={{ zIndex: 1 }}
         />
+
+        {/* Visible styled display */}
+        <div
+          onClick={handleClick}
+          className={`w-full border ${error ? 'border-red-500' : 'border-[#d1d5db]'} px-4 py-2 font-source-sans cursor-pointer bg-white`}
+          style={{ color: value ? '#636260' : '#9ca3af', minHeight: '44px', display: 'flex', alignItems: 'center' }}
+        >
+          {value ? formatDisplayDate(value) : 'DD/MM/YYYY'}
+        </div>
 
         {value && (
           <button
             type="button"
             onClick={handleClear}
             className="absolute right-2 top-1/2 -translate-y-1/2 text-wellness-text hover:text-wellness-dark"
+            style={{ zIndex: 2 }}
             aria-label="Clear date"
           >
             ×
