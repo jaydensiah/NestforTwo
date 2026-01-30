@@ -59,7 +59,15 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
           onChange={handleDateChange}
           onClick={handleClick}
           className={`w-full border ${error ? 'border-red-500' : 'border-[#d1d5db]'} px-4 py-2 font-source-sans focus:outline-none focus:ring-2 ${error ? 'focus:ring-red-500' : 'focus:ring-wellness-rose'} cursor-pointer`}
-          style={{ color: '#636260' }}
+          style={{
+            color: '#636260',
+            WebkitAppearance: 'none',
+            MozAppearance: 'none',
+            appearance: 'none',
+            minHeight: '44px',
+            display: 'block',
+            boxSizing: 'border-box'
+          }}
           required={required}
         />
 

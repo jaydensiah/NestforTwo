@@ -30,25 +30,6 @@ export const formatDate = (date, options = {}) => {
 };
 
 /**
- * Format date for Shopify display (e.g., "9 Feb 2026")
- * @param {Date|string} date - Date to format
- * @returns {string} Formatted date string
- */
-export const formatDateForShopify = (date) => {
-  const dateObj = typeof date === 'string' ? new Date(date) : date;
-
-  if (!(dateObj instanceof Date) || isNaN(dateObj)) {
-    throw new Error('Invalid date provided');
-  }
-
-  const day = String(dateObj.getDate()).padStart(2, '0');
-  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-  const year = dateObj.getFullYear();
-
-  return `${day}-${month}-${year}`;
-};
-
-/**
  * Format date to short format (DD/MM/YYYY)
  * @param {Date|string} date - Date to format
  * @returns {string} Formatted date string
@@ -502,7 +483,6 @@ export const getMinDate = (purchaseType) => {
 
 export default {
   formatDate,
-  formatDateForShopify,
   formatDateShort,
   formatDateISO,
   formatTime,
