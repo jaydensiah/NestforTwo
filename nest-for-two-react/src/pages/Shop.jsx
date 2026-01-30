@@ -147,6 +147,11 @@ const Shop = () => {
     { key: 'kue-lapis', label: 'Traditional Kue Lapis Series', description: 'Handcrafted layer cake, a perfect pairing with our bird\'s nest'}
   ];
 
+  // Set page title
+  useEffect(() => {
+    document.title = "Nest for Two - Shop";
+  }, []);
+
   // Load products based on category
   useEffect(() => {
     window.scrollTo(0, 0);

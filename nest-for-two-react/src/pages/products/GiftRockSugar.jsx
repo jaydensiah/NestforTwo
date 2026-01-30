@@ -14,6 +14,7 @@ const GiftRockSugar = () => {
   const { addItem } = useContext(CartContext);
 
   useEffect(() => {
+    document.title = "Nest for Two - Shop";
     window.scrollTo(0, 0);
   }, []);
 

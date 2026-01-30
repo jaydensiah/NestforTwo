@@ -1,4 +1,10 @@
+import { useEffect } from 'react';
+
 const About = () => {
+  useEffect(() => {
+    document.title = "Nest for Two - About";
+  }, []);
+
   return (
     <div className="pt-10">
       {/* About Us Header */}

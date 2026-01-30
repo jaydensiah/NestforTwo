@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import HeroSection from '../components/home/HeroSection';
 import ProductGrid from '../components/home/ProductGrid';
@@ -5,6 +6,9 @@ import ReviewCarousel from '../components/home/ReviewCarousel';
 import BenefitsCarousel from '../components/home/BenefitsCarousel';
 
 const Home = () => {
+  useEffect(() => {
+    document.title = "Nest for Two - Home";
+  }, []);
 
   return (
     <div>

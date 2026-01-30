@@ -65,25 +65,21 @@ const ProductCard = ({ product, onAddToCart, className = '' }) => {
             isHovered ? 'translate-y-0' : 'translate-y-full'
           }`}
         >
-          <button
-            onClick={handleAddToCart}
-            className="w-full bg-wellness-rose hover:bg-wellness-rose/90 text-white font-nunito-regular uppercase tracking-wider py-3 px-4 text-sm transition-colors duration-200"
-            aria-label={`Add ${product.name} to cart`}
-          >
+          <div className="w-full bg-wellness-rose text-white font-nunito-regular uppercase tracking-wider py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm text-center">
             View Product
-          </button>
+          </div>
         </div>
       </div>
 
       {/* Product Details */}
-      <div className="p-4">
+      <div className="p-2 sm:p-3 md:p-4">
         {/* Product Title */}
-        <h3 className="font-playfair-bold text-lg text-wellness-dark mb-2 line-clamp-2">
+        <h3 className="font-playfair-bold text-xs sm:text-sm md:text-base lg:text-lg text-wellness-dark mb-1 sm:mb-2 line-clamp-2">
           {product.name}
         </h3>
 
         {/* Product Price */}
-        <p className="text-wellness-rose font-source-sans text-base font-semibold">
+        <p className="text-wellness-rose font-source-sans text-sm sm:text-base md:text-lg font-semibold">
           {formatPrice(product.price)}
         </p>
 

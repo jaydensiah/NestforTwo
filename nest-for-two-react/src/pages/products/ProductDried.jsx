@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import ProductCarousel from '../../components/product/ProductCarousel';
 import QuantitySelector from '../../components/product/QuantitySelector';
 import DatePicker from '../../components/product/DatePicker';
@@ -12,6 +12,11 @@ import { formatDateForShopify } from '../../utils/dateHelpers';
 const ProductDried = () => {
   const product = PRODUCTS.DRIED;
   const { addItem } = useContext(CartContext);
+
+  useEffect(() => {
+    document.title = "Nest for Two - Shop";
+    window.scrollTo(0, 0);
+  }, []);
 
   const [selectedSize, setSelectedSize] = useState('50g');
   const [quantity, setQuantity] = useState(1);

@@ -15,8 +15,9 @@ const ProductHoney = () => {
   const product = PRODUCTS.HONEY;
   const { addItem } = useContext(CartContext);
 
-  // Scroll to top when component mounts
+  // Set page title and scroll to top
   useEffect(() => {
+    document.title = "Nest for Two - Shop";
     window.scrollTo(0, 0);
   }, []);
 

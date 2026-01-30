@@ -1,6 +1,10 @@
+import { useEffect } from 'react';
 import Accordion from '../components/ui/Accordion';
 
 const FAQ = () => {
+  useEffect(() => {
+    document.title = "Nest for Two - Faqs";
+  }, []);
   const faqs = [
     {
       question: 'Do your Bird\'s Nest contain preservatives or additives?',

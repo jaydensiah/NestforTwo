@@ -6,7 +6,7 @@ const Footer = () => {
     <footer style={{ backgroundColor: '#D8CDCB' }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Navigation Links */}
-        <nav className="flex justify-center space-x-12 mb-10">
+        <nav className="flex justify-center space-x-6 sm:space-x-8 md:space-x-12 mb-10">
           <Link
             to="/shop"
             className="font-nunito-regular font-bold text-sm tracking-widest hover:opacity-70 transition-opacity duration-200"
