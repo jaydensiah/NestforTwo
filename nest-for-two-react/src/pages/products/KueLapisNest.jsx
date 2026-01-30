@@ -7,6 +7,7 @@ import InstructionsField from '../../components/product/InstructionsField';
 import CollapsibleSection from '../../components/product/CollapsibleSection';
 import { PRODUCTS } from '../../config/products';
 import { CartContext } from '../../context/CartContext';
+import { formatDateForShopify } from '../../utils/dateHelpers';
 
 const KueLapisNest = () => {
   const product = PRODUCTS.KUE_LAPIS_NEST;
@@ -47,7 +48,7 @@ const KueLapisNest = () => {
       const customAttributes = [
         { key: 'Flavour', value: flavour === 'original' ? 'Original' : 'Prune' },
         { key: 'Sachet Type', value: sachetType },
-        { key: 'Delivery Date', value: deliveryDate },
+        { key: 'Delivery Date', value: formatDateForShopify(deliveryDate) },
         { key: 'Time Slot', value: timeSlot }
       ];
 

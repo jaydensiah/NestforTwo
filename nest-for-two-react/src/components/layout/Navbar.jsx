@@ -10,7 +10,7 @@ const NavLink = ({ to, children, isActive }) => {
   return (
     <Link
       to={to}
-      className={`relative font-source-sans font-bold text-sm tracking-wide py-2 group ${
+      className={`relative font-nunito-regular font-bold text-sm tracking-wide py-2 group ${
         isActive ? 'text-wellness-rose' : 'text-wellness-dark'
       }`}
     >
@@ -103,7 +103,7 @@ const Navbar = () => {
               >
                 <Link
                   to="/shop"
-                  className={`relative font-source-sans font-bold text-sm tracking-wide py-2 group ${
+                  className={`relative font-nunito-regular font-bold text-sm tracking-wide py-2 group ${
                     isActive('/shop') ? 'text-wellness-rose' : 'text-wellness-dark'
                   }`}
                 >

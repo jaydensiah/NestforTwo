@@ -39,7 +39,7 @@ const Home = () => {
           {/* Description */}
           <div className="text-center mb-12 max-w-2xl mx-auto">
             <p className="font-source-sans text-sm sm:text-base text-wellness-text">
-              Our premium freshly cooked bird's nest sachets, available in honey, rock sugar, and zero sugar variants.
+              Our signature bottle series, available in Honey, Zero Sugar, and Rock Sugar variants.
             </p>
           </div>
 

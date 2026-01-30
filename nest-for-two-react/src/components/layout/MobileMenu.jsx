@@ -87,8 +87,8 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   </span>
                 )}
               </div>
-              <span className="font-source-sans font-semibold text-wellness-dark">
-                My Cart
+              <span className="font-nunito-regular text-wellness-dark">
+                MY CART
               </span>
             </div>
           </Link>
@@ -106,7 +106,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
               className="flex items-center gap-4 px-3 py-3.5 rounded-lg text-wellness-dark hover:bg-gray-50 transition-colors duration-200 group"
             >
               <IoHomeOutline className="text-xl text-gray-400 group-hover:text-wellness-rose transition-colors" />
-              <span className="font-source-sans font-medium">Home</span>
+              <span className="font-nunito-regular">HOME</span>
             </Link>
 
             {/* Shop with Expandable Submenu */}
@@ -116,7 +116,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                 className="w-full flex items-center gap-4 px-3 py-3.5 rounded-lg text-wellness-dark hover:bg-gray-50 transition-colors duration-200 group"
               >
                 <IoBagOutline className="text-xl text-gray-400 group-hover:text-wellness-rose transition-colors" />
-                <span className="font-source-sans font-medium flex-1 text-left">Shop</span>
+                <span className="font-nunito-regular flex-1 text-left">SHOP</span>
                 <IoChevronForward
                   className={`text-lg text-gray-400 transition-transform duration-200 ${
                     isShopExpanded ? 'rotate-90' : ''
@@ -160,7 +160,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   className="flex items-center gap-4 px-3 py-3.5 rounded-lg text-wellness-dark hover:bg-gray-50 transition-colors duration-200 group"
                 >
                   <IconComponent className="text-xl text-gray-400 group-hover:text-wellness-rose transition-colors" />
-                  <span className="font-source-sans font-medium">{link.label}</span>
+                  <span className="font-nunito-regular">{link.label.toUpperCase()}</span>
                 </Link>
               );
             })}

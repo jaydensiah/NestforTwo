@@ -140,11 +140,11 @@ const Shop = () => {
 
   // Category configuration
   const categories = [
-    { key: null, label: 'All' },
-    { key: 'signature-bottle', label: 'Signature Bottle Series' },
-    { key: 'signature-gift', label: 'Signature Gift Set Series' },
-    { key: 'premium-dried', label: 'Premium Dried Series' },
-    { key: 'kue-lapis', label: 'Traditional Kue Lapis Series' }
+    { key: null, label: 'All', description: 'Discover our complete collection of premium bird\'s nest products' },
+    { key: 'signature-bottle', label: 'Signature Bottle Series', description: 'Freshly stewed bird\'s nest in elegant bottles, ready for enjoyment'},
+    { key: 'signature-gift', label: 'Signature Gift Set Series', description: 'Beautifully packaged gift sets perfect for any occasion' },
+    { key: 'premium-dried', label: 'Premium Dried Series', description: 'Traditional dried bird\'s nest for home preparation' },
+    { key: 'kue-lapis', label: 'Traditional Kue Lapis Series', description: 'Handcrafted layer cake, a perfect pairing with our bird\'s nest'}
   ];
 
   // Load products based on category
@@ -172,16 +172,22 @@ const Shop = () => {
     return active ? active.label : 'All Products';
   };
 
+  // Get active category description
+  const getActiveDescription = () => {
+    const active = categories.find(cat => cat.key === category);
+    return active ? active.description : categories[0].description;
+  };
+
   return (
     <div className="bg-wellness-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Page Header */}
         <div className="text-center mb-8">
-          <h1 className="font-playfair-bold text-3xl sm:text-4xl text-wellness-dark mb-4">
+          <h1 className="font-playfair-bold text-2xl sm:text-3xl md:text-4xl text-wellness-dark mb-2 sm:mb-4">
             {category ? getActiveLabel() : 'All Products'}
           </h1>
-          <p className="text-wellness-text font-source-sans text-base sm:text-lg">
-            Discover our complete collection of premium bird's nest products
+          <p className="text-wellness-text font-source-sans text-sm sm:text-base md:text-lg">
+            {getActiveDescription()}
           </p>
         </div>
 

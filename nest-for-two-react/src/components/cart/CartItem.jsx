@@ -15,16 +15,6 @@ const CartItem = ({ item }) => {
   const deliveryDate = getCustomAttribute('Delivery Date');
   const timeSlot = getCustomAttribute('Time Slot');
 
-  // Format date as "10 Feb 2026"
-  const formatDeliveryDate = (dateStr) => {
-    if (!dateStr) return '';
-    const date = new Date(dateStr);
-    const day = date.getDate();
-    const month = date.toLocaleString('en-US', { month: 'short' });
-    const year = date.getFullYear();
-    return `${day} ${month} ${year}`;
-  };
-
   // Handle quantity update
   const handleQuantityChange = async (newQuantity) => {
     if (newQuantity < 1) return;
@@ -85,7 +75,7 @@ const CartItem = ({ item }) => {
                 <p>{item.variant.title}</p>
               )}
               {deliveryDate && (
-                <p>Delivery: {formatDeliveryDate(deliveryDate)}</p>
+                <p>Delivery: {deliveryDate}</p>
               )}
               {timeSlot && (
                 <p>Time: {timeSlot}</p>

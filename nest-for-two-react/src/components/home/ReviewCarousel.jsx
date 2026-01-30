@@ -15,55 +15,178 @@ import Modal from '../ui/Modal';
  */
 const ReviewCarousel = ({ reviews: customReviews, autoPlay = false, autoPlayInterval = 5000 }) => {
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [reviewFormData, setReviewFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [reviewFocused, setReviewFocused] = useState({
+    name: false,
+    email: false,
+    message: false
+  });
+  const [selectedRating, setSelectedRating] = useState(0);
+  const [hoveredRating, setHoveredRating] = useState(0);
+  const [reviewTouched, setReviewTouched] = useState({
+    name: false,
+    email: false,
+    message: false,
+    rating: false
+  });
+  const [reviewSubmitAttempted, setReviewSubmitAttempted] = useState(false);
+  const [isReviewSubmitting, setIsReviewSubmitting] = useState(false);
+  const [reviewSubmitStatus, setReviewSubmitStatus] = useState(null); // 'success' or 'error'
+
+  const handleReviewChange = (e) => {
+    const { name, value } = e.target;
+    setReviewFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleReviewFocus = (field) => {
+    setReviewFocused(prev => ({ ...prev, [field]: true }));
+  };
+
+  const handleReviewBlur = (field) => {
+    setReviewFocused(prev => ({ ...prev, [field]: false }));
+    setReviewTouched(prev => ({ ...prev, [field]: true }));
+  };
+
+  const isReviewFieldActive = (field) => reviewFocused[field] || reviewFormData[field];
+
+  const countReviewWords = (text) => {
+    if (!text.trim()) return 0;
+    return text.trim().split(/\s+/).length;
+  };
+
+  const reviewWordCount = countReviewWords(reviewFormData.message);
+
+  // Validation functions
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const getReviewFieldError = (field) => {
+    if (!reviewTouched[field] && !reviewSubmitAttempted) return '';
+
+    switch (field) {
+      case 'name':
+        return !reviewFormData.name.trim() ? 'Name is required' : '';
+      case 'email':
+        if (!reviewFormData.email.trim()) return 'E-mail is required';
+        if (!validateEmail(reviewFormData.email)) return 'Please enter a valid e-mail';
+        return '';
+      case 'message':
+        return !reviewFormData.message.trim() ? 'Message is required' : '';
+      case 'rating':
+        return selectedRating === 0 ? 'Please select a rating' : '';
+      default:
+        return '';
+    }
+  };
+
+  const isReviewFormValid = () => {
+    return (
+      reviewFormData.name.trim() &&
+      reviewFormData.email.trim() &&
+      validateEmail(reviewFormData.email) &&
+      reviewFormData.message.trim() &&
+      selectedRating > 0
+    );
+  };
+
+  const handleReviewSubmit = async () => {
+    setReviewSubmitAttempted(true);
+    setReviewTouched({ name: true, email: true, message: true, rating: true });
+
+    if (!isReviewFormValid()) {
+      return;
+    }
+
+    setIsReviewSubmitting(true);
+    setReviewSubmitStatus(null);
+
+    try {
+      const response = await fetch('https://formspree.io/f/mzzagkek', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...reviewFormData,
+          rating: selectedRating,
+        }),
+      });
+
+      if (response.ok) {
+        setReviewSubmitStatus('success');
+        // Reset form after short delay to show success message
+        setTimeout(() => {
+          setIsReviewModalOpen(false);
+          setReviewFormData({ name: '', email: '', message: '' });
+          setSelectedRating(0);
+          setReviewTouched({ name: false, email: false, message: false, rating: false });
+          setReviewSubmitAttempted(false);
+          setReviewSubmitStatus(null);
+        }, 2000);
+      } else {
+        setReviewSubmitStatus('error');
+      }
+    } catch (error) {
+      setReviewSubmitStatus('error');
+    } finally {
+      setIsReviewSubmitting(false);
+    }
+  };
 
   // Default reviews data
   const defaultReviews = [
     {
       id: 1,
-      name: 'Sarah Tan',
+      name: 'En Qi Lim',
       rating: 5,
-      text: 'The best bird\'s nest I\'ve ever had! The texture is incredibly smooth and thick. My skin has been glowing since I started my subscription.',
-      date: '2024-01-15',
+      text: 'I like the rock sugar flavour because it gives a simple, familiar taste without being too strong. Perfect for my parents who prefer something classic.',
+      date: '2025-11-30',
       verified: true
     },
     {
       id: 2,
-      name: 'Michelle Wong',
+      name: 'Evina Goh',
       rating: 5,
-      text: 'Highly recommend the zero sugar variant for pregnant moms. It\'s been a lifesaver during my pregnancy. The quality is exceptional!',
-      date: '2024-01-10',
+      text: 'The zero sugar flavour is thoughtful. I can still get a light sweetness without worrying about sugar, which works well for me during pregnancy.',
+      date: '2025-12-15',
       verified: true
     },
     {
       id: 3,
       name: 'David Chen',
-      rating: 4,
-      text: 'Great quality bird\'s nest. I got the honey variant for my daughter and she loves it. The delivery was prompt and packaging was excellent.',
-      date: '2024-01-05',
+      rating: 5,
+      text: 'The premium dried series lets me prepare bird’s nest at home in the traditional style, which I really enjoy.',
+      date: '2026-01-02',
       verified: true
     },
     {
       id: 4,
-      name: 'Jennifer Lim',
+      name: 'Kelvin Tan',
       rating: 5,
-      text: 'Will definitely buy again! The rock sugar variant is perfect for my elderly parents. They\'ve noticed improvements in their energy levels.',
-      date: '2023-12-20',
+      text: 'The packaging looks really premium and makes a nice gift.',
+      date: '2025-12-13',
       verified: true
     },
     {
       id: 5,
       name: 'Raymond Ng',
       rating: 5,
-      text: 'Excellent service and premium quality. The subscription plan offers great value. I\'ve been a loyal customer for 6 months now.',
-      date: '2023-12-15',
+      text: 'The honey sachet makes it easy to adjust the sweetness just right. My kids really enjoy it, and I appreciate that it’s freshly prepared each time.',
+      date: '2026-01-14',
       verified: true
     },
     {
       id: 6,
       name: 'Amanda Lee',
-      rating: 4,
+      rating: 5,
       text: 'Very satisfied with the product quality and customer service. The bird\'s nest is fresh and the portions are generous.',
-      date: '2023-12-10',
+      date: '2026-01-30',
       verified: true
     }
   ];
@@ -146,11 +269,11 @@ const ReviewCarousel = ({ reviews: customReviews, autoPlay = false, autoPlayInte
     <div className="w-full">
       {/* Carousel Container */}
       <div
-        className="relative w-full max-w-5xl mx-auto px-4 min-h-[280px] md:min-h-[400px]"
+        className="relative w-full max-w-5xl mx-auto px-4 min-h-[240px] md:min-h-[340px]"
         {...handlers}
       >
         {/* Cards */}
-        <div className="relative w-full h-full min-h-[280px] md:min-h-[400px]">
+        <div className="relative w-full h-full min-h-[240px] md:min-h-[340px]">
           {reviews.map((review, index) => {
             const position = getCardPosition(index);
 
@@ -160,17 +283,19 @@ const ReviewCarousel = ({ reviews: customReviews, autoPlay = false, autoPlayInte
                 className={getCardStyles(position)}
                 style={{ width: 'calc(100% - 2rem)', maxWidth: '400px' }}
               >
-                <div className="bg-white rounded-xl shadow-xl p-6 md:p-8 h-full">
+                <div className="bg-white rounded-xl shadow-xl p-5 md:p-8 h-[220px] md:h-[280px] flex flex-col">
                   {/* Rating */}
                   {renderStars(review.rating)}
 
                   {/* Review Text */}
-                  <p className="font-source-sans text-wellness-text text-sm md:text-base text-center mb-6 line-clamp-6">
-                    "{review.text}"
-                  </p>
+                  <div className="flex-1 flex items-center">
+                    <p className="font-source-sans text-wellness-text text-sm md:text-base text-center line-clamp-6">
+                      "{review.text}"
+                    </p>
+                  </div>
 
                   {/* Reviewer Info */}
-                  <div className="text-center border-t border-gray-200 pt-4">
+                  <div className="text-center border-t border-gray-200 pt-4 mt-4">
                     <p className="font-nunito-regular font-semibold text-wellness-dark mb-1">
                       {review.name}
                     </p>
@@ -206,8 +331,8 @@ const ReviewCarousel = ({ reviews: customReviews, autoPlay = false, autoPlayInte
 
       {/* Mobile: Swipe instruction and bottom navigation */}
       <div className="md:hidden">
-        {/* Swipe instruction label - close to card */}
-        <div className="flex items-center justify-center gap-2 mt-2 mb-6">
+        {/* Swipe instruction label */}
+        <div className="flex items-center justify-center gap-2 mt-6 mb-8">
           <FaLongArrowAltLeft className="w-4 h-4 text-wellness-text" />
           <span className="font-nunito-regular text-wellness-text" style={{ fontSize: '12px' }}>
             Swipe for more
@@ -280,64 +405,209 @@ const ReviewCarousel = ({ reviews: customReviews, autoPlay = false, autoPlayInte
         title="Leave a Review"
       >
         <div className="space-y-6">
-          <p className="text-wellness-text font-source-sans">
-            We'd love to hear about your experience with Nest for Two! Your feedback helps us serve you better.
-          </p>
-
+          {/* Name Field */}
           <div>
-            <label className="block text-sm font-nunito-regular text-wellness-dark mb-2">
-              Your Name
-            </label>
-            <input
-              type="text"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-wellness-rose focus:border-transparent"
-              placeholder="Enter your name"
-            />
+            <div className="relative">
+              <input
+                type="text"
+                name="name"
+                id="review-name"
+                value={reviewFormData.name}
+                onChange={handleReviewChange}
+                onFocus={() => handleReviewFocus('name')}
+                onBlur={() => handleReviewBlur('name')}
+                className="w-full px-4 py-4 font-source-sans rounded-xl border-2 outline-none transition-colors bg-white"
+                style={{
+                  color: '#636260',
+                  borderColor: getReviewFieldError('name') ? '#ef4444' : isReviewFieldActive('name') ? '#81775A' : '#e5e5e5'
+                }}
+              />
+              <label
+                htmlFor="review-name"
+                className="absolute left-4 transition-all duration-200 pointer-events-none font-source-sans bg-white px-1"
+                style={{
+                  color: getReviewFieldError('name') ? '#ef4444' : isReviewFieldActive('name') ? '#81775A' : '#9ca3af',
+                  top: isReviewFieldActive('name') ? '-0.5rem' : '1rem',
+                  fontSize: isReviewFieldActive('name') ? '0.75rem' : '1rem'
+                }}
+              >
+                Name
+              </label>
+            </div>
+            {getReviewFieldError('name') && (
+              <p className="font-source-sans text-xs mt-1" style={{ color: '#ef4444' }}>
+                {getReviewFieldError('name')}
+              </p>
+            )}
           </div>
 
+          {/* Rating Field */}
           <div>
-            <label className="block text-sm font-nunito-regular text-wellness-dark mb-2">
-              Rating
-            </label>
-            <div className="flex gap-2">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <button
-                  key={star}
-                  className="text-gray-300 hover:text-yellow-400 transition-colors"
-                >
-                  <FaStar className="w-8 h-8" />
-                </button>
-              ))}
+            <div className="relative">
+              <div
+                className="w-full px-4 py-4 rounded-xl border-2 bg-white"
+                style={{ borderColor: getReviewFieldError('rating') ? '#ef4444' : '#e5e5e5' }}
+              >
+                <div className="flex gap-2 pt-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      type="button"
+                      onClick={() => {
+                        setSelectedRating(star);
+                        setReviewTouched(prev => ({ ...prev, rating: true }));
+                      }}
+                      onMouseEnter={() => setHoveredRating(star)}
+                      onMouseLeave={() => setHoveredRating(0)}
+                      className="transition-colors"
+                    >
+                      <FaStar
+                        className="w-7 h-7"
+                        style={{
+                          color: star <= (hoveredRating || selectedRating) ? '#facc15' : '#d1d5db'
+                        }}
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <label
+                className="absolute left-4 transition-all duration-200 pointer-events-none font-source-sans bg-white px-1"
+                style={{
+                  color: getReviewFieldError('rating') ? '#ef4444' : '#81775A',
+                  top: '-0.5rem',
+                  fontSize: '0.75rem'
+                }}
+              >
+                Number of Stars
+              </label>
+            </div>
+            {getReviewFieldError('rating') && (
+              <p className="font-source-sans text-xs mt-1" style={{ color: '#ef4444' }}>
+                {getReviewFieldError('rating')}
+              </p>
+            )}
+          </div>
+
+          {/* Email Field */}
+          <div>
+            <div className="relative">
+              <input
+                type="email"
+                name="email"
+                id="review-email"
+                value={reviewFormData.email}
+                onChange={handleReviewChange}
+                onFocus={() => handleReviewFocus('email')}
+                onBlur={() => handleReviewBlur('email')}
+                className="w-full px-4 py-4 font-source-sans rounded-xl border-2 outline-none transition-colors bg-white"
+                style={{
+                  color: '#636260',
+                  borderColor: getReviewFieldError('email') ? '#ef4444' : isReviewFieldActive('email') ? '#81775A' : '#e5e5e5'
+                }}
+              />
+              <label
+                htmlFor="review-email"
+                className="absolute left-4 transition-all duration-200 pointer-events-none font-source-sans bg-white px-1"
+                style={{
+                  color: getReviewFieldError('email') ? '#ef4444' : isReviewFieldActive('email') ? '#81775A' : '#9ca3af',
+                  top: isReviewFieldActive('email') ? '-0.5rem' : '1rem',
+                  fontSize: isReviewFieldActive('email') ? '0.75rem' : '1rem'
+                }}
+              >
+                E-mail
+              </label>
+            </div>
+            {getReviewFieldError('email') && (
+              <p className="font-source-sans text-xs mt-1" style={{ color: '#ef4444' }}>
+                {getReviewFieldError('email')}
+              </p>
+            )}
+          </div>
+
+          {/* Message Field */}
+          <div>
+            <div className="relative">
+              <textarea
+                name="message"
+                id="review-message"
+                rows={6}
+                value={reviewFormData.message}
+                onChange={handleReviewChange}
+                onFocus={() => handleReviewFocus('message')}
+                onBlur={() => handleReviewBlur('message')}
+                className="w-full px-4 py-4 font-source-sans rounded-xl border-2 outline-none transition-colors resize-none bg-white"
+                style={{
+                  color: '#636260',
+                  borderColor: getReviewFieldError('message') ? '#ef4444' : isReviewFieldActive('message') ? '#81775A' : '#e5e5e5'
+                }}
+              />
+              <label
+                htmlFor="review-message"
+                className="absolute left-4 transition-all duration-200 pointer-events-none font-source-sans bg-white px-1"
+                style={{
+                  color: getReviewFieldError('message') ? '#ef4444' : isReviewFieldActive('message') ? '#81775A' : '#9ca3af',
+                  top: isReviewFieldActive('message') ? '-0.5rem' : '1rem',
+                  fontSize: isReviewFieldActive('message') ? '0.75rem' : '1rem'
+                }}
+              >
+                Message
+              </label>
+            </div>
+            <div className="flex justify-between mt-1">
+              {getReviewFieldError('message') ? (
+                <p className="font-source-sans text-xs" style={{ color: '#ef4444' }}>
+                  {getReviewFieldError('message')}
+                </p>
+              ) : (
+                <span></span>
+              )}
+              <p
+                className="font-source-sans text-xs"
+                style={{ color: '#636260' }}
+              >
+                {reviewWordCount}/40 words
+              </p>
             </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-nunito-regular text-wellness-dark mb-2">
-              Your Review
-            </label>
-            <textarea
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-wellness-rose focus:border-transparent resize-none"
-              rows="6"
-              placeholder="Tell us about your experience..."
-            />
-          </div>
+          {/* Submit Status Messages */}
+          {reviewSubmitStatus === 'success' && (
+            <div className="p-4 rounded-xl bg-green-50 border border-green-200">
+              <p className="font-source-sans text-green-700 text-center">
+                Thank you! Your review has been submitted successfully.
+              </p>
+            </div>
+          )}
+          {reviewSubmitStatus === 'error' && (
+            <div className="p-4 rounded-xl bg-red-50 border border-red-200">
+              <p className="font-source-sans text-red-700 text-center">
+                Something went wrong. Please try again later.
+              </p>
+            </div>
+          )}
 
           <div className="flex gap-4">
             <button
-              onClick={() => setIsReviewModalOpen(false)}
-              className="flex-1 px-6 py-3 border border-gray-300 text-wellness-dark rounded-lg hover:bg-gray-50 transition-colors duration-200"
+              onClick={() => {
+                setIsReviewModalOpen(false);
+                // Reset validation state when canceling
+                setReviewTouched({ name: false, email: false, message: false, rating: false });
+                setReviewSubmitAttempted(false);
+                setReviewSubmitStatus(null);
+              }}
+              disabled={isReviewSubmitting}
+              className="flex-1 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200 font-source-sans disabled:opacity-70 disabled:cursor-not-allowed"
+              style={{ color: '#636260' }}
             >
               Cancel
             </button>
             <button
-              onClick={() => {
-                // Handle review submission
-                setIsReviewModalOpen(false);
-                // Show success message
-              }}
-              className="flex-1 px-6 py-3 bg-wellness-rose text-white rounded-lg hover:bg-wellness-rose/90 transition-colors duration-200"
+              onClick={handleReviewSubmit}
+              disabled={isReviewSubmitting || reviewSubmitStatus === 'success'}
+              className="flex-1 px-6 py-3 bg-wellness-rose text-white rounded-lg hover:bg-wellness-rose/90 transition-colors duration-200 font-source-sans disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Submit Review
+              {isReviewSubmitting ? 'Submitting...' : 'Submit Review'}
             </button>
           </div>
         </div>
