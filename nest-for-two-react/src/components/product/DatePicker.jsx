@@ -35,6 +35,12 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
 
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;
+
+    // Skip validation if no date selected (user cancelled or picker closed)
+    if (!selectedDate) {
+      return;
+    }
+
     const validation = isDateAllowed(selectedDate, purchaseType);
 
     if (!validation.allowed) {
