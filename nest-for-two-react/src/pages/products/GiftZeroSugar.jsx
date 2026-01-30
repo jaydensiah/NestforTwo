@@ -44,12 +44,9 @@ const GiftZeroSugar = () => {
     setIsAdding(true);
 
     try {
-      const sweetnessLabel = sweetness === 'side' ? 'Sugar on the Side' : `${sweetness}%`;
       const customAttributes = [
         { key: 'Delivery Date', value: deliveryDate },
-        { key: 'Time Slot', value: timeSlot },
-        { key: 'Sweetness Level', value: sweetnessLabel },
-        { key: 'Size', value: product.fixedSize }
+        { key: 'Time Slot', value: timeSlot }
       ];
 
       await addItem(currentVariant.id, quantity, customAttributes);
@@ -150,7 +147,7 @@ const GiftZeroSugar = () => {
                   </div>
                   <div className="font-source-sans text-[14px] leading-relaxed" style={{ color: '#636260' }}>
                     <p className="mb-4">
-                      Based on your selected sweetness level, we will adjust and mix the flavour directly into the bottles during preparation.
+                      Based on your selected sweetness level, we will adjust and mix the flavour directly into the tumbler during preparation.
                     </p>
                     <p>
                       If you select <span className="font-semibold" style={{ color: '#B76E79' }}>Sugar on the Side</span>, we will provide the Zero Sugar sachets separately so you can adjust the sweetness to your liking. 4 Zero Sugar sachets will be given.
@@ -208,41 +205,41 @@ const GiftZeroSugar = () => {
               {isAdding ? 'Adding...' : 'Add to Cart'}
             </button>
 
-            {/* Collapsible Sections */}
-            <div className="mt-6">
-              <CollapsibleSection title="Description" defaultOpen={true} hideTopBorder={true}>
-                <p className="mb-3">
-                  We highly recommend our Rock Sugar birdnest to elderly customers as it offers a classic, familiar sweetness that is flavourful yet not overly sweet.
-                </p>
-                <p className="mb-3">
-                  Each bottle of 50ml contains 3 grams of premium bird's nest (dry weight), with no chemical fragrances, preservatives, additives, artificial colouring and alcohol.
-                </p>
-              </CollapsibleSection>
-
-              <CollapsibleSection title="WHAT'S INCLUDED">
-                <img
-                  src="/images/placeholder.png"
-                  alt="What's included in your order"
-                  className="w-full h-auto rounded-lg"
-                />
-              </CollapsibleSection>
-
-              <CollapsibleSection title="HOW TO CONSUME YOUR BIRD'S NEST">
-                <img
-                  src="/images/placeholder.png"
-                  alt="How to consume your bird's nest"
-                  className="w-full h-auto rounded-lg"
-                />
-              </CollapsibleSection>
-
-              <CollapsibleSection title="HOW TO STORE YOUR BIRD'S NEST">
-                <img
-                  src="/images/placeholder.png"
-                  alt="How to store your bird's nest"
-                  className="w-full h-auto rounded-lg"
-                />
-              </CollapsibleSection>
-            </div>
+              {/* Collapsible Sections */}
+              <div className="mt-6">
+                <CollapsibleSection title="Description" defaultOpen={true} hideTopBorder={true}>
+                  <p className="mb-3">
+                    We highly recommend our Zero Sugar birdnest to pregnant moms and those watching their sugar intake, as it contains no added sugar while still giving a naturally light, pleasant sweetness. Suitable for people with diabetes as well.
+                  </p>
+                  <p className="mb-3">
+                    Each tumbler contains 15 grams of premium bird's nest (dry weight), with no chemical fragrances, preservatives, additives, artificial colouring or alcohol. Tumbler is not microwavable. 
+                  </p>
+                </CollapsibleSection>
+  
+                <CollapsibleSection title="WHAT'S INCLUDED">
+                  <img
+                    src="/images/Gift_Included.png"
+                    alt="What's included in your order"
+                    className="w-full h-auto rounded-lg"
+                  />
+                </CollapsibleSection>
+  
+                <CollapsibleSection title="HOW TO CONSUME YOUR BIRD'S NEST">
+                  <img
+                    src="/images/Gift_HTC_ZeroSugar.png"
+                    alt="How to consume your bird's nest"
+                    className="w-full h-auto rounded-lg"
+                  />
+                </CollapsibleSection>
+  
+                <CollapsibleSection title="HOW TO STORE YOUR BIRD'S NEST">
+                  <img
+                    src="/images/HTS_Bottles.png"
+                    alt="How to store your bird's nest"
+                    className="w-full h-auto rounded-lg"
+                  />
+                </CollapsibleSection>
+              </div>
           </div>
         </div>
       </div>

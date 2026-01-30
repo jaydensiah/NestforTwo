@@ -30,7 +30,7 @@ const CartSummary = () => {
   };
 
   return (
-    <div className="bg-wellness-cream border border-gray-200 rounded-lg p-6 sticky top-24">
+    <div className="bg-white border border-gray-300 rounded-lg p-6 sticky top-24">
       <h2 className="font-playfair-bold text-wellness-dark text-2xl mb-6">
         Order Summary
       </h2>
@@ -78,7 +78,7 @@ const CartSummary = () => {
 
       {/* Additional Info */}
       <p className="text-xs text-wellness-text text-center mt-4 font-nunito-regular">
-        Taxes and additional fees calculated at checkout
+        Discount codes can be applied at checkout
       </p>
     </div>
   );

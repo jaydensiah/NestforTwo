@@ -131,6 +131,25 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  // Clear all items from cart
+  const clearCart = async () => {
+    try {
+      if (!cart || !shopifyClient) {
+        throw new Error('Cart not initialized');
+      }
+
+      const lineItemIds = cart.lineItems.map(item => item.id);
+      if (lineItemIds.length === 0) return cart;
+
+      const updatedCart = await shopifyClient.checkout.removeLineItems(cart.id, lineItemIds);
+      setCart(updatedCart);
+      return updatedCart;
+    } catch (error) {
+      console.error('Clear cart error:', error);
+      throw error;
+    }
+  };
+
   // Checkout
   const checkout = () => {
     if (cart && cart.webUrl) {
@@ -145,6 +164,7 @@ export const CartProvider = ({ children }) => {
     addItem,
     updateQuantity,
     removeItem,
+    clearCart,
     checkout
   };
 

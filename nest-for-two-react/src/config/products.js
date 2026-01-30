@@ -560,8 +560,10 @@ export const PRODUCTS = {
     fixedSize: '250ml - Gift box with 1 x insulated tumbler',
     images: [
       '/images/Gift_Honey.png',
-      '/images/placeholder_gift_honey_2.png',
-      '/images/placeholder_gift_honey_3.png'
+      '/images/Gift_All1.png',
+      '/images/Gift_All2.png',
+      '/images/Gift_All3.png',
+      '/images/Gift_All4.png'
     ],
     variants: {
       // 4 sweetness levels (one-time only, no subscription)
@@ -599,8 +601,10 @@ export const PRODUCTS = {
     fixedSize: '250ml - Gift box with 1 x insulated tumbler',
     images: [
       '/images/Gift_ZeroSugar.png',
-      '/images/placeholder_gift_zerosugar_2.png',
-      '/images/placeholder_gift_zerosugar_3.png'
+      '/images/Gift_All1.png',
+      '/images/Gift_All2.png',
+      '/images/Gift_All3.png',
+      '/images/Gift_All4.png'
     ],
     variants: {
       sweetness25: {
@@ -636,8 +640,10 @@ export const PRODUCTS = {
     fixedSize: '250ml - Gift box with 1 x insulated tumbler',
     images: [
       '/images/Gift_RockSugar.png',
-      '/images/placeholder_gift_rocksugar_2.png',
-      '/images/placeholder_gift_rocksugar_3.png'
+      '/images/Gift_All1.png',
+      '/images/Gift_All2.png',
+      '/images/Gift_All3.png',
+      '/images/Gift_All4.png'
     ],
     variants: {
       sweetness25: {

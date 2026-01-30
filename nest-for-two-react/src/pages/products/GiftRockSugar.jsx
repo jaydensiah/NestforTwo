@@ -44,12 +44,9 @@ const GiftRockSugar = () => {
     setIsAdding(true);
 
     try {
-      const sweetnessLabel = sweetness === 'side' ? 'Sugar on the Side' : `${sweetness}%`;
       const customAttributes = [
         { key: 'Delivery Date', value: deliveryDate },
-        { key: 'Time Slot', value: timeSlot },
-        { key: 'Sweetness Level', value: sweetnessLabel },
-        { key: 'Size', value: product.fixedSize }
+        { key: 'Time Slot', value: timeSlot }
       ];
 
       await addItem(currentVariant.id, quantity, customAttributes);
@@ -150,10 +147,10 @@ const GiftRockSugar = () => {
                   </div>
                   <div className="font-source-sans text-[14px] leading-relaxed" style={{ color: '#636260' }}>
                     <p className="mb-4">
-                      Based on your selected sweetness level, we will adjust and mix the flavour directly into the bottles during preparation.
+                      Based on your selected sweetness level, we will adjust and mix the flavour directly into the tumbler during preparation.
                     </p>
                     <p>
-                      If you select <span className="font-semibold" style={{ color: '#B76E79' }}>Sugar on the Side</span>, we will provide the rock sugar sachets separately so you can adjust the sweetness to your liking. 4 rock sugar sachets will be given.
+                      If you select <span className="font-semibold" style={{ color: '#B76E79' }}>Sugar on the Side</span>, we will provide the rock sugar sachets separately so you can adjust the sweetness to your liking. 4 Rock sugar sachets will be given.
                     </p>
                   </div>
                   <button
@@ -215,13 +212,13 @@ const GiftRockSugar = () => {
                   We highly recommend our Rock Sugar birdnest to elderly customers as it offers a classic, familiar sweetness that is flavourful yet not overly sweet.
                 </p>
                 <p className="mb-3">
-                  Each bottle of 50ml contains 3 grams of premium bird's nest (dry weight), with no chemical fragrances, preservatives, additives, artificial colouring and alcohol.
+                  Each tumbler contains 15 grams of premium bird's nest (dry weight), with no chemical fragrances, preservatives, additives, artificial colouring or alcohol. Tumbler is not microwavable. 
                 </p>
               </CollapsibleSection>
 
               <CollapsibleSection title="WHAT'S INCLUDED">
                 <img
-                  src="/images/placeholder.png"
+                  src="/images/Gift_Included.png"
                   alt="What's included in your order"
                   className="w-full h-auto rounded-lg"
                 />
@@ -229,7 +226,7 @@ const GiftRockSugar = () => {
 
               <CollapsibleSection title="HOW TO CONSUME YOUR BIRD'S NEST">
                 <img
-                  src="/images/placeholder.png"
+                  src="/images/Gift_HTC_RockSugar.png"
                   alt="How to consume your bird's nest"
                   className="w-full h-auto rounded-lg"
                 />
@@ -237,7 +234,7 @@ const GiftRockSugar = () => {
 
               <CollapsibleSection title="HOW TO STORE YOUR BIRD'S NEST">
                 <img
-                  src="/images/placeholder.png"
+                  src="/images/HTS_Bottles.png"
                   alt="How to store your bird's nest"
                   className="w-full h-auto rounded-lg"
                 />

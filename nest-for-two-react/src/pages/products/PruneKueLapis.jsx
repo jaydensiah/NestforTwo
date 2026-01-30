@@ -31,8 +31,7 @@ const PruneKueLapis = () => {
     try {
       const customAttributes = [
         { key: 'Delivery Date', value: deliveryDate },
-        { key: 'Time Slot', value: timeSlot },
-        { key: 'Size', value: product.fixedSize }
+        { key: 'Time Slot', value: timeSlot }
       ];
 
       await addItem(product.variant, quantity, customAttributes);

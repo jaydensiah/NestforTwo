@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { IoCartOutline, IoMenuOutline } from 'react-icons/io5';
 import AnnouncementBar from './AnnouncementBar';
 import MobileMenu from './MobileMenu';
+import { CartContext } from '../../context/CartContext';
 
 // NavLink component with active state and hover underline effect
 const NavLink = ({ to, children, isActive }) => {
@@ -51,6 +52,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isShopDropdownOpen, setIsShopDropdownOpen] = useState(false);
   const location = useLocation();
+  const { itemCount } = useContext(CartContext);
 
   // Check if current path matches
   const isActive = (path) => {
@@ -169,6 +171,11 @@ const Navbar = () => {
               aria-label="Shopping cart"
             >
               <IoCartOutline className="text-2xl" />
+              {itemCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 bg-wellness-rose text-white text-xs font-source-sans font-semibold rounded-full w-5 h-5 flex items-center justify-center">
+                  {itemCount > 99 ? '99+' : itemCount}
+                </span>
+              )}
             </Link>
           </div>
         </nav>

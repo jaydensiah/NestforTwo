@@ -4,34 +4,14 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
-    subject: '',
     message: ''
   });
 
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // In a real implementation, this would send to a backend API or email service
-    console.log('Contact form submitted:', formData);
-
-    // Show success message
-    setSubmitted(true);
-
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: ''
-      });
-      setSubmitted(false);
-    }, 3000);
-  };
+  const [focused, setFocused] = useState({
+    name: false,
+    email: false,
+    message: false
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,153 +21,189 @@ const Contact = () => {
     }));
   };
 
+  const handleFocus = (field) => {
+    setFocused(prev => ({ ...prev, [field]: true }));
+  };
+
+  const handleBlur = (field) => {
+    setFocused(prev => ({ ...prev, [field]: false }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Submit functionality to be added later
+    console.log('Form submitted:', formData);
+  };
+
+  // Count words in message
+  const countWords = (text) => {
+    if (!text.trim()) return 0;
+    return text.trim().split(/\s+/).length;
+  };
+
+  const wordCount = countWords(formData.message);
+
+  // Check if field has value or is focused (for floating label)
+  const isActive = (field) => focused[field] || formData[field];
+
   return (
-    <div className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-wellness-cream min-h-screen">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="font-playfair-bold text-4xl mb-4 text-center text-wellness-dark">
+    <div className="pt-12 pb-28 px-4 sm:px-6 lg:px-8 bg-white">
+      <div className="max-w-5xl mx-auto">
+        {/* Title */}
+        <h1
+          className="font-playfair-bold text-3xl sm:text-4xl mb-12 text-center"
+          style={{ color: '#636260' }}
+        >
           Get in Touch
         </h1>
 
-        <p className="font-source-sans text-wellness-text text-center mb-8">
-          Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
-        </p>
-
-        {submitted ? (
-          <div className="bg-white p-8 rounded-lg shadow-md border-2 border-wellness-rose text-center">
-            <div className="text-wellness-rose text-5xl mb-4">✓</div>
-            <h2 className="font-playfair-bold text-2xl mb-2 text-wellness-dark">
-              Thank You!
+        {/* Two Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          {/* Left Column - Company Info (appears second on mobile) */}
+          <div
+            className="border rounded-2xl p-8 order-2 lg:order-1"
+            style={{ borderColor: '#e5e5e5' }}
+          >
+            {/* Company Info Section */}
+            <h2
+              className="font-source-sans text-lg mb-4"
+              style={{ color: '#B76E79' }}
+            >
+              Company Info
             </h2>
-            <p className="font-source-sans text-wellness-text">
-              Your message has been sent. We'll get back to you soon!
+            <div
+              className="font-source-sans space-y-1 mb-8"
+              style={{ color: '#636260' }}
+            >
+              <p>Jem & San Pte. Ltd.</p>
+              <p>202505457G</p>
+              <p className="mt-4">190 CLEMENCEAU AVENUE #03-21</p>
+              <p>SINGAPORE SHOPPING CENTRE</p>
+              <p>SINGAPORE (239924)</p>
+            </div>
+
+            {/* Email Section */}
+            <h2
+              className="font-source-sans text-lg mb-4"
+              style={{ color: '#B76E79' }}
+            >
+              Email
+            </h2>
+            <p
+              className="font-source-sans"
+              style={{ color: '#636260' }}
+            >
+              contact@nestfortwo.com
             </p>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md space-y-6">
-            {/* Name Field */}
-            <div>
-              <label className="block font-nunito-regular text-wellness-dark mb-2">
-                Name <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                name="name"
-                required
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full border border-gray-300 rounded px-4 py-2 font-source-sans text-wellness-dark focus:outline-none focus:ring-2 focus:ring-wellness-rose"
-                placeholder="Your full name"
-              />
-            </div>
 
-            {/* Email Field */}
-            <div>
-              <label className="block font-nunito-regular text-wellness-dark mb-2">
-                Email <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="email"
-                name="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full border border-gray-300 rounded px-4 py-2 font-source-sans text-wellness-dark focus:outline-none focus:ring-2 focus:ring-wellness-rose"
-                placeholder="your.email@example.com"
-              />
-            </div>
-
-            {/* Phone Field */}
-            <div>
-              <label className="block font-nunito-regular text-wellness-dark mb-2">
-                Phone Number (Optional)
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full border border-gray-300 rounded px-4 py-2 font-source-sans text-wellness-dark focus:outline-none focus:ring-2 focus:ring-wellness-rose"
-                placeholder="+65 1234 5678"
-              />
-            </div>
-
-            {/* Subject Field */}
-            <div>
-              <label className="block font-nunito-regular text-wellness-dark mb-2">
-                Subject <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                name="subject"
-                required
-                value={formData.subject}
-                onChange={handleChange}
-                className="w-full border border-gray-300 rounded px-4 py-2 font-source-sans text-wellness-dark focus:outline-none focus:ring-2 focus:ring-wellness-rose"
-                placeholder="How can we help?"
-              />
-            </div>
-
-            {/* Message Field */}
-            <div>
-              <label className="block font-nunito-regular text-wellness-dark mb-2">
-                Message <span className="text-red-500">*</span>
-              </label>
-              <textarea
-                name="message"
-                required
-                rows={6}
-                value={formData.message}
-                onChange={handleChange}
-                className="w-full border border-gray-300 rounded px-4 py-2 font-source-sans text-wellness-dark resize-none focus:outline-none focus:ring-2 focus:ring-wellness-rose"
-                placeholder="Tell us what's on your mind..."
-              />
-            </div>
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="w-full bg-wellness-rose text-white py-3 font-nunito-regular font-semibold hover:bg-rose-gold-700 transition-colors rounded"
-            >
-              Send Message
-            </button>
-          </form>
-        )}
-
-        {/* Contact Information */}
-        <div className="mt-12 bg-white p-8 rounded-lg shadow-md">
-          <h2 className="font-playfair-bold text-2xl mb-6 text-center text-wellness-dark">
-            Other Ways to Reach Us
-          </h2>
-
-          <div className="space-y-4 font-source-sans text-wellness-text">
-            <div className="flex items-start">
-              <div className="font-semibold text-wellness-dark w-24">Email:</div>
-              <a
-                href="mailto:hello@nestfortwo.com"
-                className="text-wellness-rose hover:underline"
-              >
-                hello@nestfortwo.com
-              </a>
-            </div>
-
-            <div className="flex items-start">
-              <div className="font-semibold text-wellness-dark w-24">WhatsApp:</div>
-              <a
-                href="https://wa.me/6512345678"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-wellness-rose hover:underline"
-              >
-                +65 1234 5678
-              </a>
-            </div>
-
-            <div className="flex items-start">
-              <div className="font-semibold text-wellness-dark w-24">Hours:</div>
-              <div>
-                Monday - Sunday, 9:00 AM - 8:00 PM SGT
+          {/* Right Column - Contact Form (appears first on mobile) */}
+          <div className="order-1 lg:order-2">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Name Field */}
+              <div className="relative">
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  onFocus={() => handleFocus('name')}
+                  onBlur={() => handleBlur('name')}
+                  className="w-full px-4 py-4 font-source-sans rounded-xl border-2 outline-none transition-colors peer bg-white"
+                  style={{
+                    color: '#636260',
+                    borderColor: isActive('name') ? '#81775A' : '#e5e5e5'
+                  }}
+                />
+                <label
+                  htmlFor="name"
+                  className="absolute left-4 transition-all duration-200 pointer-events-none font-source-sans bg-white px-1"
+                  style={{
+                    color: isActive('name') ? '#81775A' : '#9ca3af',
+                    top: isActive('name') ? '-0.5rem' : '1rem',
+                    fontSize: isActive('name') ? '0.75rem' : '1rem'
+                  }}
+                >
+                  Name
+                </label>
               </div>
-            </div>
+
+              {/* Email Field */}
+              <div className="relative">
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  onFocus={() => handleFocus('email')}
+                  onBlur={() => handleBlur('email')}
+                  className="w-full px-4 py-4 font-source-sans rounded-xl border-2 outline-none transition-colors peer bg-white"
+                  style={{
+                    color: '#636260',
+                    borderColor: isActive('email') ? '#81775A' : '#e5e5e5'
+                  }}
+                />
+                <label
+                  htmlFor="email"
+                  className="absolute left-4 transition-all duration-200 pointer-events-none font-source-sans bg-white px-1"
+                  style={{
+                    color: isActive('email') ? '#81775A' : '#9ca3af',
+                    top: isActive('email') ? '-0.5rem' : '1rem',
+                    fontSize: isActive('email') ? '0.75rem' : '1rem'
+                  }}
+                >
+                  E-mail
+                </label>
+              </div>
+
+              {/* Message Field */}
+              <div className="relative">
+                <textarea
+                  name="message"
+                  id="message"
+                  rows={6}
+                  value={formData.message}
+                  onChange={handleChange}
+                  onFocus={() => handleFocus('message')}
+                  onBlur={() => handleBlur('message')}
+                  className="w-full px-4 py-4 font-source-sans rounded-xl border-2 outline-none transition-colors resize-none peer bg-white"
+                  style={{
+                    color: '#636260',
+                    borderColor: isActive('message') ? '#81775A' : '#e5e5e5'
+                  }}
+                />
+                <label
+                  htmlFor="message"
+                  className="absolute left-4 transition-all duration-200 pointer-events-none font-source-sans bg-white px-1"
+                  style={{
+                    color: isActive('message') ? '#81775A' : '#9ca3af',
+                    top: isActive('message') ? '-0.5rem' : '1rem',
+                    fontSize: isActive('message') ? '0.75rem' : '1rem'
+                  }}
+                >
+                  Message
+                </label>
+              </div>
+
+              {/* Word Count */}
+              <p
+                className="font-source-sans text-sm"
+                style={{ color: '#636260' }}
+              >
+                {wordCount} / 300 words
+              </p>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full py-4 font-source-sans text-white rounded-xl transition-opacity hover:opacity-90"
+                style={{ backgroundColor: '#B76E79' }}
+              >
+                Submit
+              </button>
+            </form>
           </div>
         </div>
       </div>

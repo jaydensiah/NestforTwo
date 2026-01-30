@@ -5,6 +5,7 @@ import { CartProvider } from './context/CartContext';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import WhatsAppButton from './components/shared/WhatsAppButton';
+import ScrollToTop from './components/shared/ScrollToTop';
 
 // Pages
 import Home from './pages/Home';
@@ -40,6 +41,7 @@ import ProductDried from './pages/products/ProductDried';
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <CartProvider>
         <div className="min-h-screen flex flex-col bg-wellness-cream">
           {/* Fixed Navbar with Announcement Bar */}

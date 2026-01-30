@@ -70,11 +70,9 @@ const ProductZeroSugar = () => {
     setIsAdding(true);
 
     try {
-      const sweetnessLabel = sweetness === 'side' ? 'Sugar on the Side' : `${sweetness}%`;
       const customAttributes = [
         { key: 'Delivery Date', value: deliveryDate },
-        { key: 'Time Slot', value: timeSlot },
-        { key: 'Sweetness Level', value: sweetnessLabel }
+        { key: 'Time Slot', value: timeSlot }
       ];
 
       await addItem(currentVariant.id, quantity, customAttributes);

@@ -3,7 +3,7 @@ const About = () => {
     <div className="pt-10">
       {/* About Us Header */}
       <h1
-        className="font-playfair-bold text-4xl md:text-5xl text-center pt-2 pb-11"
+        className="font-playfair-bold text-3xl md:text-4xl text-center pt-2 pb-11"
         style={{ color: '#636260' }}
       >
         About Us

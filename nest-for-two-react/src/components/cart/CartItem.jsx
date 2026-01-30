@@ -12,8 +12,18 @@ const CartItem = ({ item }) => {
     return attr?.value || '';
   };
 
-  const deliveryDate = getCustomAttribute('deliveryDate');
-  const timeSlot = getCustomAttribute('timeSlot');
+  const deliveryDate = getCustomAttribute('Delivery Date');
+  const timeSlot = getCustomAttribute('Time Slot');
+
+  // Format date as "10 Feb 2026"
+  const formatDeliveryDate = (dateStr) => {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    const day = date.getDate();
+    const month = date.toLocaleString('en-US', { month: 'short' });
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
+  };
 
   // Handle quantity update
   const handleQuantityChange = async (newQuantity) => {
@@ -69,34 +79,18 @@ const CartItem = ({ item }) => {
               {item.title}
             </h3>
 
-            {/* Variant */}
-            {item.variant.title !== 'Default Title' && (
-              <p className="text-sm text-wellness-text mb-2">
-                {item.variant.title}
-              </p>
-            )}
-
-            {/* Delivery Date and Time Slot */}
-            {(deliveryDate || timeSlot) && (
-              <div className="text-sm text-wellness-text space-y-1">
-                {deliveryDate && (
-                  <p>Delivery: {deliveryDate}</p>
-                )}
-                {timeSlot && (
-                  <p>Time: {timeSlot}</p>
-                )}
-              </div>
-            )}
-          </div>
-
-          {/* Price per Item */}
-          <div className="text-right">
-            <p className="font-nunito-regular text-wellness-dark font-semibold">
-              ${parseFloat(item.variant.price.amount).toFixed(2)}
-            </p>
-            <p className="text-sm text-wellness-text">
-              each
-            </p>
+            {/* Variant, Delivery Date and Time Slot */}
+            <div className="text-sm text-wellness-text space-y-1">
+              {item.variant.title !== 'Default Title' && (
+                <p>{item.variant.title}</p>
+              )}
+              {deliveryDate && (
+                <p>Delivery: {formatDeliveryDate(deliveryDate)}</p>
+              )}
+              {timeSlot && (
+                <p>Time: {timeSlot}</p>
+              )}
+            </div>
           </div>
         </div>
 
@@ -127,8 +121,8 @@ const CartItem = ({ item }) => {
             </button>
           </div>
 
-          {/* Line Total */}
-          <div className="flex items-center gap-4">
+          {/* Line Total and Remove Button - Centered */}
+          <div className="flex items-center justify-center gap-4">
             <p className="font-nunito-regular text-wellness-dark font-bold text-lg">
               ${lineTotal.toFixed(2)}
             </p>
