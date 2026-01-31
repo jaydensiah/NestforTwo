@@ -116,7 +116,6 @@ const CustomInput = forwardRef(({ value, onClick, placeholder }, ref) => (
     style={{
       color: value ? '#636260' : '#9ca3af',
       minHeight: '44px',
-      minWidth: '280px',
       display: 'flex',
       alignItems: 'center'
     }}

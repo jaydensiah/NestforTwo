@@ -187,11 +187,20 @@ button {
 }
 
 .react-datepicker__close-icon::after {
-  background-color: #B76E79;
+  background-color: #B76E79 !important;
   font-size: 14px;
   width: 20px;
   height: 20px;
   line-height: 20px;
+}
+
+/* Ensure datepicker wrapper is full width */
+.datepicker-container .react-datepicker-wrapper {
+  width: 100%;
+}
+
+.datepicker-container .react-datepicker__input-container {
+  width: 100%;
 }
 
 /* Mobile responsive */
