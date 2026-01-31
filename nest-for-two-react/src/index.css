@@ -100,3 +100,111 @@ button {
 .radio-rose input[type="radio"] {
   accent-color: #B76E79;
 }
+
+/* React DatePicker Custom Styles */
+.react-datepicker {
+  font-family: 'SourceSansPro-Regular', sans-serif;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.react-datepicker__header {
+  background-color: #B76E79;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  padding-top: 12px;
+}
+
+.react-datepicker__current-month {
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.react-datepicker__day-name {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  width: 2.5rem;
+  margin: 0.2rem;
+}
+
+.react-datepicker__day {
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  margin: 0.2rem;
+  border-radius: 50%;
+  color: #636260;
+}
+
+.react-datepicker__day:hover {
+  background-color: #f3e8ea;
+  border-radius: 50%;
+}
+
+.react-datepicker__day--selected {
+  background-color: #B76E79 !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+.react-datepicker__day--keyboard-selected {
+  background-color: #d4a5ac;
+  color: white;
+}
+
+.react-datepicker__day--disabled {
+  color: #ccc !important;
+  cursor: not-allowed;
+}
+
+.react-datepicker__day--disabled:hover {
+  background-color: transparent;
+}
+
+.react-datepicker__day--outside-month {
+  color: #ccc;
+}
+
+.react-datepicker__navigation {
+  top: 12px;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: white;
+}
+
+.react-datepicker__navigation:hover *::before {
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Clear button styling */
+.react-datepicker__close-icon {
+  right: 8px;
+  padding: 0;
+}
+
+.react-datepicker__close-icon::after {
+  background-color: #B76E79;
+  font-size: 14px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+
+/* Mobile responsive */
+@media (max-width: 400px) {
+  .react-datepicker {
+    font-size: 0.9rem;
+  }
+
+  .react-datepicker__day,
+  .react-datepicker__day-name {
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    margin: 0.15rem;
+  }
+}

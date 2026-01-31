@@ -1,15 +1,7 @@
-import { useRef } from 'react';
+import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { isDateAllowed } from '../../utils/dateHelpers';
-
-/**
- * Format date from YYYY-MM-DD to DD/MM/YYYY for display
- */
-const formatDisplayDate = (dateString) => {
-  if (!dateString) return '';
-  const [year, month, day] = dateString.split('-');
-  return `${day}/${month}/${year}`;
-};
+import ReactDatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 /**
  * Get current Singapore time
@@ -28,137 +20,168 @@ const getSingaporeToday = () => {
 };
 
 /**
- * Format date to YYYY-MM-DD for input min/max attributes
+ * Check if current Singapore time is past 8pm cutoff
  */
-const formatDateForInput = (date) => {
-  return date.getFullYear() + '-' +
-    String(date.getMonth() + 1).padStart(2, '0') + '-' +
-    String(date.getDate()).padStart(2, '0');
+const isPastCutoff = () => {
+  const now = getSingaporeTime();
+  return now.getHours() >= 20;
 };
 
 /**
- * Calculate minimum date based on current Singapore time and purchase type
+ * Get minimum selectable date based on purchase type
  */
-const calculateMinDate = (purchaseType) => {
-  const now = getSingaporeTime();
-  const currentHour = now.getHours();
+const getMinDate = (purchaseType) => {
   const today = getSingaporeToday();
+  const pastCutoff = isPastCutoff();
 
   if (purchaseType === 'subscription') {
+    // For subscriptions, find next valid Sunday
     const dayOfWeek = today.getDay();
     let daysUntilSunday = dayOfWeek === 0 ? 7 : 7 - dayOfWeek;
 
-    if (currentHour >= 20 && daysUntilSunday === 1) {
+    // If past 8pm and tomorrow is Sunday, skip to next Sunday
+    if (pastCutoff && daysUntilSunday === 1) {
       daysUntilSunday = 8;
     }
 
     const nextSunday = new Date(today);
     nextSunday.setDate(today.getDate() + daysUntilSunday);
-    return formatDateForInput(nextSunday);
+    return nextSunday;
   }
 
-  let minDeliveryDate = new Date(today);
-  if (currentHour >= 20) {
-    minDeliveryDate.setDate(today.getDate() + 2);
+  // For one-time orders
+  const minDate = new Date(today);
+  if (pastCutoff) {
+    // After 8pm: minimum is day after tomorrow
+    minDate.setDate(today.getDate() + 2);
   } else {
-    minDeliveryDate.setDate(today.getDate() + 1);
+    // Before 8pm: minimum is tomorrow
+    minDate.setDate(today.getDate() + 1);
   }
-  return formatDateForInput(minDeliveryDate);
+  return minDate;
 };
 
 /**
- * Calculate maximum date (60 days from today)
+ * Get maximum selectable date (60 days from today)
  */
-const calculateMaxDate = () => {
+const getMaxDate = () => {
   const today = getSingaporeToday();
   const maxDate = new Date(today);
   maxDate.setDate(today.getDate() + 60);
-  return formatDateForInput(maxDate);
+  return maxDate;
 };
 
 /**
- * DatePicker Component
- * Simple approach: native date input is directly tappable
+ * Filter function to determine if a date is selectable
+ */
+const isDateSelectable = (date, purchaseType) => {
+  const today = getSingaporeToday();
+  const pastCutoff = isPastCutoff();
+
+  // Block today
+  if (date.toDateString() === today.toDateString()) {
+    return false;
+  }
+
+  // Block past dates
+  if (date < today) {
+    return false;
+  }
+
+  // Block tomorrow if past 8pm
+  if (pastCutoff) {
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    if (date.toDateString() === tomorrow.toDateString()) {
+      return false;
+    }
+  }
+
+  // For subscriptions, only allow Sundays
+  if (purchaseType === 'subscription') {
+    return date.getDay() === 0; // 0 = Sunday
+  }
+
+  return true;
+};
+
+/**
+ * Custom input component for the date picker
+ */
+const CustomInput = forwardRef(({ value, onClick, placeholder }, ref) => (
+  <div
+    onClick={onClick}
+    ref={ref}
+    className="w-full border border-[#d1d5db] px-4 py-2 font-source-sans bg-white cursor-pointer"
+    style={{
+      color: value ? '#636260' : '#9ca3af',
+      minHeight: '44px',
+      minWidth: '280px',
+      display: 'flex',
+      alignItems: 'center'
+    }}
+  >
+    {value || placeholder}
+  </div>
+));
+
+CustomInput.displayName = 'CustomInput';
+
+/**
+ * DatePicker Component using react-datepicker
+ * Renders a custom calendar that works on mobile
  */
 const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
-  const inputRef = useRef(null);
-  const minDate = calculateMinDate(purchaseType);
-  const maxDate = calculateMaxDate();
+  // Convert ISO string to Date object for react-datepicker
+  const selectedDate = value ? new Date(value + 'T00:00:00') : null;
 
-  const handleContainerClick = () => {
-    if (inputRef.current) {
-      try {
-        inputRef.current.showPicker();
-      } catch {
-        inputRef.current.focus();
-      }
-    }
-  };
-
-  const handleDateChange = (e) => {
-    const selectedDate = e.target.value;
-
-    if (!selectedDate) {
-      return;
-    }
-
-    const validation = isDateAllowed(selectedDate, purchaseType);
-
-    if (!validation.allowed) {
-      if (!validation.error.includes('Today') && !validation.error.includes('future date')) {
-        alert(validation.error);
-      }
-      onChange('');
+  const handleChange = (date) => {
+    if (date) {
+      // Convert Date object back to ISO string (YYYY-MM-DD)
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      onChange(`${year}-${month}-${day}`);
     } else {
-      onChange(selectedDate);
+      onChange('');
     }
-  };
-
-  const handleClear = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    onChange('');
   };
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 datepicker-container">
       <label className="block font-source-sans uppercase text-[12px] sm:text-[14px]" style={{ color: '#81775A' }}>
         DELIVERY DATE
       </label>
 
-      <div className="relative" onClick={handleContainerClick} style={{ cursor: 'pointer' }}>
-        {/* Hidden native date input */}
-        <input
-          ref={inputRef}
-          type="date"
-          min={minDate}
-          max={maxDate}
-          value={value}
-          onChange={handleDateChange}
+      <div className="relative w-full">
+        <ReactDatePicker
+          selected={selectedDate}
+          onChange={handleChange}
+          minDate={getMinDate(purchaseType)}
+          maxDate={getMaxDate()}
+          filterDate={(date) => isDateSelectable(date, purchaseType)}
+          dateFormat="dd/MM/yyyy"
+          placeholderText="DD/MM/YYYY"
+          customInput={<CustomInput />}
           required={required}
-          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-          style={{ zIndex: 1 }}
+          isClearable={!!value}
+          showPopperArrow={false}
+          popperPlacement="bottom-start"
+          popperModifiers={[
+            {
+              name: 'offset',
+              options: {
+                offset: [0, 4],
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                boundary: 'viewport',
+              },
+            },
+          ]}
         />
-
-        {/* Visible display box */}
-        <div
-          className="w-full border border-[#d1d5db] px-4 py-2 font-source-sans bg-white"
-          style={{ color: value ? '#636260' : '#9ca3af', minHeight: '44px', display: 'flex', alignItems: 'center' }}
-        >
-          {value ? formatDisplayDate(value) : 'DD/MM/YYYY'}
-        </div>
-
-        {value && (
-          <button
-            type="button"
-            onClick={handleClear}
-            className="absolute right-2 top-1/2 -translate-y-1/2 text-wellness-text hover:text-wellness-dark"
-            style={{ zIndex: 2 }}
-            aria-label="Clear date"
-          >
-            ×
-          </button>
-        )}
       </div>
 
       <p className="font-source-sans" style={{ fontSize: '12px', color: '#636260' }}>
