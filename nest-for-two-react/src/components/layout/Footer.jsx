@@ -9,6 +9,7 @@ const Footer = () => {
         <nav className="flex justify-center space-x-6 sm:space-x-8 md:space-x-12 mb-10">
           <Link
             to="/shop"
+            reloadDocument
             className="font-nunito-regular font-bold text-sm tracking-widest hover:opacity-70 transition-opacity duration-200"
             style={{ color: '#636260' }}
           >
@@ -16,6 +17,7 @@ const Footer = () => {
           </Link>
           <Link
             to="/about"
+            reloadDocument
             className="font-nunito-regular font-bold text-sm tracking-widest hover:opacity-70 transition-opacity duration-200"
             style={{ color: '#636260' }}
           >
@@ -23,6 +25,7 @@ const Footer = () => {
           </Link>
           <Link
             to="/faqs"
+            reloadDocument
             className="font-nunito-regular font-bold text-sm tracking-widest hover:opacity-70 transition-opacity duration-200"
             style={{ color: '#636260' }}
           >
@@ -30,6 +33,7 @@ const Footer = () => {
           </Link>
           <Link
             to="/contact"
+            reloadDocument
             className="font-nunito-regular font-bold text-sm tracking-widest hover:opacity-70 transition-opacity duration-200"
             style={{ color: '#636260' }}
           >
