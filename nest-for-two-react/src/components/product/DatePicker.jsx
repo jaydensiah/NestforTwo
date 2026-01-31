@@ -4,8 +4,6 @@ import { isDateAllowed } from '../../utils/dateHelpers';
 
 /**
  * Format date from YYYY-MM-DD to DD/MM/YYYY for display
- * @param {string} dateString - Date in YYYY-MM-DD format
- * @returns {string} Date in DD/MM/YYYY format
  */
 const formatDisplayDate = (dateString) => {
   if (!dateString) return '';
@@ -31,7 +29,6 @@ const getSingaporeToday = () => {
 
 /**
  * Format date to YYYY-MM-DD for input min/max attributes
- * Avoids toISOString() to prevent timezone issues
  */
 const formatDateForInput = (date) => {
   return date.getFullYear() + '-' +
@@ -48,11 +45,9 @@ const calculateMinDate = (purchaseType) => {
   const today = getSingaporeToday();
 
   if (purchaseType === 'subscription') {
-    // For subscriptions, find next Sunday
     const dayOfWeek = today.getDay();
     let daysUntilSunday = dayOfWeek === 0 ? 7 : 7 - dayOfWeek;
 
-    // If past 8pm and tomorrow is Sunday (today is Saturday), skip to next Sunday
     if (currentHour >= 20 && daysUntilSunday === 1) {
       daysUntilSunday = 8;
     }
@@ -62,13 +57,10 @@ const calculateMinDate = (purchaseType) => {
     return formatDateForInput(nextSunday);
   }
 
-  // For one-time orders
   let minDeliveryDate = new Date(today);
   if (currentHour >= 20) {
-    // After 8 PM: Block today + tomorrow
     minDeliveryDate.setDate(today.getDate() + 2);
   } else {
-    // Before 8 PM: Block today only
     minDeliveryDate.setDate(today.getDate() + 1);
   }
   return formatDateForInput(minDeliveryDate);
@@ -86,56 +78,26 @@ const calculateMaxDate = () => {
 
 /**
  * DatePicker Component
- * Date picker with 24hr advance notice and Sunday-only for subscriptions
- *
- * @param {Object} props
- * @param {string} props.purchaseType - Purchase type ('one-time' or 'subscription')
- * @param {string} props.value - Currently selected date in ISO format
- * @param {Function} props.onChange - Callback function when date changes
- * @param {boolean} props.required - Whether the field is required (default: true)
+ * Simple approach: native date input is directly tappable
  */
 const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
   const inputRef = useRef(null);
-
-  // Calculate min/max on each render so they're always current in the DOM
   const minDate = calculateMinDate(purchaseType);
   const maxDate = calculateMaxDate();
 
-  const handleClick = () => {
-    const input = inputRef.current;
-    if (!input) return;
-
-    // Update min/max via DOM as well (belt and suspenders for iOS)
-    input.setAttribute('min', minDate);
-    input.setAttribute('max', maxDate);
-
-    // Temporarily make the input clickable and bring to front
-    input.style.zIndex = '10';
-    input.style.pointerEvents = 'auto';
-
-    // Use requestAnimationFrame to ensure DOM updates before opening picker
-    requestAnimationFrame(() => {
-      input.focus();
+  const handleContainerClick = () => {
+    if (inputRef.current) {
       try {
-        if (typeof input.showPicker === 'function') {
-          input.showPicker();
-        }
-      } catch (error) {
-        // showPicker may fail on some browsers, input.focus() will still work
+        inputRef.current.showPicker();
+      } catch {
+        inputRef.current.focus();
       }
-
-      // Hide the input again after picker is triggered
-      setTimeout(() => {
-        input.style.zIndex = '1';
-        input.style.pointerEvents = 'none';
-      }, 100);
-    });
+    }
   };
 
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;
 
-    // Skip validation if no date selected (user cancelled or picker closed)
     if (!selectedDate) {
       return;
     }
@@ -143,8 +105,6 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
     const validation = isDateAllowed(selectedDate, purchaseType);
 
     if (!validation.allowed) {
-      // Silently reject today's date and past dates (no alert)
-      // Only show alert for other validation errors (subscriptions, cutoff time, etc.)
       if (!validation.error.includes('Today') && !validation.error.includes('future date')) {
         alert(validation.error);
       }
@@ -156,6 +116,7 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
 
   const handleClear = (e) => {
     e.stopPropagation();
+    e.preventDefault();
     onChange('');
   };
 
@@ -165,16 +126,8 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
         DELIVERY DATE
       </label>
 
-      <div className="relative" onClick={handleClick} style={{ cursor: 'pointer' }}>
-        {/* Visible styled display */}
-        <div
-          className="w-full border border-[#d1d5db] px-4 py-2 font-source-sans bg-white"
-          style={{ color: value ? '#636260' : '#9ca3af', minHeight: '44px', display: 'flex', alignItems: 'center' }}
-        >
-          {value ? formatDisplayDate(value) : 'DD/MM/YYYY'}
-        </div>
-
-        {/* Hidden native date input - positioned after div so inset-0 works */}
+      <div className="relative" onClick={handleContainerClick} style={{ cursor: 'pointer' }}>
+        {/* Hidden native date input */}
         <input
           ref={inputRef}
           type="date"
@@ -183,9 +136,17 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
           value={value}
           onChange={handleDateChange}
           required={required}
-          className="absolute inset-0 w-full h-full cursor-pointer"
-          style={{ opacity: 0, pointerEvents: 'none', zIndex: 1 }}
+          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+          style={{ zIndex: 1 }}
         />
+
+        {/* Visible display box */}
+        <div
+          className="w-full border border-[#d1d5db] px-4 py-2 font-source-sans bg-white"
+          style={{ color: value ? '#636260' : '#9ca3af', minHeight: '44px', display: 'flex', alignItems: 'center' }}
+        >
+          {value ? formatDisplayDate(value) : 'DD/MM/YYYY'}
+        </div>
 
         {value && (
           <button
