@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -131,6 +131,8 @@ CustomInput.displayName = 'CustomInput';
  * Renders a custom calendar that works on mobile
  */
 const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
+  const [showCutoffInfo, setShowCutoffInfo] = useState(false);
+
   // Convert ISO string to Date object for react-datepicker
   const selectedDate = value ? new Date(value + 'T00:00:00') : null;
 
@@ -148,9 +150,58 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
 
   return (
     <div className="space-y-2 datepicker-container">
-      <label className="block font-source-sans uppercase text-[12px] sm:text-[14px]" style={{ color: '#81775A' }}>
-        DELIVERY DATE
-      </label>
+      <div className="flex items-center gap-2">
+        <label className="font-source-sans uppercase text-[12px] sm:text-[14px]" style={{ color: '#81775A' }}>
+          DELIVERY DATE
+        </label>
+        <button
+          type="button"
+          onClick={() => setShowCutoffInfo(true)}
+          className="w-4 h-4 rounded-full bg-[#B76E79] text-white flex items-center justify-center hover:bg-[#a25d68] transition-colors text-[10px] font-bold"
+          aria-label="Learn more about cut-off timing"
+        >
+          ?
+        </button>
+      </div>
+
+      {/* Cut-off Timing Info Modal */}
+      {showCutoffInfo && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4"
+          onClick={() => setShowCutoffInfo(false)}
+        >
+          <div
+            className="bg-white rounded-lg max-w-md w-full p-6 shadow-xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-start mb-4">
+              <h3 className="font-playfair-bold text-lg" style={{ color: '#81775A' }}>
+                About Cut-off Timing
+              </h3>
+              <button
+                type="button"
+                onClick={() => setShowCutoffInfo(false)}
+                className="text-gray-400 hover:text-gray-600 transition-colors text-2xl leading-none"
+                aria-label="Close"
+              >
+                &times;
+              </button>
+            </div>
+            <div className="font-source-sans text-[14px] leading-relaxed" style={{ color: '#636260' }}>
+              <p>
+                Our daily cut-off is 8:00pm; next-day delivery cannot be selected after this time.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowCutoffInfo(false)}
+              className="mt-6 w-full bg-wellness-rose text-white py-2.5 font-source-sans rounded hover:bg-[#a25d68] transition-colors"
+            >
+              Got it
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="relative w-full">
         <ReactDatePicker
