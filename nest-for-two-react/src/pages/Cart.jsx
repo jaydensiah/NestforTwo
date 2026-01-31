@@ -40,17 +40,19 @@ const Cart = () => {
         {hasItems ? (
           <>
             {/* Header with Clear Cart button */}
-            <div className="relative mb-8">
-              <h1 className="font-playfair-bold text-4xl text-center text-wellness-dark">
+            <div className="mb-8">
+              <h1 className="font-playfair-bold text-4xl text-center text-wellness-dark mb-4">
                 Your Cart Items
               </h1>
-              <button
-                onClick={handleClearCart}
-                disabled={isClearing}
-                className="absolute right-0 top-1/2 -translate-y-1/2 text-wellness-rose hover:text-red-700 font-source-sans text-sm transition-colors disabled:opacity-50"
-              >
-                {isClearing ? 'Clearing...' : 'Clear Cart'}
-              </button>
+              <div className="flex justify-end">
+                <button
+                  onClick={handleClearCart}
+                  disabled={isClearing}
+                  className="text-wellness-rose hover:text-red-700 font-source-sans text-sm transition-colors disabled:opacity-50"
+                >
+                  {isClearing ? 'Clearing...' : 'Clear Cart'}
+                </button>
+              </div>
             </div>
 
             {/* Cart Items */}
