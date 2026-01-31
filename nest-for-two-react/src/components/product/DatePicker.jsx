@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { isDateAllowed, getMinDate } from '../../utils/dateHelpers';
+import { isDateAllowed } from '../../utils/dateHelpers';
 
 /**
  * Format date from YYYY-MM-DD to DD/MM/YYYY for display
@@ -11,6 +11,77 @@ const formatDisplayDate = (dateString) => {
   if (!dateString) return '';
   const [year, month, day] = dateString.split('-');
   return `${day}/${month}/${year}`;
+};
+
+/**
+ * Get current Singapore time
+ */
+const getSingaporeTime = () => {
+  const now = new Date();
+  return new Date(now.toLocaleString("en-US", { timeZone: "Asia/Singapore" }));
+};
+
+/**
+ * Get Singapore date only (no time component)
+ */
+const getSingaporeToday = () => {
+  const singaporeTime = getSingaporeTime();
+  return new Date(singaporeTime.getFullYear(), singaporeTime.getMonth(), singaporeTime.getDate());
+};
+
+/**
+ * Format date to YYYY-MM-DD for input min/max attributes
+ * Avoids toISOString() to prevent timezone issues
+ */
+const formatDateForInput = (date) => {
+  return date.getFullYear() + '-' +
+    String(date.getMonth() + 1).padStart(2, '0') + '-' +
+    String(date.getDate()).padStart(2, '0');
+};
+
+/**
+ * Calculate minimum date based on current Singapore time and purchase type
+ */
+const calculateMinDate = (purchaseType) => {
+  const now = getSingaporeTime();
+  const currentHour = now.getHours();
+  const today = getSingaporeToday();
+
+  if (purchaseType === 'subscription') {
+    // For subscriptions, find next Sunday
+    const dayOfWeek = today.getDay();
+    let daysUntilSunday = dayOfWeek === 0 ? 7 : 7 - dayOfWeek;
+
+    // If past 8pm and tomorrow is Sunday (today is Saturday), skip to next Sunday
+    if (currentHour >= 20 && daysUntilSunday === 1) {
+      daysUntilSunday = 8;
+    }
+
+    const nextSunday = new Date(today);
+    nextSunday.setDate(today.getDate() + daysUntilSunday);
+    return formatDateForInput(nextSunday);
+  }
+
+  // For one-time orders
+  let minDeliveryDate = new Date(today);
+  if (currentHour >= 20) {
+    // After 8 PM: Block today + tomorrow
+    minDeliveryDate.setDate(today.getDate() + 2);
+  } else {
+    // Before 8 PM: Block today only
+    minDeliveryDate.setDate(today.getDate() + 1);
+  }
+  return formatDateForInput(minDeliveryDate);
+};
+
+/**
+ * Calculate maximum date (60 days from today)
+ */
+const calculateMaxDate = () => {
+  const today = getSingaporeToday();
+  const maxDate = new Date(today);
+  maxDate.setDate(today.getDate() + 60);
+  return formatDateForInput(maxDate);
 };
 
 /**
@@ -27,10 +98,32 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
   const inputRef = useRef(null);
 
   const handleClick = () => {
-    if (inputRef.current) {
-      inputRef.current.showPicker?.();
-      inputRef.current.focus();
+    const input = inputRef.current;
+    if (!input) return;
+
+    // CRITICAL: Set min/max RIGHT BEFORE opening picker - this makes mobile work!
+    input.min = calculateMinDate(purchaseType);
+    input.max = calculateMaxDate();
+
+    // Temporarily make the input clickable and bring to front
+    input.style.zIndex = '10';
+    input.style.pointerEvents = 'auto';
+
+    // Focus and open the picker
+    input.focus();
+    try {
+      if (typeof input.showPicker === 'function') {
+        input.showPicker();
+      }
+    } catch (error) {
+      console.log('showPicker not supported');
     }
+
+    // Hide the input again after a short delay
+    setTimeout(() => {
+      input.style.zIndex = '1';
+      input.style.pointerEvents = 'none';
+    }, 100);
   };
 
   const handleDateChange = (e) => {
@@ -79,12 +172,11 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
         <input
           ref={inputRef}
           type="date"
-          min={getMinDate(purchaseType)}
           value={value}
           onChange={handleDateChange}
           required={required}
           className="absolute inset-0 w-full h-full cursor-pointer"
-          style={{ opacity: 0 }}
+          style={{ opacity: 0, pointerEvents: 'none', zIndex: 1 }}
         />
 
         {value && (
