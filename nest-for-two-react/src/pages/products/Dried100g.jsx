@@ -6,6 +6,7 @@ import TimeSlotSelector from '../../components/product/TimeSlotSelector';
 import CollapsibleSection from '../../components/product/CollapsibleSection';
 import { PRODUCTS } from '../../config/products';
 import { CartContext } from '../../context/CartContext';
+import { formatDateShort } from '../../utils/dateHelpers';
 
 const Dried100g = () => {
   const product = PRODUCTS.DRIED_100G;
@@ -31,7 +32,7 @@ const Dried100g = () => {
 
     try {
       const customAttributes = [
-        { key: 'Delivery Date', value: deliveryDate },
+        { key: 'Delivery Date', value: formatDateShort(deliveryDate) },
         { key: 'Time Slot', value: timeSlot }
       ];
 

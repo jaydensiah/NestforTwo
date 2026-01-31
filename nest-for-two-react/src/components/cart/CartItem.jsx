@@ -12,7 +12,28 @@ const CartItem = ({ item }) => {
     return attr?.value || '';
   };
 
-  const deliveryDate = getCustomAttribute('Delivery Date');
+  // Format date for display (dd/mm/yyyy or yyyy-mm-dd -> "02 Feb 2026")
+  const formatDateForDisplay = (dateStr) => {
+    if (!dateStr) return '';
+
+    // Handle both dd/mm/yyyy and yyyy-mm-dd formats
+    let day, month, year;
+    if (dateStr.includes('/')) {
+      [day, month, year] = dateStr.split('/');
+    } else if (dateStr.includes('-')) {
+      [year, month, day] = dateStr.split('-');
+    } else {
+      return dateStr;
+    }
+
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const monthName = months[parseInt(month, 10) - 1];
+
+    return `${parseInt(day, 10)} ${monthName} ${year}`;
+  };
+
+  const deliveryDateRaw = getCustomAttribute('Delivery Date');
+  const deliveryDate = formatDateForDisplay(deliveryDateRaw);
   const timeSlot = getCustomAttribute('Time Slot');
 
   // Handle quantity update
