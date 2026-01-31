@@ -97,33 +97,39 @@ const calculateMaxDate = () => {
 const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
   const inputRef = useRef(null);
 
+  // Calculate min/max on each render so they're always current in the DOM
+  const minDate = calculateMinDate(purchaseType);
+  const maxDate = calculateMaxDate();
+
   const handleClick = () => {
     const input = inputRef.current;
     if (!input) return;
 
-    // CRITICAL: Set min/max RIGHT BEFORE opening picker - this makes mobile work!
-    input.min = calculateMinDate(purchaseType);
-    input.max = calculateMaxDate();
+    // Update min/max via DOM as well (belt and suspenders for iOS)
+    input.setAttribute('min', minDate);
+    input.setAttribute('max', maxDate);
 
     // Temporarily make the input clickable and bring to front
     input.style.zIndex = '10';
     input.style.pointerEvents = 'auto';
 
-    // Focus and open the picker
-    input.focus();
-    try {
-      if (typeof input.showPicker === 'function') {
-        input.showPicker();
+    // Use requestAnimationFrame to ensure DOM updates before opening picker
+    requestAnimationFrame(() => {
+      input.focus();
+      try {
+        if (typeof input.showPicker === 'function') {
+          input.showPicker();
+        }
+      } catch (error) {
+        // showPicker may fail on some browsers, input.focus() will still work
       }
-    } catch (error) {
-      console.log('showPicker not supported');
-    }
 
-    // Hide the input again after a short delay
-    setTimeout(() => {
-      input.style.zIndex = '1';
-      input.style.pointerEvents = 'none';
-    }, 100);
+      // Hide the input again after picker is triggered
+      setTimeout(() => {
+        input.style.zIndex = '1';
+        input.style.pointerEvents = 'none';
+      }, 100);
+    });
   };
 
   const handleDateChange = (e) => {
@@ -172,6 +178,8 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
         <input
           ref={inputRef}
           type="date"
+          min={minDate}
+          max={maxDate}
           value={value}
           onChange={handleDateChange}
           required={required}
