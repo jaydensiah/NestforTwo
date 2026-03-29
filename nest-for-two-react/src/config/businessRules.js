@@ -1,6 +1,6 @@
 /**
  * Business Rules Configuration
- * Contains all business logic constants, delivery rules, subscription rules, pricing, and validation rules
+ * Contains all business logic constants, delivery rules, pricing, and validation rules
  */
 
 // Delivery Schedule Configuration
@@ -24,37 +24,6 @@ export const DELIVERY_SCHEDULE = {
   // Lead time for delivery (in days)
   MIN_LEAD_TIME_DAYS: 2,
   MAX_ADVANCE_DAYS: 30
-};
-
-// Subscription Plans Configuration
-export const SUBSCRIPTION_PLANS = {
-  WEEKLY: {
-    id: 'weekly',
-    name: 'Weekly Delivery',
-    deliveriesPerWeek: 1,
-    description: 'Fresh bird\'s nest delivered once a week',
-    discount: 0, // No discount
-    minDuration: 4, // weeks
-    commitmentPeriod: '4 weeks'
-  },
-  BIWEEKLY: {
-    id: 'biweekly',
-    name: 'Bi-Weekly Delivery',
-    deliveriesPerWeek: 2,
-    description: 'Fresh bird\'s nest delivered twice a week',
-    discount: 0.05, // 5% discount
-    minDuration: 4, // weeks
-    commitmentPeriod: '4 weeks'
-  },
-  TRIWEEKLY: {
-    id: 'triweekly',
-    name: 'Tri-Weekly Delivery',
-    deliveriesPerWeek: 3,
-    description: 'Fresh bird\'s nest delivered three times a week',
-    discount: 0.10, // 10% discount
-    minDuration: 4, // weeks
-    commitmentPeriod: '4 weeks'
-  }
 };
 
 // Product Types Configuration
@@ -96,7 +65,7 @@ export const PRICING = {
   ],
 
   // Delivery fees
-  DELIVERY_FEE: 10.00,
+  DELIVERY_FEE: 15.00,
   FREE_DELIVERY_THRESHOLD: 200.00,
 
   // Tax rate
@@ -231,18 +200,6 @@ export const CANCELLATION_POLICY = {
   PARTIAL_REFUND_PERCENTAGE: 0.50 // 50% refund
 };
 
-// Helper function to get subscription plan by ID
-export const getSubscriptionPlan = (planId) => {
-  return Object.values(SUBSCRIPTION_PLANS).find(plan => plan.id === planId);
-};
-
-// Helper function to calculate subscription discount
-export const calculateSubscriptionDiscount = (planId, basePrice) => {
-  const plan = getSubscriptionPlan(planId);
-  if (!plan) return 0;
-  return basePrice * plan.discount;
-};
-
 // Helper function to get quantity discount
 export const getQuantityDiscount = (quantity) => {
   const applicableDiscount = PRICING.QUANTITY_DISCOUNTS
@@ -279,7 +236,6 @@ export const getNextAvailableDeliveryDate = (fromDate = new Date()) => {
 // Export all configurations
 export default {
   DELIVERY_SCHEDULE,
-  SUBSCRIPTION_PLANS,
   PRODUCT_TYPES,
   PRICING,
   GIFT_CARD_RULES,
@@ -290,8 +246,6 @@ export default {
   BUSINESS_HOURS,
   CANCELLATION_POLICY,
   // Helper functions
-  getSubscriptionPlan,
-  calculateSubscriptionDiscount,
   getQuantityDiscount,
   isDeliveryAvailable,
   getNextAvailableDeliveryDate

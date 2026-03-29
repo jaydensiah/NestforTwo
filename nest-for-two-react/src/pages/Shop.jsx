@@ -15,8 +15,6 @@ const getProductSlug = (productKey, product) => {
     'Nest for Two Premium Dried Bird\'s Nest | 50g': 'dried-50g',
     'Nest for Two Premium Dried Bird\'s Nest | 100g': 'dried-100g',
     'Nest for Two Premium Dried Bird\'s Nest | 250g': 'dried-250g',
-    'Original Kue Lapis': 'original-kue-lapis',
-    'Prune Kue Lapis': 'prune-kue-lapis'
   };
   return slugMap[product.name] || product.name.toLowerCase().replace(/\s+/g, '-');
 };
@@ -143,8 +141,7 @@ const Shop = () => {
     { key: null, label: 'All', description: 'Discover our complete collection of premium bird\'s nest products' },
     { key: 'signature-bottle', label: 'Signature Bottle Series', description: 'Freshly stewed bird\'s nest in elegant bottles, ready for enjoyment'},
     { key: 'signature-gift', label: 'Signature Gift Set Series', description: 'Beautifully packaged gift sets perfect for any occasion' },
-    { key: 'premium-dried', label: 'Premium Dried Series', description: 'Traditional dried bird\'s nest for home preparation' },
-    { key: 'kue-lapis', label: 'Traditional Kue Lapis Series', description: 'Handcrafted layer cake, a perfect pairing with our bird\'s nest'}
+    { key: 'premium-dried', label: 'Premium Dried Series', description: 'Traditional dried bird\'s nest for home preparation' }
   ];
 
   // Set page title

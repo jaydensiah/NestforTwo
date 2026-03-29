@@ -12,8 +12,7 @@ import {
   IoGridOutline,
   IoGiftOutline,
   IoLeafOutline,
-  IoCafeOutline,
-  IoLayersOutline
+  IoCafeOutline
 } from 'react-icons/io5';
 import { CartContext } from '../../context/CartContext';
 
@@ -25,8 +24,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
     { to: '/shop', label: 'All Products', icon: IoGridOutline },
     { to: '/shop?category=signature-bottle', label: 'Signature Bottle Series', icon: IoCafeOutline },
     { to: '/shop?category=signature-gift', label: 'Signature Gift Set Series', icon: IoGiftOutline },
-    { to: '/shop?category=premium-dried', label: 'Premium Dried Series', icon: IoLeafOutline },
-    { to: '/shop?category=kue-lapis', label: 'Traditional Kue Lapis Series', icon: IoLayersOutline }
+    { to: '/shop?category=premium-dried', label: 'Premium Dried Series', icon: IoLeafOutline }
   ];
 
   const mainLinks = [

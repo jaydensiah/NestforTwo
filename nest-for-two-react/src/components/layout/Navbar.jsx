@@ -122,7 +122,7 @@ const Navbar = () => {
                   style={{ top: '120px' }}
                 >
                   <div className="max-w-6xl mx-auto px-8 py-6">
-                    <div className="grid grid-cols-4 gap-4">
+                    <div className="grid grid-cols-3 gap-4 max-w-4xl mx-auto">
                       <ShopDropdownCard
                         to="/shop?category=signature-bottle"
                         image="/images/NavBar_Bottles.png"
@@ -137,11 +137,6 @@ const Navbar = () => {
                         to="/shop?category=premium-dried"
                         image="/images/NavBar_Dried.png"
                         label="Premium Dried Series"
-                      />
-                      <ShopDropdownCard
-                        to="/shop?category=kue-lapis"
-                        image="/images/NavBar_Kue.png"
-                        label="Traditional Kue Lapis Series"
                       />
                     </div>
                   </div>

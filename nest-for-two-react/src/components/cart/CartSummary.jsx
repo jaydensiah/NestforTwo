@@ -17,7 +17,7 @@ const CartSummary = () => {
   }, 0);
 
   // Calculate delivery fee
-  const deliveryFee = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : 10;
+  const deliveryFee = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : 15;
 
   // Calculate amount needed for free delivery
   const amountForFreeDelivery = FREE_DELIVERY_THRESHOLD - subtotal;

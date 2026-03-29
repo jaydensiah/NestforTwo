@@ -101,7 +101,6 @@ const Dried100g = () => {
 
             {/* Delivery Date */}
             <DatePicker
-              purchaseType="one-time"
               value={deliveryDate}
               onChange={setDeliveryDate}
             />

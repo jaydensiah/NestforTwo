@@ -30,11 +30,6 @@ import Dried50g from './pages/products/Dried50g';
 import Dried100g from './pages/products/Dried100g';
 import Dried250g from './pages/products/Dried250g';
 
-// Product Pages - Traditional Kue Lapis Series
-import KueLapisNest from './pages/products/KueLapisNest';
-import OriginalKueLapis from './pages/products/OriginalKueLapis';
-import PruneKueLapis from './pages/products/PruneKueLapis';
-
 // Legacy - keeping for backwards compatibility
 import ProductDried from './pages/products/ProductDried';
 
@@ -80,11 +75,6 @@ function App() {
               <Route path="/products/dried-250g" element={<Dried250g />} />
               {/* Legacy dried route for backwards compatibility */}
               <Route path="/products/dried" element={<ProductDried />} />
-
-              {/* Product Pages - Traditional Kue Lapis Series */}
-              <Route path="/products/kue-lapis-nest" element={<KueLapisNest />} />
-              <Route path="/products/original-kue-lapis" element={<OriginalKueLapis />} />
-              <Route path="/products/prune-kue-lapis" element={<PruneKueLapis />} />
 
               {/* Catch-all route for debugging */}
               <Route path="*" element={

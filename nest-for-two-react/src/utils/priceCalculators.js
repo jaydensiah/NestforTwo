@@ -3,7 +3,7 @@
  * Utility functions for calculating prices, discounts, taxes, and totals
  */
 
-import { PRICING, SUBSCRIPTION_PLANS } from '../config/businessRules.js';
+import { PRICING } from '../config/businessRules.js';
 
 /**
  * Format price with currency symbol
@@ -84,41 +84,6 @@ export const calculateQuantityDiscount = (subtotal, quantity) => {
 };
 
 /**
- * Calculate subscription discount
- * @param {number} subtotal - Subtotal amount
- * @param {string} planId - Subscription plan ID
- * @returns {Object} Discount information {amount, percentage, applied}
- */
-export const calculateSubscriptionDiscount = (subtotal, planId) => {
-  if (!planId) {
-    return {
-      amount: 0,
-      percentage: 0,
-      applied: false
-    };
-  }
-
-  const plan = Object.values(SUBSCRIPTION_PLANS).find(p => p.id === planId);
-
-  if (!plan || plan.discount === 0) {
-    return {
-      amount: 0,
-      percentage: 0,
-      applied: false
-    };
-  }
-
-  const discountAmount = subtotal * plan.discount;
-
-  return {
-    amount: discountAmount,
-    percentage: plan.discount * 100,
-    planName: plan.name,
-    applied: true
-  };
-};
-
-/**
  * Calculate delivery fee
  * @param {number} subtotal - Subtotal amount
  * @param {boolean} requiresDelivery - Whether delivery is required
@@ -165,7 +130,6 @@ export const calculateTax = (amount, taxRate = PRICING.TAX_RATE) => {
 export const calculateOrderTotal = (orderDetails) => {
   const {
     items = [],
-    subscriptionPlanId = null,
     requiresDelivery = true,
     applyTax = true
   } = orderDetails;
@@ -178,10 +142,9 @@ export const calculateOrderTotal = (orderDetails) => {
 
   // Calculate discounts
   const quantityDiscount = calculateQuantityDiscount(subtotal, totalQuantity);
-  const subscriptionDiscount = calculateSubscriptionDiscount(subtotal, subscriptionPlanId);
 
   // Total discounts
-  const totalDiscounts = quantityDiscount.amount + subscriptionDiscount.amount;
+  const totalDiscounts = quantityDiscount.amount;
 
   // Subtotal after discounts
   const subtotalAfterDiscounts = subtotal - totalDiscounts;
@@ -200,7 +163,6 @@ export const calculateOrderTotal = (orderDetails) => {
     subtotal: parseFloat(subtotal.toFixed(2)),
     discounts: {
       quantity: quantityDiscount,
-      subscription: subscriptionDiscount,
       total: parseFloat(totalDiscounts.toFixed(2))
     },
     subtotalAfterDiscounts: parseFloat(subtotalAfterDiscounts.toFixed(2)),
@@ -209,50 +171,6 @@ export const calculateOrderTotal = (orderDetails) => {
     taxRate: PRICING.TAX_RATE,
     total: parseFloat(total.toFixed(2)),
     totalQuantity: totalQuantity,
-    currency: PRICING.CURRENCY
-  };
-};
-
-/**
- * Calculate subscription recurring total
- * @param {Object} subscriptionDetails - Subscription details
- * @returns {Object} Recurring price breakdown
- */
-export const calculateSubscriptionRecurring = (subscriptionDetails) => {
-  const {
-    items = [],
-    planId,
-    duration = 4 // weeks
-  } = subscriptionDetails;
-
-  const plan = Object.values(SUBSCRIPTION_PLANS).find(p => p.id === planId);
-
-  if (!plan) {
-    throw new Error('Invalid subscription plan');
-  }
-
-  // Calculate single delivery total
-  const singleDelivery = calculateOrderTotal({
-    items,
-    subscriptionPlanId: planId,
-    requiresDelivery: true,
-    applyTax: true
-  });
-
-  // Calculate totals based on frequency
-  const deliveriesPerWeek = plan.deliveriesPerWeek;
-  const totalDeliveries = deliveriesPerWeek * duration;
-  const weeklyTotal = singleDelivery.total * deliveriesPerWeek;
-  const totalForPeriod = singleDelivery.total * totalDeliveries;
-
-  return {
-    perDelivery: singleDelivery,
-    deliveriesPerWeek,
-    weeklyTotal: parseFloat(weeklyTotal.toFixed(2)),
-    totalDeliveries,
-    duration,
-    totalForPeriod: parseFloat(totalForPeriod.toFixed(2)),
-    planName: plan.name,
     currency: PRICING.CURRENCY
   };
 };
@@ -392,11 +310,9 @@ export default {
   formatPriceNumber,
   calculateSubtotal,
   calculateQuantityDiscount,
-  calculateSubscriptionDiscount,
   calculateDeliveryFee,
   calculateTax,
   calculateOrderTotal,
-  calculateSubscriptionRecurring,
   calculateSavings,
   calculatePricePerUnit,
   applyPromoCode,

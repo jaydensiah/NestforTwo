@@ -125,7 +125,6 @@ const ProductDried = () => {
 
             {/* Delivery Date */}
             <DatePicker
-              purchaseType="one-time"
               value={deliveryDate}
               onChange={setDeliveryDate}
             />

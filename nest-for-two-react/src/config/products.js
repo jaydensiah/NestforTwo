@@ -92,96 +92,6 @@ export const PRODUCTS = {
         pricePerBottle: 24,
         type: 'one-time'
       },
-      // Subscription 50ml variants (4 sweetness levels)
-      subscription50ml25: {
-        id: 'gid://shopify/ProductVariant/42912035110993',
-        size: '50ml',
-        sweetness: '25',
-        quantity: 30,
-        price: 300,
-        originalPrice: 360,
-        pricePerBottle: 10,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription50ml50: {
-        id: 'gid://shopify/ProductVariant/59014014533713',
-        size: '50ml',
-        sweetness: '50',
-        quantity: 30,
-        price: 300,
-        originalPrice: 360,
-        pricePerBottle: 10,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription50ml100: {
-        id: 'gid://shopify/ProductVariant/59014015942737',
-        size: '50ml',
-        sweetness: '100',
-        quantity: 30,
-        price: 300,
-        originalPrice: 360,
-        pricePerBottle: 10,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription50mlSide: {
-        id: 'gid://shopify/ProductVariant/59014017056849',
-        size: '50ml',
-        sweetness: 'side',
-        quantity: 30,
-        price: 300,
-        originalPrice: 360,
-        pricePerBottle: 10,
-        type: 'subscription',
-        savings: '17%'
-      },
-      // Subscription 100ml variants (4 sweetness levels)
-      subscription100ml25: {
-        id: 'gid://shopify/ProductVariant/42912035143761',
-        size: '100ml',
-        sweetness: '25',
-        quantity: 30,
-        price: 600,
-        originalPrice: 720,
-        pricePerBottle: 20,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription100ml50: {
-        id: 'gid://shopify/ProductVariant/59014027903057',
-        size: '100ml',
-        sweetness: '50',
-        quantity: 30,
-        price: 600,
-        originalPrice: 720,
-        pricePerBottle: 20,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription100ml100: {
-        id: 'gid://shopify/ProductVariant/59014028460113',
-        size: '100ml',
-        sweetness: '100',
-        quantity: 30,
-        price: 600,
-        originalPrice: 720,
-        pricePerBottle: 20,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription100mlSide: {
-        id: 'gid://shopify/ProductVariant/59014029115473',
-        size: '100ml',
-        sweetness: 'side',
-        quantity: 30,
-        price: 600,
-        originalPrice: 720,
-        pricePerBottle: 20,
-        type: 'subscription',
-        savings: '17%'
-      }
     }
   },
 
@@ -273,96 +183,6 @@ export const PRODUCTS = {
         pricePerBottle: 24,
         type: 'one-time'
       },
-      // Subscription 50ml variants (4 sweetness levels)
-      subscription50ml25: {
-        id: 'gid://shopify/ProductVariant/42912008470609',
-        size: '50ml',
-        sweetness: '25',
-        quantity: 30,
-        price: 300,
-        originalPrice: 360,
-        pricePerBottle: 10,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription50ml50: {
-        id: 'gid://shopify/ProductVariant/59014109200465',
-        size: '50ml',
-        sweetness: '50',
-        quantity: 30,
-        price: 300,
-        originalPrice: 360,
-        pricePerBottle: 10,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription50ml100: {
-        id: 'gid://shopify/ProductVariant/59014109462609',
-        size: '50ml',
-        sweetness: '100',
-        quantity: 30,
-        price: 300,
-        originalPrice: 360,
-        pricePerBottle: 10,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription50mlSide: {
-        id: 'gid://shopify/ProductVariant/59014109888593',
-        size: '50ml',
-        sweetness: 'side',
-        quantity: 30,
-        price: 300,
-        originalPrice: 360,
-        pricePerBottle: 10,
-        type: 'subscription',
-        savings: '17%'
-      },
-      // Subscription 100ml variants (4 sweetness levels)
-      subscription100ml25: {
-        id: 'gid://shopify/ProductVariant/42912008503377',
-        size: '100ml',
-        sweetness: '25',
-        quantity: 30,
-        price: 600,
-        originalPrice: 720,
-        pricePerBottle: 20,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription100ml50: {
-        id: 'gid://shopify/ProductVariant/59014115033169',
-        size: '100ml',
-        sweetness: '50',
-        quantity: 30,
-        price: 600,
-        originalPrice: 720,
-        pricePerBottle: 20,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription100ml100: {
-        id: 'gid://shopify/ProductVariant/59014111526993',
-        size: '100ml',
-        sweetness: '100',
-        quantity: 30,
-        price: 600,
-        originalPrice: 720,
-        pricePerBottle: 20,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription100mlSide: {
-        id: 'gid://shopify/ProductVariant/59014112444497',
-        size: '100ml',
-        sweetness: 'side',
-        quantity: 30,
-        price: 600,
-        originalPrice: 720,
-        pricePerBottle: 20,
-        type: 'subscription',
-        savings: '17%'
-      }
     }
   },
 
@@ -454,96 +274,6 @@ export const PRODUCTS = {
         pricePerBottle: 24,
         type: 'one-time'
       },
-      // Subscription 50ml variants (4 sweetness levels)
-      subscription50ml25: {
-        id: 'gid://shopify/ProductVariant/42911991464017',
-        size: '50ml',
-        sweetness: '25',
-        quantity: 30,
-        price: 300,
-        originalPrice: 360,
-        pricePerBottle: 10,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription50ml50: {
-        id: 'gid://shopify/ProductVariant/59014135251025',
-        size: '50ml',
-        sweetness: '50',
-        quantity: 30,
-        price: 300,
-        originalPrice: 360,
-        pricePerBottle: 10,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription50ml100: {
-        id: 'gid://shopify/ProductVariant/59014135578705',
-        size: '50ml',
-        sweetness: '100',
-        quantity: 30,
-        price: 300,
-        originalPrice: 360,
-        pricePerBottle: 10,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription50mlSide: {
-        id: 'gid://shopify/ProductVariant/59014135971921',
-        size: '50ml',
-        sweetness: 'side',
-        quantity: 30,
-        price: 300,
-        originalPrice: 360,
-        pricePerBottle: 10,
-        type: 'subscription',
-        savings: '17%'
-      },
-      // Subscription 100ml variants (4 sweetness levels)
-      subscription100ml25: {
-        id: 'gid://shopify/ProductVariant/42911991496785',
-        size: '100ml',
-        sweetness: '25',
-        quantity: 30,
-        price: 600,
-        originalPrice: 720,
-        pricePerBottle: 20,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription100ml50: {
-        id: 'gid://shopify/ProductVariant/59014140297297',
-        size: '100ml',
-        sweetness: '50',
-        quantity: 30,
-        price: 600,
-        originalPrice: 720,
-        pricePerBottle: 20,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription100ml100: {
-        id: 'gid://shopify/ProductVariant/59014627164241',
-        size: '100ml',
-        sweetness: '100',
-        quantity: 30,
-        price: 600,
-        originalPrice: 720,
-        pricePerBottle: 20,
-        type: 'subscription',
-        savings: '17%'
-      },
-      subscription100mlSide: {
-        id: 'gid://shopify/ProductVariant/59014140657745',
-        size: '100ml',
-        sweetness: 'side',
-        quantity: 30,
-        price: 600,
-        originalPrice: 720,
-        pricePerBottle: 20,
-        type: 'subscription',
-        savings: '17%'
-      }
     }
   },
 
@@ -566,7 +296,7 @@ export const PRODUCTS = {
       '/images/Gift_All4.png'
     ],
     variants: {
-      // 4 sweetness levels (one-time only, no subscription)
+      // 4 sweetness levels
       sweetness25: {
         id: 'gid://shopify/ProductVariant/59031296180305',
         sweetness: '25',
@@ -738,42 +468,6 @@ export const PRODUCTS = {
     }
   },
 
-  // ============================================
-  // TRADITIONAL KUE LAPIS SERIES (2 products)
-  // ============================================
-  ORIGINAL_KUE_LAPIS: {
-    id: 'gid://shopify/Product/15591856177233',
-    name: 'Original Kue Lapis',
-    category: 'Kue Lapis',
-    series: 'kue-lapis',
-    label: null,
-    price: 40,
-    fixedSize: '1 Box of Kue Lapis (20 x 10cm)',
-    variant: 'gid://shopify/ProductVariant/58347016781905',
-    images: [
-      '/images/Original_1.png',
-      '/images/Original_2.png',
-      '/images/Original_3.png'
-    ]
-  },
-
-  PRUNE_KUE_LAPIS: {
-    id: 'gid://shopify/Product/15591856308305',
-    name: 'Prune Kue Lapis',
-    category: 'Kue Lapis',
-    series: 'kue-lapis',
-    label: null,
-    price: 50,
-    fixedSize: '1 Box of Kue Lapis (20 x 10cm)',
-    variant: 'gid://shopify/ProductVariant/58347020353617',
-    images: [
-      '/images/Prune_1.png',
-      '/images/Prune_2.png',
-      '/images/Prune_3.png'
-    ]
-  },
-
-  
 };
 
 // Helper function to get product by key
@@ -794,11 +488,6 @@ export const getSignatureGiftProducts = () => {
 // Get Premium Dried Series products
 export const getPremiumDriedProducts = () => {
   return [PRODUCTS.DRIED_50G, PRODUCTS.DRIED_100G, PRODUCTS.DRIED_250G];
-};
-
-// Get Traditional Kue Lapis Series products
-export const getKueLapisProducts = () => {
-  return [PRODUCTS.ORIGINAL_KUE_LAPIS, PRODUCTS.PRUNE_KUE_LAPIS];
 };
 
 // Get all freshly cooked products (backwards compatibility)
@@ -825,10 +514,7 @@ export const getAllShopProducts = () => {
     // Premium Dried Series
     PRODUCTS.DRIED_50G,
     PRODUCTS.DRIED_100G,
-    PRODUCTS.DRIED_250G,
-    // Traditional Kue Lapis Series
-    PRODUCTS.ORIGINAL_KUE_LAPIS,
-    PRODUCTS.PRUNE_KUE_LAPIS
+    PRODUCTS.DRIED_250G
   ];
 };
 
@@ -841,8 +527,6 @@ export const getProductsBySeries = (series) => {
       return getSignatureGiftProducts();
     case 'premium-dried':
       return getPremiumDriedProducts();
-    case 'kue-lapis':
-      return getKueLapisProducts();
     default:
       return getAllShopProducts();
   }

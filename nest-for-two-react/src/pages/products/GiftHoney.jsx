@@ -177,7 +177,6 @@ const GiftHoney = () => {
 
             {/* Delivery Date */}
             <DatePicker
-              purchaseType="one-time"
               value={deliveryDate}
               onChange={setDeliveryDate}
             />

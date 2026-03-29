@@ -44,7 +44,7 @@ const FAQ = () => {
     },
     {
       question: 'Do you offer free delivery?',
-      answer: 'We offer free delivery for all orders above $120. For orders below $120, a $10 delivery fee applies.'
+      answer: 'We offer free delivery for all orders above $120. For orders below $120, a $15 delivery fee applies.'
     },
      {
       question: 'Can I choose a specific delivery time slot?',

@@ -376,32 +376,11 @@ export const getTomorrowDate = () => {
 };
 
 /**
- * Get next Sunday's date in ISO format (YYYY-MM-DD)
- * If past 8pm and tomorrow is Sunday, returns the Sunday after
- * @returns {string} Next Sunday's date in ISO format
- */
-export const getNextSunday = () => {
-  const today = new Date();
-  const dayOfWeek = today.getDay();
-  let daysUntilSunday = dayOfWeek === 0 ? 7 : 7 - dayOfWeek;
-
-  // If past 8pm and tomorrow is Sunday (today is Saturday), skip to next Sunday
-  if (isPastCutoffTime() && daysUntilSunday === 1) {
-    daysUntilSunday = 8;
-  }
-
-  const nextSunday = new Date(today);
-  nextSunday.setDate(today.getDate() + daysUntilSunday);
-  return formatDateISO(nextSunday);
-};
-
-/**
- * Check if a date is allowed based on purchase type
+ * Check if a date is allowed for delivery
  * @param {string} dateString - Date string to validate
- * @param {string} purchaseType - Purchase type ('one-time' or 'subscription')
  * @returns {Object} Validation result {allowed, error}
  */
-export const isDateAllowed = (dateString, purchaseType) => {
+export const isDateAllowed = (dateString) => {
   if (!dateString) {
     return {
       allowed: false,
@@ -445,39 +424,14 @@ export const isDateAllowed = (dateString, purchaseType) => {
     };
   }
 
-  // For subscriptions, only Sunday is allowed
-  if (purchaseType === 'subscription') {
-    const dayOfWeek = selectedDate.getDay();
-    if (dayOfWeek !== 0) {
-      return {
-        allowed: false,
-        error: 'Subscription deliveries are only available on Sundays'
-      };
-    }
-
-    // Must be at least next Sunday (not today if today is Sunday)
-    const nextSunday = new Date(getNextSunday());
-    nextSunday.setHours(0, 0, 0, 0);
-    if (selectedDate < nextSunday) {
-      return {
-        allowed: false,
-        error: 'Please select next Sunday or later'
-      };
-    }
-  }
-
   return { allowed: true };
 };
 
 /**
- * Get minimum allowed date based on purchase type
- * @param {string} purchaseType - Purchase type ('one-time' or 'subscription')
+ * Get minimum allowed date for delivery
  * @returns {string} Minimum date in ISO format
  */
-export const getMinDate = (purchaseType) => {
-  if (purchaseType === 'subscription') {
-    return getNextSunday();
-  }
+export const getMinDate = () => {
   return getTomorrowDate();
 };
 
@@ -504,7 +458,6 @@ export default {
   startOfDay,
   endOfDay,
   getTomorrowDate,
-  getNextSunday,
   isDateAllowed,
   getMinDate
 };

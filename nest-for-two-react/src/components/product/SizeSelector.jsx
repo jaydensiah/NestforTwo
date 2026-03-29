@@ -9,16 +9,8 @@ import PropTypes from 'prop-types';
  * @param {Array} props.options - Array of size options
  * @param {string} props.selected - Currently selected size
  * @param {Function} props.onChange - Callback function when size changes
- * @param {string} props.purchaseType - Purchase type to filter options
  */
-const SizeSelector = ({ options, selected, onChange, purchaseType }) => {
-  const getSizeLabel = (size, type) => {
-    if (type === 'subscription') {
-      return `${size} - Monthly Subscription (30 bottles)`;
-    }
-    return `${size} - Box of 6 bottles`;
-  };
-
+const SizeSelector = ({ options, selected, onChange }) => {
   return (
     <div className="space-y-2">
       {options.map(option => (
@@ -36,21 +28,11 @@ const SizeSelector = ({ options, selected, onChange, purchaseType }) => {
               className="w-4 h-4 text-wellness-rose"
             />
             <div className="font-source-sans text-wellness-dark text-[14px] sm:text-base">
-              {getSizeLabel(option.size, purchaseType)}
+              {option.size} - Box of 6 bottles
             </div>
           </div>
           <div className="font-source-sans text-base sm:text-lg flex items-center gap-2">
-            {option.originalPrice && (
-              <span className="text-[13px] sm:text-[14px] line-through" style={{ color: '#9ca3af' }}>
-                ${option.originalPrice.toFixed(2)}
-              </span>
-            )}
             <span style={{ color: '#B76E79' }}>${option.price}</span>
-            {option.pricePerBottle && (
-              <span className="font-source-sans text-[12px] sm:text-sm" style={{ color: '#636260' }}>
-                (${option.pricePerBottle}/bottle)
-              </span>
-            )}
           </div>
         </label>
       ))}
@@ -62,15 +44,11 @@ SizeSelector.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       size: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      originalPrice: PropTypes.number,
-      pricePerBottle: PropTypes.number,
-      savings: PropTypes.string
+      price: PropTypes.number.isRequired
     })
   ).isRequired,
   selected: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  purchaseType: PropTypes.string
+  onChange: PropTypes.func.isRequired
 };
 
 export default SizeSelector;

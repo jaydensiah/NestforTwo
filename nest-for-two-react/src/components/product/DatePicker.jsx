@@ -28,28 +28,12 @@ const isPastCutoff = () => {
 };
 
 /**
- * Get minimum selectable date based on purchase type
+ * Get minimum selectable date
  */
-const getMinDate = (purchaseType) => {
+const getMinDate = () => {
   const today = getSingaporeToday();
   const pastCutoff = isPastCutoff();
 
-  if (purchaseType === 'subscription') {
-    // For subscriptions, find next valid Sunday
-    const dayOfWeek = today.getDay();
-    let daysUntilSunday = dayOfWeek === 0 ? 7 : 7 - dayOfWeek;
-
-    // If past 8pm and tomorrow is Sunday, skip to next Sunday
-    if (pastCutoff && daysUntilSunday === 1) {
-      daysUntilSunday = 8;
-    }
-
-    const nextSunday = new Date(today);
-    nextSunday.setDate(today.getDate() + daysUntilSunday);
-    return nextSunday;
-  }
-
-  // For one-time orders
   const minDate = new Date(today);
   if (pastCutoff) {
     // After 8pm: minimum is day after tomorrow
@@ -74,7 +58,7 @@ const getMaxDate = () => {
 /**
  * Filter function to determine if a date is selectable
  */
-const isDateSelectable = (date, purchaseType) => {
+const isDateSelectable = (date) => {
   const today = getSingaporeToday();
   const pastCutoff = isPastCutoff();
 
@@ -95,11 +79,6 @@ const isDateSelectable = (date, purchaseType) => {
     if (date.toDateString() === tomorrow.toDateString()) {
       return false;
     }
-  }
-
-  // For subscriptions, only allow Sundays
-  if (purchaseType === 'subscription') {
-    return date.getDay() === 0; // 0 = Sunday
   }
 
   return true;
@@ -130,7 +109,7 @@ CustomInput.displayName = 'CustomInput';
  * DatePicker Component using react-datepicker
  * Renders a custom calendar that works on mobile
  */
-const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
+const DatePicker = ({ value, onChange, required = true }) => {
   const [showCutoffInfo, setShowCutoffInfo] = useState(false);
 
   // Convert ISO string to Date object for react-datepicker
@@ -207,9 +186,9 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
         <ReactDatePicker
           selected={selectedDate}
           onChange={handleChange}
-          minDate={getMinDate(purchaseType)}
+          minDate={getMinDate()}
           maxDate={getMaxDate()}
-          filterDate={(date) => isDateSelectable(date, purchaseType)}
+          filterDate={(date) => isDateSelectable(date)}
           dateFormat="dd/MM/yyyy"
           placeholderText="DD/MM/YYYY"
           customInput={<CustomInput />}
@@ -235,16 +214,13 @@ const DatePicker = ({ purchaseType, value, onChange, required = true }) => {
       </div>
 
       <p className="font-source-sans" style={{ fontSize: '12px', color: '#636260' }}>
-        {purchaseType === 'subscription'
-          ? 'Delivery for Subscription orders are fixed on Sundays. *Today\'s date cannot be selected for delivery.'
-          : 'We deliver Monday to Sunday *Today\'s date cannot be selected for delivery.'}
+        We deliver Monday to Sunday *Today's date cannot be selected for delivery.
       </p>
     </div>
   );
 };
 
 DatePicker.propTypes = {
-  purchaseType: PropTypes.oneOf(['one-time', 'subscription']).isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   required: PropTypes.bool
