@@ -3,6 +3,19 @@ import SweetnessLevelSelector from '../components/product/SweetnessLevelSelector
 import { PRODUCTS } from '../config/products';
 import { CartContext } from '../context/CartContext';
 
+const FLAVOUR_KEY_MAP = {
+  'Honey': 'honey',
+  'Rock Sugar': 'rockSugar',
+  'Zero Sugar': 'zeroSugar'
+};
+
+const SWEETNESS_DISPLAY = {
+  '25': '25%',
+  '50': '50%',
+  '100': '100%',
+  'side': 'Sugar on the Side'
+};
+
 const SpecialOrderBulk180 = () => {
   const product = PRODUCTS.SPECIAL_BULK_180;
   const { addItem } = useContext(CartContext);
@@ -12,13 +25,24 @@ const SpecialOrderBulk180 = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const [flavour, setFlavour] = useState('');
   const [sweetness, setSweetness] = useState('');
   const [isAdding, setIsAdding] = useState(false);
 
-  const sweetnessKeyMap = { '25': 'sweetness25', '50': 'sweetness50', '100': 'sweetness100', 'side': 'sweetnessSide' };
-  const currentVariant = sweetness ? product.variants[sweetnessKeyMap[sweetness]] : null;
+  const getVariant = () => {
+    if (!flavour || !sweetness) return null;
+    const key = `${FLAVOUR_KEY_MAP[flavour]}_${sweetness}`;
+    return product.variants[key] || null;
+  };
+
+  const currentVariant = getVariant();
+  const showSubtotal = flavour && sweetness;
 
   const handleAddToCart = async () => {
+    if (!flavour) {
+      alert('Please select a Flavour');
+      return;
+    }
     if (!sweetness) {
       alert('Please select a Sweetness Level');
       return;
@@ -28,6 +52,8 @@ const SpecialOrderBulk180 = () => {
 
     try {
       const customAttributes = [
+        { key: 'Flavour', value: flavour },
+        { key: 'Sweetness Level', value: SWEETNESS_DISPLAY[sweetness] },
         { key: 'Delivery Schedule', value: 'Every 10th, 20th and 30th of the month - 6 months period' }
       ];
 
@@ -57,6 +83,37 @@ const SpecialOrderBulk180 = () => {
             </label>
             <div className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full font-source-sans text-[13px] sm:text-[14px] bg-wellness-rose text-white border-2 border-wellness-rose shadow-md inline-block">
               {product.fixedSize}
+            </div>
+          </div>
+
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <label className="font-source-sans uppercase text-[12px] sm:text-[14px]" style={{ color: '#81775A' }}>
+                Flavour
+              </label>
+            </div>
+            <div className="flex flex-wrap gap-2 sm:gap-3">
+              {product.flavours.map(option => (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => setFlavour(option)}
+                  className={`
+                    px-4 sm:px-5 py-2 sm:py-2.5
+                    rounded-full
+                    font-source-sans
+                    text-[13px] sm:text-[14px]
+                    transition-all duration-200
+                    border-2
+                    ${flavour === option
+                      ? 'bg-wellness-rose text-white border-wellness-rose shadow-md'
+                      : 'bg-white text-[#636260] border-[#d1d5db] hover:border-wellness-rose hover:text-wellness-rose'
+                    }
+                  `}
+                >
+                  {option}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -97,7 +154,7 @@ const SpecialOrderBulk180 = () => {
             />
           </div>
 
-          {sweetness && (
+          {showSubtotal && (
             <div className="border-t border-gray-200 pt-4">
               <div className="flex justify-between items-center">
                 <span className="font-source-sans" style={{ color: '#636260' }}>

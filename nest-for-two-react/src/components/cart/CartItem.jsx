@@ -35,6 +35,9 @@ const CartItem = ({ item }) => {
   const deliveryDateRaw = getCustomAttribute('Delivery Date');
   const deliveryDate = formatDateForDisplay(deliveryDateRaw);
   const timeSlot = getCustomAttribute('Time Slot');
+  const flavour = getCustomAttribute('Flavour');
+  const sweetnessLevel = getCustomAttribute('Sweetness Level');
+  const deliverySchedule = getCustomAttribute('Delivery Schedule');
 
   // Handle quantity update
   const handleQuantityChange = async (newQuantity) => {
@@ -92,11 +95,20 @@ const CartItem = ({ item }) => {
 
             {/* Variant, Delivery Date and Time Slot */}
             <div className="text-sm text-wellness-text space-y-1">
-              {item.variant.title !== 'Default Title' && (
+              {item.variant.title !== 'Default Title' && !flavour && (
                 <p>{item.variant.title}</p>
+              )}
+              {flavour && (
+                <p>Flavour: {flavour}</p>
+              )}
+              {sweetnessLevel && (
+                <p>Sweetness Level: {sweetnessLevel}</p>
               )}
               {deliveryDate && (
                 <p>Delivery: {deliveryDate}</p>
+              )}
+              {deliverySchedule && (
+                <p>Delivery: {deliverySchedule}</p>
               )}
               {timeSlot && (
                 <p>Time: {timeSlot}</p>

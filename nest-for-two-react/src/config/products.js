@@ -479,27 +479,20 @@ export const PRODUCTS = {
     label: null,
     price: 2070,
     fixedSize: '50ml x 180 bottles',
+    flavours: ['Honey', 'Rock Sugar', 'Zero Sugar'],
     variants: {
-      sweetness25: {
-        id: 'gid://shopify/ProductVariant/59501117309009',
-        sweetness: '25',
-        price: 2070
-      },
-      sweetness50: {
-        id: 'gid://shopify/ProductVariant/59501117341777',
-        sweetness: '50',
-        price: 2070
-      },
-      sweetness100: {
-        id: 'gid://shopify/ProductVariant/59501117374545',
-        sweetness: '100',
-        price: 2070
-      },
-      sweetnessSide: {
-        id: 'gid://shopify/ProductVariant/59501117407313',
-        sweetness: 'side',
-        price: 2070
-      }
+      honey_25: { id: 'gid://shopify/ProductVariant/59501117309009', flavour: 'Honey', sweetness: '25', price: 2070 },
+      honey_50: { id: 'gid://shopify/ProductVariant/59501117341777', flavour: 'Honey', sweetness: '50', price: 2070 },
+      honey_100: { id: 'gid://shopify/ProductVariant/59501117374545', flavour: 'Honey', sweetness: '100', price: 2070 },
+      honey_side: { id: 'gid://shopify/ProductVariant/59501117407313', flavour: 'Honey', sweetness: 'side', price: 2070 },
+      rockSugar_25: { id: 'gid://shopify/ProductVariant/59501128974417', flavour: 'Rock Sugar', sweetness: '25', price: 2070 },
+      rockSugar_50: { id: 'gid://shopify/ProductVariant/59501129039953', flavour: 'Rock Sugar', sweetness: '50', price: 2070 },
+      rockSugar_100: { id: 'gid://shopify/ProductVariant/59501129105489', flavour: 'Rock Sugar', sweetness: '100', price: 2070 },
+      rockSugar_side: { id: 'gid://shopify/ProductVariant/59501129171025', flavour: 'Rock Sugar', sweetness: 'side', price: 2070 },
+      zeroSugar_25: { id: 'gid://shopify/ProductVariant/59501129007185', flavour: 'Zero Sugar', sweetness: '25', price: 2070 },
+      zeroSugar_50: { id: 'gid://shopify/ProductVariant/59501129072721', flavour: 'Zero Sugar', sweetness: '50', price: 2070 },
+      zeroSugar_100: { id: 'gid://shopify/ProductVariant/59501129138257', flavour: 'Zero Sugar', sweetness: '100', price: 2070 },
+      zeroSugar_side: { id: 'gid://shopify/ProductVariant/59501129203793', flavour: 'Zero Sugar', sweetness: 'side', price: 2070 }
     }
   },
 
