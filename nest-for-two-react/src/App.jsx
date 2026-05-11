@@ -30,6 +30,9 @@ import Dried50g from './pages/products/Dried50g';
 import Dried100g from './pages/products/Dried100g';
 import Dried250g from './pages/products/Dried250g';
 
+// Special Orders
+import SpecialOrderBulk180 from './pages/SpecialOrderBulk180';
+
 // Legacy - keeping for backwards compatibility
 import ProductDried from './pages/products/ProductDried';
 
@@ -75,6 +78,9 @@ function App() {
               <Route path="/products/dried-250g" element={<Dried250g />} />
               {/* Legacy dried route for backwards compatibility */}
               <Route path="/products/dried" element={<ProductDried />} />
+
+              {/* Special Orders */}
+              <Route path="/special-order/bulk-180" element={<SpecialOrderBulk180 />} />
 
               {/* Catch-all route for debugging */}
               <Route path="*" element={

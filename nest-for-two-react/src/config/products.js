@@ -468,6 +468,41 @@ export const PRODUCTS = {
     }
   },
 
+  // ============================================
+  // SPECIAL ORDERS
+  // ============================================
+  SPECIAL_BULK_180: {
+    id: 'gid://shopify/Product/15806367236177',
+    name: 'Freshly Cooked Bird\'s Nest - Special Order',
+    category: 'Special Order',
+    series: 'special-order',
+    label: null,
+    price: 2070,
+    fixedSize: '50ml x 180 bottles',
+    variants: {
+      sweetness25: {
+        id: 'gid://shopify/ProductVariant/59501117309009',
+        sweetness: '25',
+        price: 2070
+      },
+      sweetness50: {
+        id: 'gid://shopify/ProductVariant/59501117341777',
+        sweetness: '50',
+        price: 2070
+      },
+      sweetness100: {
+        id: 'gid://shopify/ProductVariant/59501117374545',
+        sweetness: '100',
+        price: 2070
+      },
+      sweetnessSide: {
+        id: 'gid://shopify/ProductVariant/59501117407313',
+        sweetness: 'side',
+        price: 2070
+      }
+    }
+  },
+
 };
 
 // Helper function to get product by key
